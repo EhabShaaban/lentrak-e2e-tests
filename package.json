@@ -1,0 +1,24 @@
+{
+  "name": "vuetodo",
+  "version": "1.0.0",
+  "description": "vuetodo-e2e-framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:open": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EhabShaaban/cypress-vuetodo.git"
+  },
+  "author": "Ehab S.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EhabShaaban/cypress-vuetodo/issues"
+  },
+  "homepage": "https://github.com/EhabShaaban/cypress-vuetodo#readme",
+  "devDependencies": {
+    "cypress": "^6.5.0",
+    "cypress-image-snapshot": "^4.0.1"
+  }
+}
