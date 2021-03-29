@@ -1,13 +1,11 @@
 /// <reference types="Cypress" />
 
-import TodoPage from '../page/TodoPage'
+import LoginPage from '../page/LoginPage'
 
-describe('visual suite', function() {
+describe('', function() {
 
-    it('first visual test', function(){
-        const todoPage = new TodoPage()
-        
-        todoPage.visit()
-        cy.matchImageSnapshot();
+    it('', function(){
+        const loginPage = new LoginPage()
+        loginPage.visit().login("test@example.com", "password")
     })
 })
