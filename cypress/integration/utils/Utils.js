@@ -8,9 +8,22 @@ class Utils
     logoutImg(){
         return cy.get("img[alt='Logout']")
     }
+    randomRealVinInput(){
+        return cy.get("input[value='Random Real VIN']")
+    }
+    vinH2(){
+        return cy.get("span[id='Result'] h2")
+    }
     logout(){
         this.userIconDiv().trigger('mouseover')
         this.logoutImg().click()
+    }
+    getVIN(){
+        cy.visit(Cypress.env('vin'))
+        this.randomRealVinInput().click().wait(1000)
+        this.vinH2().invoke('text').then((vin)=>{
+            console.log(vin)
+        })
     }
 }
 

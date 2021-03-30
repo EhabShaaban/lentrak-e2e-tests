@@ -19,6 +19,7 @@
   "homepage": "https://ehabsfeki@bitbucket.org/dealertouch/ui-framework.git",
   "devDependencies": {
     "cypress": "^6.5.0",
-    "cypress-image-snapshot": "^4.0.1"
+    "cypress-image-snapshot": "^4.0.1",
+    "cypress-xpath": "^1.6.2"
   }
 }
