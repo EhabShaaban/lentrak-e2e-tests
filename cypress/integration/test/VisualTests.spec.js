@@ -6,6 +6,8 @@ describe('', function() {
 
     it('', function(){
         const loginPage = new LoginPage()
-        loginPage.visit().login("test@example.com", "password")
+        loginPage.visit()
+        loginPage.login("test@example.com", "password")
+        
     })
 })
