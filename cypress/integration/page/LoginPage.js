@@ -4,7 +4,7 @@ class LoginPage
 {
     visit()
     {
-        cy.visit(Cypress.env('dev'));
+        cy.visit(Cypress.config('baseUrl'));
         return this
     }
     usernameID(){

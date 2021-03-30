@@ -1,5 +1,5 @@
 {
-    "baseUrl": "https://www.dealertouch.ca/",
+    "baseUrl": "https://dev.dealertouch.ca/",
     "video": false,
     "env": {
         "prod": "https://app.dealertouch.ca/",
