@@ -21,9 +21,10 @@ class Utils
     getVIN(){
         cy.visit(Cypress.env('vin'))
         this.randomRealVinInput().click().wait(1000)
-        this.vinH2().invoke('text').then((vin)=>{
-            console.log(vin)
-        })
+        // this.vinH2().then(($vin) => {
+        //     cy.log($vin.text())
+        // })
+        return this.vinH2().text()
     }
 }
 
