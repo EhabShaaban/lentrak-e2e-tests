@@ -2,10 +2,47 @@
 
 class UserPage
 {
-    visitUsers()
-    {
-        cy.visit(Cypress.config('baseUrl')+'users');
-        return this
+    // './user/ > add user btn 
+    addUserBtn(){
+        return cy.get("button[class='ant-btn sc-eCssSg bjuFNh bredcrumb-action-btn-large-screen ml15']")
+    }
+    firstNameID(){
+        return cy.get("#first_name")
+    }
+    lastNameID(){
+        return cy.get("#last_name")
+    }
+    emailID(){
+        return cy.get("#email")
+    }
+    contactID(){
+        return cy.get("#phone_number")
+    }
+    salesID(){
+        return cy.get("#sales")
+    }
+    titleID(){
+        return cy.get("#title")
+    }
+    departmentID(){
+        return cy.get("#department")
+    }
+    roleID(){
+        return cy.get("#roles")
+    }
+    saveUserBtn(){
+        return cy.get("button[type='Submit']")
+    }
+    newUserSuccessMsg(){
+        return cy.get("div[class='ant-message-cutom-content ant-message-success'] span")
+    }
+
+    // action methods
+    clickAddUserBtn(){
+        return this.addUserBtn().click();
+    }
+    clickSaveNewUser(){
+        return this.saveUserBtn().click();
     }
 }
 

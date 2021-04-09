@@ -27,10 +27,6 @@ class Utils
         return cy.get("button[type='submit']")
     }
     //action methods
-    visit()
-    {
-        return cy.visit(Cypress.config('baseUrl'));
-    }
     login(username, passwd){
         this.usernameID().type(username)
         this.passwordID().type(passwd)
