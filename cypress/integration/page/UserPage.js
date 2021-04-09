@@ -34,7 +34,7 @@ class UserPage
         return cy.get("button[type='Submit']")
     }
     newUserSuccessMsg(){
-        return cy.get("div[class='ant-message-cutom-content ant-message-success'] span")
+        return cy.get("div[class='ant-message-custom-content ant-message-success'] span")
     }
 
     // action methods
@@ -42,7 +42,7 @@ class UserPage
         return this.addUserBtn().click();
     }
     clickSaveNewUser(){
-        return this.saveUserBtn().click();
+        return this.saveUserBtn().click().wait(1500);
     }
 }
 

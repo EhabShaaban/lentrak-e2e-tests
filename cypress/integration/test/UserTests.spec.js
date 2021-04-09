@@ -15,6 +15,8 @@ describe('User test suite', function() {
     })
     it('Create new user', function(){
         //TODO: implement dynamic email generator
+        //TODO: Negative Test/add user with existing email
+        //TODO: Implement test combination methods and flows
         cy.visit('/')
         utils.login(this.loginCredentials.dev.username, this.loginCredentials.dev.passwd)
         dashboardPage.dashboardLabelDiv().should('have.text', 'Dashboard')
