@@ -1,9 +1,10 @@
 /// <reference types="Cypress" />
 
 import names from '/home/ehab/lentrak/ui-framework/cypress/fixtures/random_names.json'
+import {writeFileSync} from 'fs';
 
 class Utils {
-
+    
     //logout locators
     userIconDiv() {
         return cy.get("div[class='sc-gsTCUz dMzJOQ flex-x center cursor-pointer an-13 bold-text']")
@@ -44,7 +45,11 @@ class Utils {
         // this.vinH2().then(($vin) => {
         //     cy.log($vin.text())
         // })
-        return this.vinH2().text()
+
+        // console.log(this.vinH2().text())
+
+        // const fs = require('fs');
+        writeFileSync('/home/ehab/lentrak/ui-framework/cypress/fixtures/vin.json', this.vinH2().text());
     }
     makeEmail() {
         var strValues = "abcdefg12345";
