@@ -14,7 +14,6 @@ describe('User test suite', function() {
         cy.fixture('create_user_data').as('userData')
     })
     it('Create new user', function(){
-        //TODO: implement dynamic email generator
         //TODO: Negative Test/add user with existing email
         //TODO: Implement test combination methods and flows
         cy.visit('/')
@@ -24,7 +23,7 @@ describe('User test suite', function() {
         userPage.clickAddUserBtn();
         userPage.firstNameID().type(this.userData.user.firstName)
         userPage.lastNameID().type(this.userData.user.lastName)
-        userPage.emailID().type(this.userData.user.emailID)
+        userPage.emailID().type(utils.makeEmail())
         userPage.contactID().type(this.userData.user.contact)
         userPage.salesID().type(this.userData.user.salesRegNo)
         userPage.titleID().type(this.userData.user.title)
