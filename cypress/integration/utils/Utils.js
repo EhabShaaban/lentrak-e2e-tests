@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+import names from '/home/ehab/lentrak/ui-framework/cypress/fixtures/random_names.json'
+
 class Utils {
 
     //logout locators
@@ -70,10 +72,7 @@ class Utils {
     }
     
     generateName() {
-        var nameJSON = require('/home/ehab/lentrak/ui-framework/cypress/integration/cypress/fixtures/random_names.json')
-        var randomNames = JSON.parse(nameJSON);
-        return this.capFirst(randomNames[this.getRandomInt(0, randomNames.length + 1)]);
-
+        return this.capFirst(names[this.getRandomInt(0, names.length + 1)]);
     }
 }
 
