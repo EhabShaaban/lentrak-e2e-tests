@@ -36,6 +36,9 @@ class UserPage
     newUserSuccessMsg(){
         return cy.get("div[class='ant-message-custom-content ant-message-success'] span")
     }
+    emailExists(){
+        return cy.get("div[class='ant-message-custom-content ant-message-error']")
+    }
 
     // action methods
     clickAddUserBtn(){
