@@ -49,4 +49,3 @@ Thumbs.db
 *.wmv
 
 cypress/snapshots/
-cypress/fixtures/
