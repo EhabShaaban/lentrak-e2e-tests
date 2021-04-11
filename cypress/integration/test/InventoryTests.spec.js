@@ -11,7 +11,7 @@ const createInv = new CreateInventoryPage()
 let loginCredentials
 let inventoryData
 
-describe('', function() {
+describe('Create new inventory test suite', function() {
 
     before(() => {
         cy.fixture('login_credentials').then(cred => loginCredentials = cred)
@@ -25,7 +25,7 @@ describe('', function() {
         cy.visit('./inventory/create')
     })
 
-    it('', function(){
+    it('Create 4WD, gasoline, ...', function(){
         createInv.vinId().type(inventoryData.generalInfo.vin).type('{enter}')
         createInv.stockNumberId().type(inventoryData.generalInfo.stockNumber)
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -35,5 +35,12 @@ describe('', function() {
         for(var i=0; i<=5;i++){
             createInv.featuresDiv(i).click()
         }
+        createInv.fourWdDiv().click()
+        createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
+        createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
+        createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
+        //
+        createInv.automaticDiv().click()
+        createInv.cylindersId().type(inventoryData.generalInfo.transmission.cylinders[4]).type('{enter}')
     })
 })
