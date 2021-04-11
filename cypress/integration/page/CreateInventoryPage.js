@@ -3,112 +3,112 @@
 class CreateInventoryPage
 {
     //1. General Information
-    vin(){
+    vinId(){
         return cy.get("#vin")
     }
-    stockNumber(){
+    stockNumberId(){
         return cy.get("#stock_number")
     }
-    mileage(){
+    listingMileageId(){
         return cy.get("#mileage")
     }
-    listingPrice(){
+    listingPriceInput(){
         return cy.get("input[data-testid='Listing Price']")
     }
-    exteriorColor(){
+    exteriorColorDiv(){
         return cy.get("div[style='background-color: rgb(255, 255, 255); margin-right: 5px;']").eq(0)
     }
-    interiorColorColor(){
+    interiorColorColorDiv(){
         return cy.get("div[style='background-color: rgb(255, 255, 255); margin-right: 5px;']").eq(1)
     }
     // .eq(i) >> from 0 to 19 >> 20 total feature
-    features(){
-        return cy.get("div[style='color: rgb(87, 98, 117);']")
+    featuresDiv(idx){
+        return cy.get("div[style='color: rgb(87, 98, 117);']").eq(idx)
     }
     //Specs >> Drivetrain
-    fourWd(){
+    fourWdDiv(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(0)
     }
-    awd(){
+    awdDiv(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(1)
     }
-    fwd(){
+    fwdDiv(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(2)
     }
-    rwd(){
+    rwdDiv(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(3)
     }
-    fuelType(){
+    fuelTypeId(){
         return cy.get("#fuel_type")
     }
     //Specs >> Transmission
-    automatic(){
+    automaticDiv(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(4)
     }
-    manual(){
+    manualDiv(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(5)
     }
-    cylinders(){
+    cylindersId(){
         return cy.get("#cylinders")
     }
-    highwayFuelEco(){
+    highwayFuelEcoId(){
         return cy.get("#highway_fuel_economy")
     }
-    bodyType(){
+    bodyTypeId(){
         return cy.get("#body")
     }
     //Specs >> Number of Doors
-    numberOfDoors2(){
+    numberOfDoors2Div(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(6)
     }
-    numberOfDoors3(){
+    numberOfDoors3Div(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(7)
     }
-    numberOfDoors4(){
+    numberOfDoors4Div(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(8)
     }
-    numberOfDoors5(){
+    numberOfDoors5Div(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(9)
     }
-    numberOfDoorsOther(){
+    numberOfDoorsOtherDiv(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(10)
     }
-    cityFuelEco(){
+    cityFuelEcoId(){
         return cy.get("#city_fuel_economy")
     }
-    engineDisplacement(){
+    engineDisplacementId(){
         return cy.get("#engine_displacement")
     }
-    passengers(){
+    passengersId(){
         return cy.get("#passengers")
     }
-    combinedFuelEco(){
+    combinedFuelEcoId(){
         return cy.get("#combined_fuel_economy")
     }
     //next btn to next page
-    next(){
+    nextBtn(){
         return cy.get("button[type='submit']")
     }
     //2. Purchase Information
-    source(){
+    sourceSpan(){
         return cy.get("span[title='Whole-Sale']")
     }
-    vendor(){
+    vendorId(){
         return cy.get("#purchase_vendor")
     }
-    purchaseMileage(){
+    purchaseMileageId(){
         return cy.get("#purchase_mileage")
     }
-    purchaseComments(){
+    purchaseCommentsId(){
         return cy.get("#purchase_coments")
     }
-    purchasePrice(){
+    purchasePriceInput(){
         return cy.get("input[class='input currency-input ant-input']")
     }
-    purchaseInvoice(){
+    purchaseInvoiceId(){
         return cy.get("#purchase_invoice")
     }
-    save(){
+    saveBtn(){
         return cy.get("button[type='submit']")
     }
 }

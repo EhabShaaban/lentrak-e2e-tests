@@ -2,17 +2,20 @@
 
 import Utils from '../utils/Utils'
 import DashboardPage from '../page/DashboardPage'
+import CreateInventoryPage from '../page/CreateInventoryPage'
 
 const utils = new Utils()
 const dashboardPage = new DashboardPage()
+const createInv = new CreateInventoryPage()
 
 let loginCredentials
-let vin = "5TBRT34145S466823"
+let inventoryData
 
 describe('', function() {
 
     before(() => {
         cy.fixture('login_credentials').then(cred => loginCredentials = cred)
+        cy.fixture('new_inventory_data').then(inv => inventoryData = inv)
         })
 
     beforeEach(function(){
@@ -23,6 +26,14 @@ describe('', function() {
     })
 
     it('', function(){
-        cy.log("Hey Inventory!")
+        createInv.vinId().type(inventoryData.generalInfo.vin).type('{enter}')
+        createInv.stockNumberId().type(inventoryData.generalInfo.stockNumber)
+        createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
+        createInv.listingPriceInput().type(inventoryData.generalInfo.ListingPrice)
+        createInv.exteriorColorDiv().click()
+        createInv.interiorColorColorDiv().click()
+        for(var i=0; i<=5;i++){
+            createInv.featuresDiv(i).click()
+        }
     })
 })

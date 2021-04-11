@@ -1,7 +1,6 @@
 /// <reference types="Cypress" />
 
 import names from '/home/ehab/lentrak/ui-framework/cypress/fixtures/random_names.json'
-import {writeFileSync} from 'fs';
 
 class Utils {
     
@@ -39,18 +38,12 @@ class Utils {
         this.userIconDiv().trigger('mouseover')
         this.logoutImg().click()
     }
-    getVIN() {
-        cy.visit(Cypress.env('vin'))
-        this.randomRealVinInput().click().wait(1000)
-        // this.vinH2().then(($vin) => {
-        //     cy.log($vin.text())
-        // })
-
-        // console.log(this.vinH2().text())
-
-        // const fs = require('fs');
-        writeFileSync('/home/ehab/lentrak/ui-framework/cypress/fixtures/vin.json', this.vinH2().text());
-    }
+    // needs to be replaced with a puppeteer script
+    // getVIN() {
+    //     cy.visit(Cypress.env('vin'))
+    //     this.randomRealVinInput().click().wait(1000)
+    //     return this.vinH2().text()
+    // }
     makeEmail() {
         var strValues = "abcdefg12345";
         var strEmail = "";
