@@ -23,11 +23,12 @@ describe('Create new inventory test suite', function() {
         utils.login(loginCredentials.dev.username, loginCredentials.dev.passwd)
         dashboardPage.dashboardLabelDiv().should('have.text', 'Dashboard')
         cy.visit('./inventory/create')
+        // cy.exec("node ./cypress/integration/utils/vin-puppeteer.js")
     })
 
     it('Create 4WD, gasoline, ...', function(){
         createInv.vinId().type(inventoryData.generalInfo.vin).type('{enter}')
-        createInv.stockNumberId().type(inventoryData.generalInfo.stockNumber)
+        // createInv.stockNumberId().type(inventoryData.generalInfo.stockNumber)
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
         createInv.listingPriceInput().type(inventoryData.generalInfo.ListingPrice)
         createInv.exteriorColorDiv().click()

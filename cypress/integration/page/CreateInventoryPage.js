@@ -74,10 +74,10 @@ class CreateInventoryPage
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(10)
     }
     cityFuelEcoId(){
-        return cy.get("#city_fuel_economy")
+        return cy.get("input[data-testid='City Fuel Economy']")
     }
     engineDisplacementId(){
-        return cy.get("#engine_displacement")
+        return cy.get("input[data-testid='Engine Displacement (e.g. 0.0)']")
     }
     passengersId(){
         return cy.get("#passengers")

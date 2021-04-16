@@ -23,6 +23,8 @@
     "cypress-xpath": "^1.6.2"
   },
   "dependencies": {
-    "cypress-commands": "^1.1.0"
+    "cypress-commands": "^1.1.0",
+    "fs-extra": "^9.1.0",
+    "puppeteer": "^8.0.0"
   }
 }
