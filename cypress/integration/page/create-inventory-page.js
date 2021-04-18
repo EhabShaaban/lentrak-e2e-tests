@@ -94,7 +94,7 @@ class CreateInventoryPage
     }
     //2. Purchase Information
     sourceSpan(){
-        return cy.get("span[title='Whole-Sale']")
+        return cy.get("#source")
     }
     vendorId(){
         return cy.get("#purchase_vendor")
@@ -107,6 +107,9 @@ class CreateInventoryPage
     }
     purchasePriceInput(){
         return cy.get("input[class='input currency-input ant-input']")
+    }
+    purchaseTaxInput(){
+        return cy.get("input[data-testid='Tax']")
     }
     purchaseInvoiceId(){
         return cy.get("#purchase_invoice")
