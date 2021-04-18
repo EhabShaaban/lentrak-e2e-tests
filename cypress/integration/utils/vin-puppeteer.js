@@ -1,9 +1,11 @@
 const puppeteer = require('puppeteer');
-const { URL } = require('url');
-const fse = require('fs-extra');
-const path = require('path');
+const fs = require('fs')
 
 async function getVin(){
+
+    var vinArr  = [
+
+    ];
 
     const browser = await puppeteer.launch({
         headless: true,
@@ -28,21 +30,22 @@ async function getVin(){
       
       let value = await page.$eval("#Result h2", e => e.innerText);
   
-      console.log(value)
+      vinArr.push(value)
+
+      console.log(vinArr)
 
     }
+
+    fs.writeFile('./cypress/fixtures/vin.json',
+    JSON.stringify(vinArr, null, 2), err => {
+      if (err) {
+        console.log('Error writing vin.json', err)
+      } else {
+        console.log('Successfully wrote vin.json')
+      }
+      });
 
     browser.close();
 }
 
 getVin();
-
-// save request to hard disk
-// page.on('response', async (response) => {
-//   const url = new URL(response.url());
-//   let filePath = path.resolve(`./output${url.pathname}`);
-//   if (path.extname(url.pathname).trim() === '') {
-//     filePath = `${filePath}/index.html`;
-//   }
-//   await fse.outputFile(filePath, await response.buffer());
-// });
