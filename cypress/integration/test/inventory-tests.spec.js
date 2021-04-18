@@ -22,6 +22,10 @@ describe('Create new inventory test suite', function() {
         cy.visit('/')
         utils.login(loginCredentials.dev.username, loginCredentials.dev.passwd)
         dashboardPage.dashboardLabelDiv().should('have.text', 'Dashboard')
+        dashboardPage.arrowImg().click()
+        dashboardPage.settingsLi().click()
+        dashboardPage.dateConfigInput().click()
+        dashboardPage.saveConfigBtn().click()
         cy.visit('./inventory/create')
         // cy.exec("node ./cypress/integration/utils/vin-puppeteer.js")
     })
@@ -36,12 +40,14 @@ describe('Create new inventory test suite', function() {
         for(var i=0; i<=5;i++){
             createInv.featuresDiv(i).click()
         }
-        createInv.fourWdDiv().click()
+        createInv.rwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
         //
         createInv.automaticDiv().click()
         createInv.cylindersId().type(inventoryData.generalInfo.transmission.cylinders[4]).type('{enter}')
+        createInv.highwayFuelEcoId().type(inventoryData.generalInfo.transmission.highwayFuelEconomy)
+        createInv.bodyTypeId().type(inventoryData.generalInfo.transmission.bodyType.sedan).type('{enter}')
     })
 })

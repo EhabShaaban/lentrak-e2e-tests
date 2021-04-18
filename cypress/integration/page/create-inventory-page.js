@@ -6,6 +6,9 @@ class CreateInventoryPage
     vinId(){
         return cy.get("#vin")
     }
+    decodeBtn(){
+        return cy.get("button[class='ant-btn']")
+    }
     stockNumberId(){
         return cy.get("#stock_number")
     }
@@ -43,35 +46,35 @@ class CreateInventoryPage
     }
     //Specs >> Transmission
     automaticDiv(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(4)
+        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(3)
     }
     manualDiv(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(5)
+        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(4)
     }
     cylindersId(){
         return cy.get("#cylinders")
     }
     highwayFuelEcoId(){
-        return cy.get("#highway_fuel_economy")
+        return cy.get("input[data-testid='Highway Fuel Economy']")
     }
     bodyTypeId(){
         return cy.get("#body")
     }
     //Specs >> Number of Doors
     numberOfDoors2Div(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(6)
+        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(4)
     }
     numberOfDoors3Div(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(7)
+        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(5)
     }
     numberOfDoors4Div(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(8)
+        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(6)
     }
     numberOfDoors5Div(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(9)
+        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(7)
     }
     numberOfDoorsOtherDiv(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(10)
+        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(8)
     }
     cityFuelEcoId(){
         return cy.get("input[data-testid='City Fuel Economy']")
@@ -83,7 +86,7 @@ class CreateInventoryPage
         return cy.get("#passengers")
     }
     combinedFuelEcoId(){
-        return cy.get("#combined_fuel_economy")
+        return cy.get("input[data-testid='Combined Fuel Economy']")
     }
     //next btn to next page
     nextBtn(){
