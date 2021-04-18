@@ -33,7 +33,6 @@ describe('Create new 4WD inventory with multiple fuel types test suite', functio
 
     it('Create 4WD, gasoline fuel, automatic, 8 cylinders, sedan type & 2 doors', function(){
         createInv.vinId().type(inventoryData.generalInfo.vin).type('{enter}')
-        // createInv.stockNumberId().type(inventoryData.generalInfo.stockNumber)
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
         createInv.listingPriceInput().type(inventoryData.generalInfo.ListingPrice)
         createInv.exteriorColorDiv().click()
@@ -62,11 +61,12 @@ describe('Create new 4WD inventory with multiple fuel types test suite', functio
         createInv.vendorId().type(inventoryData.purchaseInfo.vendor).type('{enter}')
         createInv.purchasePriceInput().click({force: true})
         createInv.purchasePriceInput().type(inventoryData.purchaseInfo.purchasePrice)
-        const purchaseTax = inventoryData.purchaseInfo.purchasePrice * 0.13
-        createInv.purchaseTaxInput().should('have.css', 'value', purchaseTax)
-        // createInv.purchaseMileageId().type(inventoryData.purchaseInfo.purchaseMileage)
-        // createInv.purchaseInvoiceId().type(inventoryData.purchaseInfo.purchaseInvoice)
-        // createInv.purchaseCommentsId().type(inventoryData.purchaseInfo.comments)
+        createInv.purchaseMileageId().type(inventoryData.purchaseInfo.purchaseMileage)
+        createInv.purchaseInvoiceId().type(inventoryData.purchaseInfo.purchaseInvoice)
+        createInv.purchaseCommentsId().type(inventoryData.purchaseInfo.comments)
+        var purchaseTax = inventoryData.purchaseInfo.purchasePrice * 0.13;
+        purchaseTax = purchaseTax.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        createInv.purchaseTaxInput().should('have.value', purchaseTax)
     })
 
     // it('Create 4WD, diesel fuel, automatic, 8 cylinders, sedan type & 2 doors', function(){
