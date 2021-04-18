@@ -28,11 +28,11 @@ describe('Create new 4WD inventory with multiple fuel types test suite', functio
         dashboardPage.dateConfigInput().click()
         dashboardPage.saveConfigBtn().click()
         cy.visit('./inventory/create')
-        // cy.exec("node ./cypress/integration/utils/vin-puppeteer.js")
     })
 
     it('Create 4WD, gasoline fuel, automatic, 8 cylinders, sedan type & 2 doors', function(){
         createInv.vinId().type(inventoryData.generalInfo.vin).type('{enter}')
+        createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
         createInv.listingPriceInput().type(inventoryData.generalInfo.ListingPrice)
         createInv.exteriorColorDiv().click()
@@ -67,6 +67,13 @@ describe('Create new 4WD inventory with multiple fuel types test suite', functio
         var purchaseTax = inventoryData.purchaseInfo.purchasePrice * 0.13;
         purchaseTax = purchaseTax.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
         createInv.purchaseTaxInput().should('have.value', purchaseTax)
+        createInv.saveBtn().click()
+        createInv.congratulationsMsgDiv().should('have.text', 'Congratulations!')
+        createInv.successMsgDiv().then(($text) => {
+            const stockNumber = $text.text().slice(-9);
+            cy.visit('./inventory/'+stockNumber)
+            //from here make sure to assert on newly created inventory data
+        });
     })
 
     // it('Create 4WD, diesel fuel, automatic, 8 cylinders, sedan type & 2 doors', function(){

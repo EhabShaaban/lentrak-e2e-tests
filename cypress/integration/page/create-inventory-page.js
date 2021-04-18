@@ -117,6 +117,12 @@ class CreateInventoryPage
     saveBtn(){
         return cy.get("button[type='submit']")
     }
+    successMsgDiv(){
+        return cy.get("div[class='an-16 lh-25 pt10']")
+    }
+    congratulationsMsgDiv(){
+        return cy.get("div[class='an-25 bold-text congratulations-text pt15']")
+    }
 }
 
 export default CreateInventoryPage
