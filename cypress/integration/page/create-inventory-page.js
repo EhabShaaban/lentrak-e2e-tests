@@ -83,7 +83,7 @@ class CreateInventoryPage
         return cy.get("input[data-testid='Engine Displacement (e.g. 0.0)']")
     }
     passengersId(){
-        return cy.get("#passengers")
+        return cy.get("input[data-testid='Passangers']")
     }
     combinedFuelEcoId(){
         return cy.get("input[data-testid='Combined Fuel Economy']")
