@@ -1,6 +1,6 @@
 {
    "generalInfo":{
-      "vin":"JTKDE177470164494",
+      "vin":"",
       "stockNumber":"008210214",
       "listingMileage":10000,
       "ListingPrice":50000,
@@ -18,15 +18,15 @@
          "engineDisplacement":3.3
       },
       "transmission":{
-         "cylinders":[
-            3,
-            4,
-            5,
-            6,
-            8,
-            10,
-            12
-         ],
+         "cylinders":{
+            "cy3": "3",
+            "cy4": "4",
+            "cy5": "5",
+            "cy6": "6",
+            "cy8": "8",
+            "cy10": "10",
+            "cy12": "12"            
+         },
          "highwayFuelEconomy":100,
          "bodyType":{
             "sedan":"Sedan",
