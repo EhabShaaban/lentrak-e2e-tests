@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import names from '/home/ehab/lentrak/ui-framework/cypress/fixtures/random_names.json'
+import names from '/cypress/integration/utils/random_names.json'
 
 class Utils {
     
@@ -38,12 +38,6 @@ class Utils {
         this.userIconDiv().trigger('mouseover')
         this.logoutImg().click()
     }
-    // needs to be replaced with a puppeteer script
-    // getVIN() {
-    //     cy.visit(Cypress.env('vin'))
-    //     this.randomRealVinInput().click().wait(1000)
-    //     return this.vinH2().text()
-    // }
     makeEmail() {
         var strValues = "abcdefg12345";
         var strEmail = "";

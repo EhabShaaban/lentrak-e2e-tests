@@ -1,8 +1,8 @@
 /// <reference types="Cypress" />
 
-import DashboardPage from '../page/DashboardPage'
-import UserPage from '../page/UserPage'
-import Utils from '../utils/Utils'
+import DashboardPage from '../page/dashboard-page'
+import UserPage from '../page/user-page'
+import Utils from '../utils/utils'
 
 const utils = new Utils()
 const userPage = new UserPage()
