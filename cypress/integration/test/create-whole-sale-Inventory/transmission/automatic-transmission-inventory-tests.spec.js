@@ -375,7 +375,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
         cy.visit('./inventory/create')
     })
 
-    it('Create 4WD, gasoline fuel, manual, 3 cylinders, coupe type, 2 doors', function(){
+    it('Create AWD, gasoline fuel, manual, 3 cylinders, coupe type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -386,7 +386,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.awdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -421,7 +421,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
         // });
     })
 
-    it('Create 4WD, gasoline fuel, manual, 4 cylinders, coupe type, 2 doors', function(){
+    it('Create AWD, gasoline fuel, manual, 4 cylinders, coupe type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -432,7 +432,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.awdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -467,7 +467,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
         // });
     })
 
-    it('Create 4WD, gasoline fuel, manual, 5 cylinders, coupe type, 2 doors', function(){
+    it('Create AWD, gasoline fuel, manual, 5 cylinders, coupe type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -478,7 +478,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.awdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -513,7 +513,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
         // });
     })
 
-    it('Create 4WD, gasoline fuel, manual, 6 cylinders, coupe type, 2 doors', function(){
+    it('Create AWD, gasoline fuel, manual, 6 cylinders, coupe type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -524,7 +524,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.awdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -559,7 +559,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
         // });
     })
 
-    it('Create 4WD, gasoline fuel, manual, 8 cylinders, coupe type, 2 doors', function(){
+    it('Create AWD, gasoline fuel, manual, 8 cylinders, coupe type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -570,7 +570,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.awdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -605,7 +605,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
         // });
     })
 
-    it('Create 4WD, gasoline fuel, manual, 10 cylinders, coupe type, 2 doors', function(){
+    it('Create AWD, gasoline fuel, manual, 10 cylinders, coupe type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -616,7 +616,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.awdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -651,7 +651,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
         // });
     })
 
-    it('Create 4WD, gasoline fuel, manual, 12 cylinders, coupe type, 2 doors', function(){
+    it('Create AWD, gasoline fuel, manual, 12 cylinders, coupe type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -662,7 +662,7 @@ describe('New inventories with transmission coverage focusing on coupe with diff
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.awdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -717,7 +717,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
         cy.visit('./inventory/create')
     })
 
-    it('Create 4WD, gasoline fuel, manual, 3 cylinders, hatchback type, 2 doors', function(){
+    it('Create FWD, gasoline fuel, manual, 3 cylinders, hatchback type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -728,7 +728,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -763,7 +763,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
         // });
     })
 
-    it('Create 4WD, gasoline fuel, manual, 4 cylinders, hatchback type, 2 doors', function(){
+    it('Create FWD, gasoline fuel, manual, 4 cylinders, hatchback type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -774,7 +774,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -809,7 +809,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
         // });
     })
 
-    it('Create 4WD, gasoline fuel, manual, 5 cylinders, hatchback type, 2 doors', function(){
+    it('Create FWD, gasoline fuel, manual, 5 cylinders, hatchback type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -820,7 +820,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -855,7 +855,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
         // });
     })
 
-    it('Create 4WD, gasoline fuel, manual, 6 cylinders, hatchback type, 2 doors', function(){
+    it('Create FWD, gasoline fuel, manual, 6 cylinders, hatchback type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -866,7 +866,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -901,7 +901,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
         // });
     })
 
-    it('Create 4WD, gasoline fuel, manual, 8 cylinders, hatchback type, 2 doors', function(){
+    it('Create FWD, gasoline fuel, manual, 8 cylinders, hatchback type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -912,7 +912,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -947,7 +947,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
         // });
     })
 
-    it('Create 4WD, gasoline fuel, manual, 10 cylinders, hatchback type, 2 doors', function(){
+    it('Create FWD, gasoline fuel, manual, 10 cylinders, hatchback type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -958,7 +958,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -993,7 +993,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
         // });
     })
 
-    it('Create 4WD, gasoline fuel, manual, 12 cylinders, hatchback type, 2 doors', function(){
+    it('Create FWD, gasoline fuel, manual, 12 cylinders, hatchback type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -1004,7 +1004,7 @@ describe('New inventories with transmission coverage focusing on hatchback  with
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.fourWdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
