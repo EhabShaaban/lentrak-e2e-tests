@@ -1,8 +1,8 @@
 /// <reference types="Cypress" />
 
-import CreateInventoryPage from '../../page/create-inventory-page'
-import DashboardPage from '../../page/dashboard-page'
-import Utils from '../../utils/utils'
+import CreateInventoryPage from '../../../page/create-inventory-page'
+import DashboardPage from '../../../page/dashboard-page'
+import Utils from '../../../utils/utils'
 
 const utils = new Utils
 
@@ -16,7 +16,7 @@ let inventoryVIN
 // write python script to go over generated vins and make sure
 // all json values is valid vin & remove empty vins 'caused by
 // vin website latency and update vin.json with needed data
-describe('Create new AWD inventory with multiple fuel types test suite', function() {
+describe('Create new FWD inventory with multiple fuel types test suite', function() {
 
     before(() => {
         cy.fixture('login_credentials').then(cred => loginCredentials = cred)
@@ -35,7 +35,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
         cy.visit('./inventory/create')
     })
 
-    it('Create AWD, gasoline fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
+    it('Create FWD, gasoline fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[0]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -46,7 +46,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.awdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -81,7 +81,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
         // });
     })
 
-    it('Create AWD, diesel fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
+    it('Create FWD, diesel fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[1]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -92,7 +92,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.awdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.diesel).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -127,7 +127,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
         // });
     })
 
-    it('Create AWD, flex fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
+    it('Create FWD, flex fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[2]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -138,7 +138,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.awdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.flex).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -173,7 +173,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
         // });
     })
 
-    it('Create AWD, hybrid fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
+    it('Create FWD, hybrid fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[3]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -184,7 +184,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.awdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.hybrid).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -219,7 +219,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
         // });
     })
 
-    it('Create AWD, electric fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
+    it('Create FWD, electric fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[4]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -230,7 +230,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.awdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.electric).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -265,7 +265,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
         // });
     })
 
-    it('Create AWD, alternate fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
+    it('Create FWD, alternate fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[5]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -276,7 +276,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.awdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.alternate).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
@@ -311,7 +311,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
         // });
     })
 
-    it('Create AWD, other fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
+    it('Create FWD, other fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
         createInv.vinId().type(inventoryVIN[6]).type('{enter}')
         createInv.decodeBtn().click()
         createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
@@ -322,7 +322,7 @@ describe('Create new AWD inventory with multiple fuel types test suite', functio
             createInv.featuresDiv(i).click()
         }
         //
-        createInv.awdDiv().click()
+        createInv.fwdDiv().click()
         createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.other).type('{enter}')
         createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
         createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
