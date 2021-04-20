@@ -123,7 +123,8 @@ class CreateInventoryPage
     congratulationsMsgDiv(){
         return cy.get("div[class='an-25 bold-text congratulations-text pt15']")
     }
-    // actions
+
+    // actions that this page can do
     selectGear(gearType){
         if(gearType == "automatic"){
             return this.automaticDiv().click();
@@ -143,7 +144,7 @@ class CreateInventoryPage
             return this.rwdDiv().click();
         }
     }
-    selectDoors(number){
+    selectDoorNumber(number){
         if(number==2){
             return this.numberOfDoors2Div().click();
         } else if(number==3){

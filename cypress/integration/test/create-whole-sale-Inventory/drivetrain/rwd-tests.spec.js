@@ -1,77 +1,58 @@
 /// <reference types="Cypress" />
 
-import CreateInventoryPage from '../../../page/create-inventory-page'
+import createInventoryGeneralDynamicInfo from '../../helpers/create-inventory-general-dynamic-info'
+import createInventoryGeneralStaticInfo from '../../helpers/create-inventory-general-static-info'
+import createInventoryPurchaseInfo from '../../helpers/create-inventory-purchase-info'
 import DashboardPage from '../../../page/dashboard-page'
 import Utils from '../../../utils/utils'
 
-const utils = new Utils
-
 const dashboardPage = new DashboardPage()
-const createInv = new CreateInventoryPage()
+const utils = new Utils
 
 let loginCredentials
 let inventoryData
 let inventoryVIN
 
-// write python script to go over generated vins and make sure
-// all json values is valid vin & remove empty vins 'caused by
-// vin website latency and update vin.json with needed data
-describe('Create new RWD inventory with multiple fuel types test suite', function() {
+/**
+ * TODO: write python script to process vin.json
+ */
+
+describe('new whole-sale, rwd suite', function() {
 
     before(() => {
         cy.fixture('login_credentials').then(cred => loginCredentials = cred)
         cy.fixture('new_inventory_data').then(inv => inventoryData = inv)
         cy.fixture('vin').then(vin => inventoryVIN = vin)
-        })
+    })
 
     beforeEach(function(){
         cy.visit('/')
-        utils.login(loginCredentials.dev.username, loginCredentials.dev.passwd)
+        utils.login(loginCredentials.qa.username, loginCredentials.qa.passwd)
         dashboardPage.dashboardLabelDiv().should('have.text', 'Dashboard')
         dashboardPage.arrowImg().click()
         dashboardPage.settingsLi().click()
         dashboardPage.dateConfigInput().click()
         dashboardPage.saveConfigBtn().click()
         cy.visit('./inventory/create')
+        createInventoryGeneralStaticInfo({
+            listingMileage   : inventoryData.generalInfo.listingMileage,
+            cityFuelEco      : inventoryData.generalInfo.drivetrain.cityFuelEconomy,
+            highwayFuelEco   : inventoryData.generalInfo.transmission.highwayFuelEconomy,
+            passengers       : inventoryData.generalInfo.numberOfDoors.passengers,
+            combinedFuelEco  : inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy,
+        })
     })
 
-    it('Create RWD, gasoline fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
-        createInv.vinId().type(inventoryVIN[0]).type('{enter}')
-        createInv.decodeBtn().click()
-        createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
-        createInv.listingPriceInput().type(inventoryData.generalInfo.ListingPrice)
-        createInv.exteriorColorDiv().click()
-        createInv.interiorColorColorDiv().click()
-        for(var i=0; i<=5;i++){
-            createInv.featuresDiv(i).click()
-        }
-        //
-        createInv.rwdDiv().click()
-        createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.gasoline).type('{enter}')
-        createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
-        createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
-        //
-        createInv.automaticDiv().click()
-        createInv.cylindersId().type(inventoryData.generalInfo.transmission.cylinders.cy3).type('{enter}')
-        createInv.highwayFuelEcoId().type(inventoryData.generalInfo.transmission.highwayFuelEconomy)
-        createInv.bodyTypeId().type(inventoryData.generalInfo.transmission.bodyType.sedan).type('{enter}')
-        //
-        createInv.numberOfDoors2Div().click()
-        createInv.passengersId().type(inventoryData.generalInfo.numberOfDoors.passengers)
-        createInv.combinedFuelEcoId().type(inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy).type('{enter}')
-        //
-        createInv.nextBtn().click()
-        createInv.sourceSpan().click({force: true})
-        createInv.sourceSpan().type(inventoryData.purchaseInfo.source.wholeSale).type('{enter}')
-        createInv.vendorId().type(inventoryData.purchaseInfo.vendor).type('{enter}')
-        createInv.purchasePriceInput().click({force: true})
-        createInv.purchasePriceInput().type(inventoryData.purchaseInfo.purchasePrice)
-        createInv.purchaseMileageId().type(inventoryData.purchaseInfo.purchaseMileage)
-        createInv.purchaseInvoiceId().type(inventoryData.purchaseInfo.purchaseInvoice)
-        createInv.purchaseCommentsId().type(inventoryData.purchaseInfo.comments)
-        var purchaseTax = inventoryData.purchaseInfo.purchasePrice * 0.13;
-        purchaseTax = purchaseTax.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-        createInv.purchaseTaxInput().should('have.value', purchaseTax)
+    afterEach(function(){
+        createInventoryPurchaseInfo({
+            source           : inventoryData.purchaseInfo.source.wholeSale,
+            vendor           : inventoryData.purchaseInfo.vendor,
+            purchasePrice    : inventoryData.purchaseInfo.purchasePrice,
+            purchaseMileage  : inventoryData.purchaseInfo.purchaseMileage,
+            purchaseInvoice  : inventoryData.purchaseInfo.purchaseInvoice,
+            purchaseComments : inventoryData.purchaseInfo.comments,
+        })
+        
         // createInv.saveBtn().click()
         // createInv.congratulationsMsgDiv().should('have.text', 'Congratulations!')
         // createInv.successMsgDiv().then(($text) => {
@@ -81,279 +62,157 @@ describe('Create new RWD inventory with multiple fuel types test suite', functio
         // });
     })
 
-    it('Create RWD, diesel fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
-        createInv.vinId().type(inventoryVIN[1]).type('{enter}')
-        createInv.decodeBtn().click()
-        createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
-        createInv.listingPriceInput().type(inventoryData.generalInfo.ListingPrice)
-        createInv.exteriorColorDiv().click()
-        createInv.interiorColorColorDiv().click()
-        for(var i=0; i<=5;i++){
-            createInv.featuresDiv(i).click()
-        }
-        //
-        createInv.rwdDiv().click()
-        createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.diesel).type('{enter}')
-        createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
-        createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
-        //
-        createInv.automaticDiv().click()
-        createInv.cylindersId().type(inventoryData.generalInfo.transmission.cylinders.cy3).type('{enter}')
-        createInv.highwayFuelEcoId().type(inventoryData.generalInfo.transmission.highwayFuelEconomy)
-        createInv.bodyTypeId().type(inventoryData.generalInfo.transmission.bodyType.sedan).type('{enter}')
-        //
-        createInv.numberOfDoors2Div().click()
-        createInv.passengersId().type(inventoryData.generalInfo.numberOfDoors.passengers)
-        createInv.combinedFuelEcoId().type(inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy).type('{enter}')
-        //
-        createInv.nextBtn().click()
-        createInv.sourceSpan().click({force: true})
-        createInv.sourceSpan().type(inventoryData.purchaseInfo.source.wholeSale).type('{enter}')
-        createInv.vendorId().type(inventoryData.purchaseInfo.vendor).type('{enter}')
-        createInv.purchasePriceInput().click({force: true})
-        createInv.purchasePriceInput().type(inventoryData.purchaseInfo.purchasePrice)
-        createInv.purchaseMileageId().type(inventoryData.purchaseInfo.purchaseMileage)
-        createInv.purchaseInvoiceId().type(inventoryData.purchaseInfo.purchaseInvoice)
-        createInv.purchaseCommentsId().type(inventoryData.purchaseInfo.comments)
-        var purchaseTax = inventoryData.purchaseInfo.purchasePrice * 0.13;
-        purchaseTax = purchaseTax.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-        createInv.purchaseTaxInput().should('have.value', purchaseTax)
-        // createInv.saveBtn().click()
-        // createInv.congratulationsMsgDiv().should('have.text', 'Congratulations!')
-        // createInv.successMsgDiv().then(($text) => {
-        //     const stockNumber = $text.text().slice(-9);
-        //     cy.visit('./inventory/'+stockNumber)
-        //     //from here make sure to assert on newly created inventory data
-        // });
+    it('create rwd, 2 doors, automatic, gasoline, cy3, sedan', function(){
+        createInventoryGeneralDynamicInfo({
+            doorNumber         : 2,
+            inventoryType      : "rwd",
+            gearType           : "automatic",
+            vin                : inventoryVIN[0],
+            listingPrice       : inventoryData.generalInfo.ListingPrice,
+            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
+            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
+            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy3,
+            bodyType           : inventoryData.generalInfo.transmission.bodyType.sedan,
+        })
     })
 
-    it('Create RWD, flex fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
-        createInv.vinId().type(inventoryVIN[2]).type('{enter}')
-        createInv.decodeBtn().click()
-        createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
-        createInv.listingPriceInput().type(inventoryData.generalInfo.ListingPrice)
-        createInv.exteriorColorDiv().click()
-        createInv.interiorColorColorDiv().click()
-        for(var i=0; i<=5;i++){
-            createInv.featuresDiv(i).click()
-        }
-        //
-        createInv.rwdDiv().click()
-        createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.flex).type('{enter}')
-        createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
-        createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
-        //
-        createInv.automaticDiv().click()
-        createInv.cylindersId().type(inventoryData.generalInfo.transmission.cylinders.cy3).type('{enter}')
-        createInv.highwayFuelEcoId().type(inventoryData.generalInfo.transmission.highwayFuelEconomy)
-        createInv.bodyTypeId().type(inventoryData.generalInfo.transmission.bodyType.sedan).type('{enter}')
-        //
-        createInv.numberOfDoors2Div().click()
-        createInv.passengersId().type(inventoryData.generalInfo.numberOfDoors.passengers)
-        createInv.combinedFuelEcoId().type(inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy).type('{enter}')
-        //
-        createInv.nextBtn().click()
-        createInv.sourceSpan().click({force: true})
-        createInv.sourceSpan().type(inventoryData.purchaseInfo.source.wholeSale).type('{enter}')
-        createInv.vendorId().type(inventoryData.purchaseInfo.vendor).type('{enter}')
-        createInv.purchasePriceInput().click({force: true})
-        createInv.purchasePriceInput().type(inventoryData.purchaseInfo.purchasePrice)
-        createInv.purchaseMileageId().type(inventoryData.purchaseInfo.purchaseMileage)
-        createInv.purchaseInvoiceId().type(inventoryData.purchaseInfo.purchaseInvoice)
-        createInv.purchaseCommentsId().type(inventoryData.purchaseInfo.comments)
-        var purchaseTax = inventoryData.purchaseInfo.purchasePrice * 0.13;
-        purchaseTax = purchaseTax.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-        createInv.purchaseTaxInput().should('have.value', purchaseTax)
-        // createInv.saveBtn().click()
-        // createInv.congratulationsMsgDiv().should('have.text', 'Congratulations!')
-        // createInv.successMsgDiv().then(($text) => {
-        //     const stockNumber = $text.text().slice(-9);
-        //     cy.visit('./inventory/'+stockNumber)
-        //     //from here make sure to assert on newly created inventory data
-        // });
+    it('create rwd, 3 doors, manual, diesel, cy10, van', function(){
+        createInventoryGeneralDynamicInfo({
+            doorNumber         : 3,
+            inventoryType      : "rwd",
+            gearType           : "manual",
+            vin                : inventoryVIN[1],
+            listingPrice       : inventoryData.generalInfo.ListingPrice,
+            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.diesel,
+            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
+            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy10,
+            bodyType           : inventoryData.generalInfo.transmission.bodyType.van,
+        })
     })
 
-    it('Create RWD, hybrid fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
-        createInv.vinId().type(inventoryVIN[3]).type('{enter}')
-        createInv.decodeBtn().click()
-        createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
-        createInv.listingPriceInput().type(inventoryData.generalInfo.ListingPrice)
-        createInv.exteriorColorDiv().click()
-        createInv.interiorColorColorDiv().click()
-        for(var i=0; i<=5;i++){
-            createInv.featuresDiv(i).click()
-        }
-        //
-        createInv.rwdDiv().click()
-        createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.hybrid).type('{enter}')
-        createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
-        createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
-        //
-        createInv.automaticDiv().click()
-        createInv.cylindersId().type(inventoryData.generalInfo.transmission.cylinders.cy3).type('{enter}')
-        createInv.highwayFuelEcoId().type(inventoryData.generalInfo.transmission.highwayFuelEconomy)
-        createInv.bodyTypeId().type(inventoryData.generalInfo.transmission.bodyType.sedan).type('{enter}')
-        //
-        createInv.numberOfDoors2Div().click()
-        createInv.passengersId().type(inventoryData.generalInfo.numberOfDoors.passengers)
-        createInv.combinedFuelEcoId().type(inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy).type('{enter}')
-        //
-        createInv.nextBtn().click()
-        createInv.sourceSpan().click({force: true})
-        createInv.sourceSpan().type(inventoryData.purchaseInfo.source.wholeSale).type('{enter}')
-        createInv.vendorId().type(inventoryData.purchaseInfo.vendor).type('{enter}')
-        createInv.purchasePriceInput().click({force: true})
-        createInv.purchasePriceInput().type(inventoryData.purchaseInfo.purchasePrice)
-        createInv.purchaseMileageId().type(inventoryData.purchaseInfo.purchaseMileage)
-        createInv.purchaseInvoiceId().type(inventoryData.purchaseInfo.purchaseInvoice)
-        createInv.purchaseCommentsId().type(inventoryData.purchaseInfo.comments)
-        var purchaseTax = inventoryData.purchaseInfo.purchasePrice * 0.13;
-        purchaseTax = purchaseTax.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-        createInv.purchaseTaxInput().should('have.value', purchaseTax)
-        // createInv.saveBtn().click()
-        // createInv.congratulationsMsgDiv().should('have.text', 'Congratulations!')
-        // createInv.successMsgDiv().then(($text) => {
-        //     const stockNumber = $text.text().slice(-9);
-        //     cy.visit('./inventory/'+stockNumber)
-        //     //from here make sure to assert on newly created inventory data
-        // });
+    it('create rwd, 5 doors, manual, gasoline, cy12, wagon', function(){
+        createInventoryGeneralDynamicInfo({
+            doorNumber         : 5,
+            inventoryType      : "rwd",
+            gearType           : "manual",
+            vin                : inventoryVIN[2],
+            listingPrice       : inventoryData.generalInfo.ListingPrice,
+            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
+            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
+            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy12,
+            bodyType           : inventoryData.generalInfo.transmission.bodyType.wagon,
+        })
     })
 
-    it('Create RWD, electric fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
-        createInv.vinId().type(inventoryVIN[4]).type('{enter}')
-        createInv.decodeBtn().click()
-        createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
-        createInv.listingPriceInput().type(inventoryData.generalInfo.ListingPrice)
-        createInv.exteriorColorDiv().click()
-        createInv.interiorColorColorDiv().click()
-        for(var i=0; i<=5;i++){
-            createInv.featuresDiv(i).click()
-        }
-        //
-        createInv.rwdDiv().click()
-        createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.electric).type('{enter}')
-        createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
-        createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
-        //
-        createInv.automaticDiv().click()
-        createInv.cylindersId().type(inventoryData.generalInfo.transmission.cylinders.cy3).type('{enter}')
-        createInv.highwayFuelEcoId().type(inventoryData.generalInfo.transmission.highwayFuelEconomy)
-        createInv.bodyTypeId().type(inventoryData.generalInfo.transmission.bodyType.sedan).type('{enter}')
-        //
-        createInv.numberOfDoors2Div().click()
-        createInv.passengersId().type(inventoryData.generalInfo.numberOfDoors.passengers)
-        createInv.combinedFuelEcoId().type(inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy).type('{enter}')
-        //
-        createInv.nextBtn().click()
-        createInv.sourceSpan().click({force: true})
-        createInv.sourceSpan().type(inventoryData.purchaseInfo.source.wholeSale).type('{enter}')
-        createInv.vendorId().type(inventoryData.purchaseInfo.vendor).type('{enter}')
-        createInv.purchasePriceInput().click({force: true})
-        createInv.purchasePriceInput().type(inventoryData.purchaseInfo.purchasePrice)
-        createInv.purchaseMileageId().type(inventoryData.purchaseInfo.purchaseMileage)
-        createInv.purchaseInvoiceId().type(inventoryData.purchaseInfo.purchaseInvoice)
-        createInv.purchaseCommentsId().type(inventoryData.purchaseInfo.comments)
-        var purchaseTax = inventoryData.purchaseInfo.purchasePrice * 0.13;
-        purchaseTax = purchaseTax.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-        createInv.purchaseTaxInput().should('have.value', purchaseTax)
-        // createInv.saveBtn().click()
-        // createInv.congratulationsMsgDiv().should('have.text', 'Congratulations!')
-        // createInv.successMsgDiv().then(($text) => {
-        //     const stockNumber = $text.text().slice(-9);
-        //     cy.visit('./inventory/'+stockNumber)
-        //     //from here make sure to assert on newly created inventory data
-        // });
+    it('create rwd, 4 doors, automatic, alternate, cy5, suv', function(){
+        createInventoryGeneralDynamicInfo({
+            doorNumber         : 4,
+            inventoryType      : "rwd",
+            gearType           : "automatic",
+            vin                : inventoryVIN[3],
+            listingPrice       : inventoryData.generalInfo.ListingPrice,
+            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.alternate,
+            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
+            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy5,
+            bodyType           : inventoryData.generalInfo.transmission.bodyType.suv,
+        })
     })
 
-    it('Create RWD, alternate fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
-        createInv.vinId().type(inventoryVIN[5]).type('{enter}')
-        createInv.decodeBtn().click()
-        createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
-        createInv.listingPriceInput().type(inventoryData.generalInfo.ListingPrice)
-        createInv.exteriorColorDiv().click()
-        createInv.interiorColorColorDiv().click()
-        for(var i=0; i<=5;i++){
-            createInv.featuresDiv(i).click()
-        }
-        //
-        createInv.rwdDiv().click()
-        createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.alternate).type('{enter}')
-        createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
-        createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
-        //
-        createInv.automaticDiv().click()
-        createInv.cylindersId().type(inventoryData.generalInfo.transmission.cylinders.cy3).type('{enter}')
-        createInv.highwayFuelEcoId().type(inventoryData.generalInfo.transmission.highwayFuelEconomy)
-        createInv.bodyTypeId().type(inventoryData.generalInfo.transmission.bodyType.sedan).type('{enter}')
-        //
-        createInv.numberOfDoors2Div().click()
-        createInv.passengersId().type(inventoryData.generalInfo.numberOfDoors.passengers)
-        createInv.combinedFuelEcoId().type(inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy).type('{enter}')
-        //
-        createInv.nextBtn().click()
-        createInv.sourceSpan().click({force: true})
-        createInv.sourceSpan().type(inventoryData.purchaseInfo.source.wholeSale).type('{enter}')
-        createInv.vendorId().type(inventoryData.purchaseInfo.vendor).type('{enter}')
-        createInv.purchasePriceInput().click({force: true})
-        createInv.purchasePriceInput().type(inventoryData.purchaseInfo.purchasePrice)
-        createInv.purchaseMileageId().type(inventoryData.purchaseInfo.purchaseMileage)
-        createInv.purchaseInvoiceId().type(inventoryData.purchaseInfo.purchaseInvoice)
-        createInv.purchaseCommentsId().type(inventoryData.purchaseInfo.comments)
-        var purchaseTax = inventoryData.purchaseInfo.purchasePrice * 0.13;
-        purchaseTax = purchaseTax.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-        createInv.purchaseTaxInput().should('have.value', purchaseTax)
-        // createInv.saveBtn().click()
-        // createInv.congratulationsMsgDiv().should('have.text', 'Congratulations!')
-        // createInv.successMsgDiv().then(($text) => {
-        //     const stockNumber = $text.text().slice(-9);
-        //     cy.visit('./inventory/'+stockNumber)
-        //     //from here make sure to assert on newly created inventory data
-        // });
+    it('create rwd, 2 doors, manual, electric, cy6, minivan', function(){
+        createInventoryGeneralDynamicInfo({
+            doorNumber         : 2,
+            inventoryType      : "rwd",
+            gearType           : "manual",
+            vin                : inventoryVIN[4],
+            listingPrice       : inventoryData.generalInfo.ListingPrice,
+            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.electric,
+            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
+            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy6,
+            bodyType           : inventoryData.generalInfo.transmission.bodyType.minivan,
+        })
     })
 
-    it('Create RWD, other fuel, automatic, 3 cylinders, sedan type, 2 doors', function(){
-        createInv.vinId().type(inventoryVIN[6]).type('{enter}')
-        createInv.decodeBtn().click()
-        createInv.listingMileageId().type(inventoryData.generalInfo.listingMileage)
-        createInv.listingPriceInput().type(inventoryData.generalInfo.ListingPrice)
-        createInv.exteriorColorDiv().click()
-        createInv.interiorColorColorDiv().click()
-        for(var i=0; i<=5;i++){
-            createInv.featuresDiv(i).click()
-        }
-        //
-        createInv.rwdDiv().click()
-        createInv.fuelTypeId().type(inventoryData.generalInfo.drivetrain.fuelType.other).type('{enter}')
-        createInv.cityFuelEcoId().type(inventoryData.generalInfo.drivetrain.cityFuelEconomy)
-        createInv.engineDisplacementId().type(inventoryData.generalInfo.drivetrain.engineDisplacement)
-        //
-        createInv.automaticDiv().click()
-        createInv.cylindersId().type(inventoryData.generalInfo.transmission.cylinders.cy3).type('{enter}')
-        createInv.highwayFuelEcoId().type(inventoryData.generalInfo.transmission.highwayFuelEconomy)
-        createInv.bodyTypeId().type(inventoryData.generalInfo.transmission.bodyType.sedan).type('{enter}')
-        //
-        createInv.numberOfDoors2Div().click()
-        createInv.passengersId().type(inventoryData.generalInfo.numberOfDoors.passengers)
-        createInv.combinedFuelEcoId().type(inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy).type('{enter}')
-        //
-        createInv.nextBtn().click()
-        createInv.sourceSpan().click({force: true})
-        createInv.sourceSpan().type(inventoryData.purchaseInfo.source.wholeSale).type('{enter}')
-        createInv.vendorId().type(inventoryData.purchaseInfo.vendor).type('{enter}')
-        createInv.purchasePriceInput().click({force: true})
-        createInv.purchasePriceInput().type(inventoryData.purchaseInfo.purchasePrice)
-        createInv.purchaseMileageId().type(inventoryData.purchaseInfo.purchaseMileage)
-        createInv.purchaseInvoiceId().type(inventoryData.purchaseInfo.purchaseInvoice)
-        createInv.purchaseCommentsId().type(inventoryData.purchaseInfo.comments)
-        var purchaseTax = inventoryData.purchaseInfo.purchasePrice * 0.13;
-        purchaseTax = purchaseTax.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-        createInv.purchaseTaxInput().should('have.value', purchaseTax)
-        // createInv.saveBtn().click()
-        // createInv.congratulationsMsgDiv().should('have.text', 'Congratulations!')
-        // createInv.successMsgDiv().then(($text) => {
-        //     const stockNumber = $text.text().slice(-9);
-        //     cy.visit('./inventory/'+stockNumber)
-        //     //from here make sure to assert on newly created inventory data
-        // });
+    it('create rwd, 3 doors, automatic, hybrid, cy8, hatchback', function(){
+        createInventoryGeneralDynamicInfo({
+            doorNumber         : 3,
+            inventoryType      : "rwd",
+            gearType           : "automatic",
+            vin                : inventoryVIN[5],
+            listingPrice       : inventoryData.generalInfo.ListingPrice,
+            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
+            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
+            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy8,
+            bodyType           : inventoryData.generalInfo.transmission.bodyType.hatchback,
+        })
+    })
+
+    it('create rwd, 2 doors, automatic, electric, cy10, pickupTruck', function(){
+        createInventoryGeneralDynamicInfo({
+            doorNumber         : 2,
+            inventoryType      : "rwd",
+            gearType           : "automatic",
+            vin                : inventoryVIN[6],
+            listingPrice       : inventoryData.generalInfo.ListingPrice,
+            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.electric,
+            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
+            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy10,
+            bodyType           : inventoryData.generalInfo.transmission.bodyType.pickupTruck,
+        })
+    })
+
+    it('create rwd, 5 doors, manual, gasoline, cy3, coupe', function(){
+        createInventoryGeneralDynamicInfo({
+            doorNumber         : 5,
+            inventoryType      : "rwd",
+            gearType           : "manual",
+            vin                : inventoryVIN[7],
+            listingPrice       : inventoryData.generalInfo.ListingPrice,
+            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
+            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
+            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy3,
+            bodyType           : inventoryData.generalInfo.transmission.bodyType.coupe,
+        })
+    })
+
+    it('create rwd, 2 doors, automatic, flex, cy6, convertible', function(){
+        createInventoryGeneralDynamicInfo({
+            doorNumber         : 2,
+            inventoryType      : "rwd",
+            gearType           : "automatic",
+            vin                : inventoryVIN[8],
+            listingPrice       : inventoryData.generalInfo.ListingPrice,
+            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.flex,
+            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
+            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy6,
+            bodyType           : inventoryData.generalInfo.transmission.bodyType.convertible,
+        })
+    })
+
+    it('create rwd, 3 doors, manual, electric, cy10, sedan', function(){
+        createInventoryGeneralDynamicInfo({
+            doorNumber         : 3,
+            inventoryType      : "rwd",
+            gearType           : "manual",
+            vin                : inventoryVIN[9],
+            listingPrice       : inventoryData.generalInfo.ListingPrice,
+            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.electric,
+            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
+            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy10,
+            bodyType           : inventoryData.generalInfo.transmission.bodyType.sedan,
+        })
+    })
+
+    it('create rwd, 2 doors, automatic, diesel, cy4, wagon', function(){
+        createInventoryGeneralDynamicInfo({
+            doorNumber         : 2,
+            inventoryType      : "rwd",
+            gearType           : "automatic",
+            vin                : inventoryVIN[10],
+            listingPrice       : inventoryData.generalInfo.ListingPrice,
+            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.diesel,
+            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
+            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy4,
+            bodyType           : inventoryData.generalInfo.transmission.bodyType.wagon,
+        })
     })
 })

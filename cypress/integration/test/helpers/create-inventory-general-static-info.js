@@ -33,25 +33,13 @@ const createInv = new CreateInventoryPage()
  */
 
 module.exports = ({
-    vin,
     listingMileage,
-    listingPrice,
-    fuelType,
     cityFuelEco,
-    engineDisplacement,
-    cylinders,
     highwayFuelEco,
-    bodyType,
     passengers,
     combinedFuelEco,
 }) => {
-    createInv.vinId().type(vin).type('{enter}')
-
-    createInv.decodeBtn().click()
-
     createInv.listingMileageId().type(listingMileage)
-
-    createInv.listingPriceInput().type(listingPrice)
 
     createInv.exteriorColorDiv().click()
 
@@ -61,19 +49,9 @@ module.exports = ({
         createInv.featuresDiv(i).click()
     }
 
-    createInv.fuelTypeId().type(fuelType).type('{enter}')
-
     createInv.cityFuelEcoId().type(cityFuelEco)
 
-    createInv.engineDisplacementId().type(engineDisplacement)
-
-    createInv.cylindersId().type(cylinders).type('{enter}')
-
     createInv.highwayFuelEcoId().type(highwayFuelEco)
-
-    createInv.bodyTypeId().type(bodyType).type('{enter}')
-    
-    createInv.numberOfDoors2Div().click()
 
     createInv.passengersId().type(passengers)
 
