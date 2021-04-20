@@ -2,7 +2,7 @@
 
 class CreateInventoryPage
 {
-    //1. General Information
+    // 1. General Information
     vinId(){
         return cy.get("#vin")
     }
@@ -28,7 +28,7 @@ class CreateInventoryPage
     featuresDiv(idx){
         return cy.get("div[style='color: rgb(87, 98, 117);']").eq(idx)
     }
-    //Specs >> Drivetrain
+    // Specs >> Drivetrain
     fourWdDiv(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(0)
     }
@@ -44,7 +44,7 @@ class CreateInventoryPage
     fuelTypeId(){
         return cy.get("#fuel_type")
     }
-    //Specs >> Transmission
+    // Specs >> Transmission
     automaticDiv(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(3)
     }
@@ -60,7 +60,7 @@ class CreateInventoryPage
     bodyTypeId(){
         return cy.get("#body")
     }
-    //Specs >> Number of Doors
+    // Specs >> Number of Doors
     numberOfDoors2Div(){
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(4)
     }
@@ -88,11 +88,11 @@ class CreateInventoryPage
     combinedFuelEcoId(){
         return cy.get("input[data-testid='Combined Fuel Economy']")
     }
-    //next btn to next page
+    // next btn to next page
     nextBtn(){
         return cy.get("button[type='submit']")
     }
-    //2. Purchase Information
+    // 2. Purchase Information
     sourceSpan(){
         return cy.get("#source")
     }
@@ -156,6 +156,16 @@ class CreateInventoryPage
         } else {
             return this.numberOfDoorsOtherDiv().click();
         }
+    }
+    typeVin(vinCode){
+        this.vinId().type(vinCode).type('{enter}')
+        this.decodeBtn().click()
+    }
+    typeListingPrice(listingPrice){
+        this.listingPriceInput().type(listingPrice)
+    }
+    clickNext(){
+        this.nextBtn().click()
     }
 }
 

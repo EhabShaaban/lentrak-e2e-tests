@@ -2,11 +2,11 @@
 
 class DashboardPage
 {
-    //dashboard label in dashboard page
+    // dashboard label in dashboard page
     dashboardLabelDiv(){
         return cy.get("#content-scroll div[class='an-24 bold-text lh-33 pl15']")
     }
-    //user profile arrow - top right
+    // user profile arrow - top right
     arrowImg(){
         return cy.get("img[class='pl15']")
     }

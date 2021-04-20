@@ -1,13 +1,16 @@
 /// <reference types="Cypress" />
 
-import createInventoryGeneralDynamicInfo from '../../helpers/create-inventory-general-dynamic-info'
-import createInventoryGeneralStaticInfo from '../../helpers/create-inventory-general-static-info'
-import createInventoryPurchaseInfo from '../../helpers/create-inventory-purchase-info'
 import DashboardPage from '../../../page/dashboard-page'
 import Utils from '../../../utils/utils'
+import CreateInventoryPage from '../../../page/create-inventory-page'
+import createInventoryDrivetrain from '../../helpers/create-inventorty/create-inventory-drivetrain'
+import createInventoryTransmission from '../../helpers/create-inventorty/create-inventory-transmission'
+import createInventoryGeneralInfo from '../../helpers/create-inventorty/create-inventory-general-info'
+import createInventoryPurchaseInfo from '../../helpers/create-inventorty/create-inventory-purchase-info'
 
 const dashboardPage = new DashboardPage()
-const utils = new Utils
+const createInventory = new CreateInventoryPage()
+const utils = new Utils()
 
 let loginCredentials
 let inventoryData
@@ -17,7 +20,7 @@ let inventoryVIN
  * TODO: write python script to process vin.json
  */
 
-describe('new whole-sale, fwd suite', function() {
+describe('new whole-sale, fwd suite, focusing on changing drivetrain', function() {
 
     before(() => {
         cy.fixture('login_credentials').then(cred => loginCredentials = cred)
@@ -26,20 +29,25 @@ describe('new whole-sale, fwd suite', function() {
     })
 
     beforeEach(function(){
+
         cy.visit('/')
         utils.login(loginCredentials.qa.username, loginCredentials.qa.passwd)
         dashboardPage.dashboardLabelDiv().should('have.text', 'Dashboard')
+
         dashboardPage.arrowImg().click()
         dashboardPage.settingsLi().click()
         dashboardPage.dateConfigInput().click()
         dashboardPage.saveConfigBtn().click()
+
         cy.visit('./inventory/create')
-        createInventoryGeneralStaticInfo({
-            listingMileage   : inventoryData.generalInfo.listingMileage,
-            cityFuelEco      : inventoryData.generalInfo.drivetrain.cityFuelEconomy,
-            highwayFuelEco   : inventoryData.generalInfo.transmission.highwayFuelEconomy,
-            passengers       : inventoryData.generalInfo.numberOfDoors.passengers,
-            combinedFuelEco  : inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy,
+
+        createInventoryGeneralInfo({
+            listingMileage     : inventoryData.generalInfo.listingMileage,
+            cityFuelEco        : inventoryData.generalInfo.drivetrain.cityFuelEconomy,
+            highwayFuelEco     : inventoryData.generalInfo.transmission.highwayFuelEconomy,
+            passengers         : inventoryData.generalInfo.numberOfDoors.passengers,
+            combinedFuelEco    : inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy,
+            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement
         })
     })
 
@@ -62,157 +70,223 @@ describe('new whole-sale, fwd suite', function() {
         // });
     })
 
-    it('create fwd, 2 doors, automatic, gasoline, cy3, sedan', function(){
-        createInventoryGeneralDynamicInfo({
-            doorNumber         : 2,
-            inventoryType      : "fwd",
-            gearType           : "automatic",
-            vin                : inventoryVIN[0],
-            listingPrice       : inventoryData.generalInfo.ListingPrice,
-            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
-            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
-            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy3,
-            bodyType           : inventoryData.generalInfo.transmission.bodyType.sedan,
+    it('create fwd, gasoline, automatic, cy3, sedan, 2 doors', function(){
+
+        createInventory.typeVin(inventoryVIN[0])
+        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+
+        createInventoryDrivetrain({
+            inventoryType : "fwd",
+            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
         })
+
+        createInventoryTransmission({
+            gearType  : "automatic",
+            cylinders : inventoryData.generalInfo.transmission.cylinders.cy3,
+            bodyType  : inventoryData.generalInfo.transmission.bodyType.sedan,
+        })
+
+        createInventory.selectDoorNumber(2)
+        
     })
 
-    it('create fwd, 3 doors, manual, diesel, cy10, van', function(){
-        createInventoryGeneralDynamicInfo({
-            doorNumber         : 3,
-            inventoryType      : "fwd",
-            gearType           : "manual",
-            vin                : inventoryVIN[1],
-            listingPrice       : inventoryData.generalInfo.ListingPrice,
-            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.diesel,
-            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
-            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy10,
-            bodyType           : inventoryData.generalInfo.transmission.bodyType.van,
+    it('create fwd, flex, automatic, cy6, convertible, 3 doors', function(){
+
+        createInventory.typeVin(inventoryVIN[1])
+        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+
+        createInventoryDrivetrain({
+            inventoryType : "fwd",
+            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
         })
+
+        createInventoryTransmission({
+            gearType  : "automatic",
+            cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
+            bodyType  : inventoryData.generalInfo.transmission.bodyType.convertible,
+        })
+
+        createInventory.selectDoorNumber(3)
+        
     })
 
-    it('create fwd, 5 doors, manual, gasoline, cy12, wagon', function(){
-        createInventoryGeneralDynamicInfo({
-            doorNumber         : 5,
-            inventoryType      : "fwd",
-            gearType           : "manual",
-            vin                : inventoryVIN[2],
-            listingPrice       : inventoryData.generalInfo.ListingPrice,
-            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
-            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
-            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy12,
-            bodyType           : inventoryData.generalInfo.transmission.bodyType.wagon,
+    it('create fwd, gasoline, manual, cy3, van, 2 doors', function(){
+
+        createInventory.typeVin(inventoryVIN[2])
+        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+
+        createInventoryDrivetrain({
+            inventoryType : "fwd",
+            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.electric,
         })
+
+        createInventoryTransmission({
+            gearType  : "manual",
+            cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
+            bodyType  : inventoryData.generalInfo.transmission.bodyType.van,
+        })
+
+        createInventory.selectDoorNumber(4)
+        
     })
 
-    it('create fwd, 4 doors, automatic, alternate, cy5, suv', function(){
-        createInventoryGeneralDynamicInfo({
-            doorNumber         : 4,
-            inventoryType      : "fwd",
-            gearType           : "automatic",
-            vin                : inventoryVIN[3],
-            listingPrice       : inventoryData.generalInfo.ListingPrice,
-            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.alternate,
-            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
-            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy5,
-            bodyType           : inventoryData.generalInfo.transmission.bodyType.suv,
+    it('create fwd, hybrid, automatic, cy5, wagon, 5 doors', function(){
+
+        createInventory.typeVin(inventoryVIN[3])
+        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+
+        createInventoryDrivetrain({
+            inventoryType : "fwd",
+            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
         })
+
+        createInventoryTransmission({
+            gearType  : "automatic",
+            cylinders : inventoryData.generalInfo.transmission.cylinders.cy5,
+            bodyType  : inventoryData.generalInfo.transmission.bodyType.wagon,
+        })
+
+        createInventory.selectDoorNumber(5)
+        
     })
 
-    it('create fwd, 2 doors, manual, electric, cy6, minivan', function(){
-        createInventoryGeneralDynamicInfo({
-            doorNumber         : 2,
-            inventoryType      : "fwd",
-            gearType           : "manual",
-            vin                : inventoryVIN[4],
-            listingPrice       : inventoryData.generalInfo.ListingPrice,
-            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.electric,
-            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
-            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy6,
-            bodyType           : inventoryData.generalInfo.transmission.bodyType.minivan,
+    it('create fwd, electric, manual, cy6, crossover, 4 doors', function(){
+
+        createInventory.typeVin(inventoryVIN[4])
+        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+
+        createInventoryDrivetrain({
+            inventoryType : "fwd",
+            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.electric,
         })
+
+        createInventoryTransmission({
+            gearType  : "manual",
+            cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
+            bodyType  : inventoryData.generalInfo.transmission.bodyType.crossover,
+        })
+
+        createInventory.selectDoorNumber(4)
+        
     })
 
-    it('create fwd, 3 doors, automatic, hybrid, cy8, hatchback', function(){
-        createInventoryGeneralDynamicInfo({
-            doorNumber         : 3,
-            inventoryType      : "fwd",
-            gearType           : "automatic",
-            vin                : inventoryVIN[5],
-            listingPrice       : inventoryData.generalInfo.ListingPrice,
-            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
-            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
-            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy8,
-            bodyType           : inventoryData.generalInfo.transmission.bodyType.hatchback,
+    it('create fwd, diesel, automatic, cy10, pickupTruck, 3 doors', function(){
+
+        createInventory.typeVin(inventoryVIN[5])
+        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+
+        createInventoryDrivetrain({
+            inventoryType : "fwd",
+            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
         })
+
+        createInventoryTransmission({
+            gearType  : "automatic",
+            cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
+            bodyType  : inventoryData.generalInfo.transmission.bodyType.pickupTruck,
+        })
+
+        createInventory.selectDoorNumber(3)
+        
     })
 
-    it('create fwd, 2 doors, automatic, electric, cy10, pickupTruck', function(){
-        createInventoryGeneralDynamicInfo({
-            doorNumber         : 2,
-            inventoryType      : "fwd",
-            gearType           : "automatic",
-            vin                : inventoryVIN[6],
-            listingPrice       : inventoryData.generalInfo.ListingPrice,
-            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.electric,
-            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
-            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy10,
-            bodyType           : inventoryData.generalInfo.transmission.bodyType.pickupTruck,
+    it('create fwd, flex, manual, c10, sedan, 2 doors', function(){
+
+        createInventory.typeVin(inventoryVIN[6])
+        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+
+        createInventoryDrivetrain({
+            inventoryType : "fwd",
+            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
         })
+
+        createInventoryTransmission({
+            gearType  : "manual",
+            cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
+            bodyType  : inventoryData.generalInfo.transmission.bodyType.sedan,
+        })
+
+        createInventory.selectDoorNumber(2)
+        
     })
 
-    it('create fwd, 5 doors, manual, gasoline, cy3, coupe', function(){
-        createInventoryGeneralDynamicInfo({
-            doorNumber         : 5,
-            inventoryType      : "fwd",
-            gearType           : "manual",
-            vin                : inventoryVIN[7],
-            listingPrice       : inventoryData.generalInfo.ListingPrice,
-            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
-            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
-            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy3,
-            bodyType           : inventoryData.generalInfo.transmission.bodyType.coupe,
+    it('create fwd, hybrid, manual, cy3, hatchback, 3 doors', function(){
+
+        createInventory.typeVin(inventoryVIN[7])
+        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+
+        createInventoryDrivetrain({
+            inventoryType : "fwd",
+            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
         })
+
+        createInventoryTransmission({
+            gearType  : "manual",
+            cylinders : inventoryData.generalInfo.transmission.cylinders.cy3,
+            bodyType  : inventoryData.generalInfo.transmission.bodyType.hatchback,
+        })
+
+        createInventory.selectDoorNumber(3)
+        
     })
 
-    it('create fwd, 2 doors, automatic, flex, cy6, convertible', function(){
-        createInventoryGeneralDynamicInfo({
-            doorNumber         : 2,
-            inventoryType      : "fwd",
-            gearType           : "automatic",
-            vin                : inventoryVIN[8],
-            listingPrice       : inventoryData.generalInfo.ListingPrice,
-            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.flex,
-            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
-            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy6,
-            bodyType           : inventoryData.generalInfo.transmission.bodyType.convertible,
+    it('create fwd, diesel, automatic, cy6, coupe, 4 doors', function(){
+
+        createInventory.typeVin(inventoryVIN[8])
+        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+
+        createInventoryDrivetrain({
+            inventoryType : "fwd",
+            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
         })
+
+        createInventoryTransmission({
+            gearType  : "automatic",
+            cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
+            bodyType  : inventoryData.generalInfo.transmission.bodyType.coupe,
+        })
+
+        createInventory.selectDoorNumber(4)
+        
     })
 
-    it('create fwd, 3 doors, manual, electric, cy10, sedan', function(){
-        createInventoryGeneralDynamicInfo({
-            doorNumber         : 3,
-            inventoryType      : "fwd",
-            gearType           : "manual",
-            vin                : inventoryVIN[9],
-            listingPrice       : inventoryData.generalInfo.ListingPrice,
-            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.electric,
-            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
-            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy10,
-            bodyType           : inventoryData.generalInfo.transmission.bodyType.sedan,
+    it('create fwd, alternate, manual, cy8, suv, 2 doors', function(){
+
+        createInventory.typeVin(inventoryVIN[9])
+        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+
+        createInventoryDrivetrain({
+            inventoryType : "fwd",
+            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.alternate,
         })
+
+        createInventoryTransmission({
+            gearType  : "manual",
+            cylinders : inventoryData.generalInfo.transmission.cylinders.cy8,
+            bodyType  : inventoryData.generalInfo.transmission.bodyType.suv,
+        })
+
+        createInventory.selectDoorNumber(2)
+        
     })
 
-    it('create fwd, 2 doors, automatic, diesel, cy4, wagon', function(){
-        createInventoryGeneralDynamicInfo({
-            doorNumber         : 2,
-            inventoryType      : "fwd",
-            gearType           : "automatic",
-            vin                : inventoryVIN[10],
-            listingPrice       : inventoryData.generalInfo.ListingPrice,
-            fuelType           : inventoryData.generalInfo.drivetrain.fuelType.diesel,
-            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
-            cylinders          : inventoryData.generalInfo.transmission.cylinders.cy4,
-            bodyType           : inventoryData.generalInfo.transmission.bodyType.wagon,
+    it('create fwd, flex, automatic, cy6, convertible, 5 doors', function(){
+
+        createInventory.typeVin(inventoryVIN[10])
+        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+
+        createInventoryDrivetrain({
+            inventoryType : "fwd",
+            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
         })
+
+        createInventoryTransmission({
+            gearType  : "automatic",
+            cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
+            bodyType  : inventoryData.generalInfo.transmission.bodyType.convertible,
+        })
+
+        createInventory.selectDoorNumber(5)
+        
     })
 })
