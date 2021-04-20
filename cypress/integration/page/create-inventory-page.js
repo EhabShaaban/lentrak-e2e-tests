@@ -123,6 +123,39 @@ class CreateInventoryPage
     congratulationsMsgDiv(){
         return cy.get("div[class='an-25 bold-text congratulations-text pt15']")
     }
+    // actions
+    selectGear(gearType){
+        if(gearType == "automatic"){
+            return this.automaticDiv().click();
+        } else {
+            return this.manualDiv().click();
+        }
+    }
+    selectInventoryType(inventoryType){
+        if(inventoryType=="4wd"){
+            return this.fourWdDiv().click();
+        } else if(inventoryType=="awd"){
+            return this.awdDiv().click();
+        } else if(inventoryType=="fwd"){
+            return this.fwdDiv().click();
+        } else {
+            // rwd
+            return this.rwdDiv().click();
+        }
+    }
+    selectDoors(number){
+        if(number==2){
+            return this.numberOfDoors2Div().click();
+        } else if(number==3){
+            return this.numberOfDoors3Div().click();
+        } else if(number==4){
+            return this.numberOfDoors4Div().click();
+        } else if(number==5) {
+            return this.numberOfDoors5Div().click();
+        } else {
+            return this.numberOfDoorsOtherDiv().click();
+        }
+    }
 }
 
 export default CreateInventoryPage
