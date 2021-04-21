@@ -62,7 +62,7 @@ module.exports = ({
     createInv.congratulationsMsgDiv().should('have.text', 'Congratulations!')
 
     createInv.successMsgDiv().then(($text) => {
-        const stockNumber = $text.text().slice(-8);
+        const stockNumber = $text.text().slice(-9);
         cy.log(stockNumber)
         cy.visit('./inventory/'+stockNumber)
     });

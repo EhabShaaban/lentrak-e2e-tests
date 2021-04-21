@@ -13,24 +13,33 @@ const inventortyPage = new InventoryPage()
  */
 
 module.exports = ({
-    vin,
-    status,
-    bodyType,
+    //vin,
+    //InventoryStatus,
+    //bodyType,
     listingMileage,
     listingPrice,
     purchasePrice,
     totalExpenses,
     totalCost,
     profit,
-    gearType,
-    fuelType,
-    bodyType,
-    cylinders,
-    passengers,
     source,
     tax,
     invoiceNumber,
     purchaseMileage
 }) => {
+    
+    inventortyPage.vinDiv()
+    inventortyPage.InventoryStatusDiv()
+    inventortyPage.bodyTypeDiv()
+    inventortyPage.listingMileageDiv()
+    inventortyPage.listingPriceDiv()
+    inventortyPage.purchasePriceDiv()
+    inventortyPage.totalExpensesDiv()
+    inventortyPage.totalCostDiv()
+    inventortyPage.profitDiv()
+    inventortyPage.sourceDiv()
+    inventortyPage.taxDiv()
+    inventortyPage.invoiceNumberDiv()
+    inventortyPage.purchaseMileageDiv()
     
 }
