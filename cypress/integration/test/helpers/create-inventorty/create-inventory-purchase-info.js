@@ -2,6 +2,28 @@ import CreateInventoryPage from '../../../page/create-inventory-page'
 
 const createInv = new CreateInventoryPage()
 
+
+/**
+ * This should create inventory drivetrain section
+ * for an inventory based on provided options
+ * 
+ * @typedef CreateInventoryPurchaseInfo
+ * @property {String} source
+ * @property {String} vendor
+ * @property {String} purchasePrice
+ * @property {String} purchaseMileage
+ * @property {String} purchaseInvoice
+ * @property {String} purchaseComments
+
+ * 
+ * @param {CreateInventoryPurchaseInfo} source               - Inventory's source
+ * @param {CreateInventoryPurchaseInfo} vendor               - Inventory's vendor
+ * @param {CreateInventoryPurchaseInfo} purchasePrice        - Inventory's purchase price
+ * @param {CreateInventoryPurchaseInfo} purchaseMileage      - Inventory's purchase mileage
+ * @param {CreateInventoryPurchaseInfo} purchaseInvoice      - Inventory's purchase invoice
+ * @param {CreateInventoryPurchaseInfo} purchaseComments     - Inventory's purchase comments
+ */
+
 module.exports = ({
     source,
     vendor,
@@ -34,5 +56,15 @@ module.exports = ({
     purchaseTax = purchaseTax.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     
     createInv.purchaseTaxInput().should('have.value', purchaseTax)
+
+    createInv.saveBtn().click()
+
+    createInv.congratulationsMsgDiv().should('have.text', 'Congratulations!')
+
+    createInv.successMsgDiv().then(($text) => {
+        const stockNumber = $text.text().slice(-8);
+        cy.log(stockNumber)
+        cy.visit('./inventory/'+stockNumber)
+    });
     
 }
