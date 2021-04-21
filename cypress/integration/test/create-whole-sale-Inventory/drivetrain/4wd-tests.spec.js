@@ -7,6 +7,7 @@ import createInventoryDrivetrain from '../../helpers/create-inventorty/create-in
 import createInventoryTransmission from '../../helpers/create-inventorty/create-inventory-transmission'
 import createInventoryGeneralInfo from '../../helpers/create-inventorty/create-inventory-general-info'
 import createInventoryPurchaseInfo from '../../helpers/create-inventorty/create-inventory-purchase-info'
+import assertNewInventory from '../../helpers/assert/assert-new-inventory'
 
 const dashboardPage = new DashboardPage()
 const createInventory = new CreateInventoryPage()
@@ -34,10 +35,7 @@ describe('new whole-sale, 4wd suite, focusing on changing drivetrain', function(
         utils.login(loginCredentials.qa.username, loginCredentials.qa.passwd)
         dashboardPage.dashboardLabelDiv().should('have.text', 'Dashboard')
 
-        dashboardPage.arrowImg().click()
-        dashboardPage.settingsLi().click()
-        dashboardPage.dateConfigInput().click()
-        dashboardPage.saveConfigBtn().click()
+        dashboardPage.setupStockNumberDateSettings()
 
         cy.visit('./inventory/create')
 
@@ -52,6 +50,7 @@ describe('new whole-sale, 4wd suite, focusing on changing drivetrain', function(
     })
 
     afterEach(function(){
+
         createInventoryPurchaseInfo({
             source           : inventoryData.purchaseInfo.source.wholeSale,
             vendor           : inventoryData.purchaseInfo.vendor,
@@ -60,19 +59,30 @@ describe('new whole-sale, 4wd suite, focusing on changing drivetrain', function(
             purchaseInvoice  : inventoryData.purchaseInfo.purchaseInvoice,
             purchaseComments : inventoryData.purchaseInfo.comments,
         })
-        
-        // createInv.saveBtn().click()
-        // createInv.congratulationsMsgDiv().should('have.text', 'Congratulations!')
-        // createInv.successMsgDiv().then(($text) => {
-        //     const stockNumber = $text.text().slice(-9);
-        //     cy.visit('./inventory/'+stockNumber)
-        //     //from here make sure to assert on newly created inventory data
-        // });
+
+        assertNewInventory({
+            listingMileage:     inventoryData.generalInfo.listingMileage,
+            listingPrice:       inventoryData.generalInfo.ListingPrice,
+            purchasePrice:      inventoryData.purchaseInfo.purchasePrice,
+            totalExpenses:      0,
+            totalCost:          inventoryData.purchaseInfo.purchasePrice,
+            profit:             inventoryData.generalInfo.ListingPrice - inventoryData.purchaseInfo.purchasePrice,
+            source:             "whole-sale",
+            tax:                inventoryData.purchaseInfo.purchasePrice * 0.13,
+            invoiceNumber:      inventoryData.purchaseInfo.purchaseInvoice,
+            purchaseMileage:    inventoryData.purchaseInfo.purchaseMileage,
+        })
     })
+
+    /**
+     * 
+     * tests start from here
+     *  
+     */
 
     it('create 4wd, gasoline, automatic, cy3, sedan, 2 doors', function(){
 
-        createInventory.typeVin(inventoryVIN[0])
+        createInventory.typeVin("3VWSG71K56M652872")
         createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
         createInventoryDrivetrain({
@@ -90,203 +100,203 @@ describe('new whole-sale, 4wd suite, focusing on changing drivetrain', function(
         
     })
 
-    it('create 4wd, flex, automatic, cy6, convertible, 3 doors', function(){
+    // it('create 4wd, flex, automatic, cy6, convertible, 3 doors', function(){
 
-        createInventory.typeVin(inventoryVIN[1])
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+    //     createInventory.typeVin(inventoryVIN[1])
+    //     createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
-        createInventoryDrivetrain({
-            inventoryType : "4wd",
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
-        })
+    //     createInventoryDrivetrain({
+    //         inventoryType : "4wd",
+    //         fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
+    //     })
 
-        createInventoryTransmission({
-            gearType  : "automatic",
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.convertible,
-        })
+    //     createInventoryTransmission({
+    //         gearType  : "automatic",
+    //         cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
+    //         bodyType  : inventoryData.generalInfo.transmission.bodyType.convertible,
+    //     })
 
-        createInventory.selectDoorNumber(3)
+    //     createInventory.selectDoorNumber(3)
         
-    })
+    // })
 
-    it('create 4wd, gasoline, manual, cy3, van, 2 doors', function(){
+    // it('create 4wd, gasoline, manual, cy3, van, 2 doors', function(){
 
-        createInventory.typeVin(inventoryVIN[2])
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+    //     createInventory.typeVin(inventoryVIN[2])
+    //     createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
-        createInventoryDrivetrain({
-            inventoryType : "4wd",
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.electric,
-        })
+    //     createInventoryDrivetrain({
+    //         inventoryType : "4wd",
+    //         fuelType      : inventoryData.generalInfo.drivetrain.fuelType.electric,
+    //     })
 
-        createInventoryTransmission({
-            gearType  : "manual",
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.van,
-        })
+    //     createInventoryTransmission({
+    //         gearType  : "manual",
+    //         cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
+    //         bodyType  : inventoryData.generalInfo.transmission.bodyType.van,
+    //     })
 
-        createInventory.selectDoorNumber(4)
+    //     createInventory.selectDoorNumber(4)
         
-    })
+    // })
 
-    it('create 4wd, hybrid, automatic, cy5, wagon, 5 doors', function(){
+    // it('create 4wd, hybrid, automatic, cy5, wagon, 5 doors', function(){
 
-        createInventory.typeVin(inventoryVIN[3])
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+    //     createInventory.typeVin(inventoryVIN[3])
+    //     createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
-        createInventoryDrivetrain({
-            inventoryType : "4wd",
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
-        })
+    //     createInventoryDrivetrain({
+    //         inventoryType : "4wd",
+    //         fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
+    //     })
 
-        createInventoryTransmission({
-            gearType  : "automatic",
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy5,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.wagon,
-        })
+    //     createInventoryTransmission({
+    //         gearType  : "automatic",
+    //         cylinders : inventoryData.generalInfo.transmission.cylinders.cy5,
+    //         bodyType  : inventoryData.generalInfo.transmission.bodyType.wagon,
+    //     })
 
-        createInventory.selectDoorNumber(5)
+    //     createInventory.selectDoorNumber(5)
         
-    })
+    // })
 
-    it('create 4wd, electric, manual, cy6, crossover, 4 doors', function(){
+    // it('create 4wd, electric, manual, cy6, crossover, 4 doors', function(){
 
-        createInventory.typeVin(inventoryVIN[4])
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+    //     createInventory.typeVin(inventoryVIN[4])
+    //     createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
-        createInventoryDrivetrain({
-            inventoryType : "4wd",
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.electric,
-        })
+    //     createInventoryDrivetrain({
+    //         inventoryType : "4wd",
+    //         fuelType      : inventoryData.generalInfo.drivetrain.fuelType.electric,
+    //     })
 
-        createInventoryTransmission({
-            gearType  : "manual",
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.crossover,
-        })
+    //     createInventoryTransmission({
+    //         gearType  : "manual",
+    //         cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
+    //         bodyType  : inventoryData.generalInfo.transmission.bodyType.crossover,
+    //     })
 
-        createInventory.selectDoorNumber(4)
+    //     createInventory.selectDoorNumber(4)
         
-    })
+    // })
 
-    it('create 4wd, diesel, automatic, cy10, pickupTruck, 3 doors', function(){
+    // it('create 4wd, diesel, automatic, cy10, pickupTruck, 3 doors', function(){
 
-        createInventory.typeVin(inventoryVIN[5])
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+    //     createInventory.typeVin(inventoryVIN[5])
+    //     createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
-        createInventoryDrivetrain({
-            inventoryType : "4wd",
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
-        })
+    //     createInventoryDrivetrain({
+    //         inventoryType : "4wd",
+    //         fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
+    //     })
 
-        createInventoryTransmission({
-            gearType  : "automatic",
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.pickupTruck,
-        })
+    //     createInventoryTransmission({
+    //         gearType  : "automatic",
+    //         cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
+    //         bodyType  : inventoryData.generalInfo.transmission.bodyType.pickupTruck,
+    //     })
 
-        createInventory.selectDoorNumber(3)
+    //     createInventory.selectDoorNumber(3)
         
-    })
+    // })
 
-    it('create 4wd, flex, manual, c10, sedan, 2 doors', function(){
+    // it('create 4wd, flex, manual, c10, sedan, 2 doors', function(){
 
-        createInventory.typeVin(inventoryVIN[6])
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+    //     createInventory.typeVin(inventoryVIN[6])
+    //     createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
-        createInventoryDrivetrain({
-            inventoryType : "4wd",
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
-        })
+    //     createInventoryDrivetrain({
+    //         inventoryType : "4wd",
+    //         fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
+    //     })
 
-        createInventoryTransmission({
-            gearType  : "manual",
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.sedan,
-        })
+    //     createInventoryTransmission({
+    //         gearType  : "manual",
+    //         cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
+    //         bodyType  : inventoryData.generalInfo.transmission.bodyType.sedan,
+    //     })
 
-        createInventory.selectDoorNumber(2)
+    //     createInventory.selectDoorNumber(2)
         
-    })
+    // })
 
-    it('create 4wd, hybrid, manual, cy3, hatchback, 3 doors', function(){
+    // it('create 4wd, hybrid, manual, cy3, hatchback, 3 doors', function(){
 
-        createInventory.typeVin(inventoryVIN[7])
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+    //     createInventory.typeVin(inventoryVIN[7])
+    //     createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
-        createInventoryDrivetrain({
-            inventoryType : "4wd",
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
-        })
+    //     createInventoryDrivetrain({
+    //         inventoryType : "4wd",
+    //         fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
+    //     })
 
-        createInventoryTransmission({
-            gearType  : "manual",
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy3,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.hatchback,
-        })
+    //     createInventoryTransmission({
+    //         gearType  : "manual",
+    //         cylinders : inventoryData.generalInfo.transmission.cylinders.cy3,
+    //         bodyType  : inventoryData.generalInfo.transmission.bodyType.hatchback,
+    //     })
 
-        createInventory.selectDoorNumber(3)
+    //     createInventory.selectDoorNumber(3)
         
-    })
+    // })
 
-    it('create 4wd, diesel, automatic, cy6, coupe, 4 doors', function(){
+    // it('create 4wd, diesel, automatic, cy6, coupe, 4 doors', function(){
 
-        createInventory.typeVin(inventoryVIN[8])
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+    //     createInventory.typeVin(inventoryVIN[8])
+    //     createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
-        createInventoryDrivetrain({
-            inventoryType : "4wd",
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
-        })
+    //     createInventoryDrivetrain({
+    //         inventoryType : "4wd",
+    //         fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
+    //     })
 
-        createInventoryTransmission({
-            gearType  : "automatic",
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.coupe,
-        })
+    //     createInventoryTransmission({
+    //         gearType  : "automatic",
+    //         cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
+    //         bodyType  : inventoryData.generalInfo.transmission.bodyType.coupe,
+    //     })
 
-        createInventory.selectDoorNumber(4)
+    //     createInventory.selectDoorNumber(4)
         
-    })
+    // })
 
-    it('create 4wd, alternate, manual, cy8, suv, 2 doors', function(){
+    // it('create 4wd, alternate, manual, cy8, suv, 2 doors', function(){
 
-        createInventory.typeVin(inventoryVIN[9])
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+    //     createInventory.typeVin(inventoryVIN[9])
+    //     createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
-        createInventoryDrivetrain({
-            inventoryType : "4wd",
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.alternate,
-        })
+    //     createInventoryDrivetrain({
+    //         inventoryType : "4wd",
+    //         fuelType      : inventoryData.generalInfo.drivetrain.fuelType.alternate,
+    //     })
 
-        createInventoryTransmission({
-            gearType  : "manual",
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy8,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.suv,
-        })
+    //     createInventoryTransmission({
+    //         gearType  : "manual",
+    //         cylinders : inventoryData.generalInfo.transmission.cylinders.cy8,
+    //         bodyType  : inventoryData.generalInfo.transmission.bodyType.suv,
+    //     })
 
-        createInventory.selectDoorNumber(2)
+    //     createInventory.selectDoorNumber(2)
         
-    })
+    // })
 
-    it('create 4wd, flex, automatic, cy6, convertible, 5 doors', function(){
+    // it('create 4wd, flex, automatic, cy6, convertible, 5 doors', function(){
 
-        createInventory.typeVin(inventoryVIN[10])
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
+    //     createInventory.typeVin(inventoryVIN[10])
+    //     createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
-        createInventoryDrivetrain({
-            inventoryType : "4wd",
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
-        })
+    //     createInventoryDrivetrain({
+    //         inventoryType : "4wd",
+    //         fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
+    //     })
 
-        createInventoryTransmission({
-            gearType  : "automatic",
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.convertible,
-        })
+    //     createInventoryTransmission({
+    //         gearType  : "automatic",
+    //         cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
+    //         bodyType  : inventoryData.generalInfo.transmission.bodyType.convertible,
+    //     })
 
-        createInventory.selectDoorNumber(5)
+    //     createInventory.selectDoorNumber(5)
         
-    })
+    // })
 })

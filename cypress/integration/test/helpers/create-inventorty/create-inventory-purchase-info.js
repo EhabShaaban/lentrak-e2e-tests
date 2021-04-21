@@ -7,6 +7,8 @@ const createInv = new CreateInventoryPage()
  * This should create inventory drivetrain section
  * for an inventory based on provided options
  * 
+ * impacted page create-inventory-page.js
+ * 
  * @typedef CreateInventoryPurchaseInfo
  * @property {String} source
  * @property {String} vendor

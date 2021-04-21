@@ -19,6 +19,13 @@ class DashboardPage
     saveConfigBtn(){
         return cy.get("button[type='Submit']")
     }
+    // actions
+    setupStockNumberDateSettings(){
+        this.arrowImg().click()
+        this.settingsLi().click()
+        this.dateConfigInput().click()
+        this.saveConfigBtn().click()
+    }
 }
 
 export default DashboardPage

@@ -34,10 +34,7 @@ describe('new whole-sale, fwd suite, focusing on changing drivetrain', function(
         utils.login(loginCredentials.qa.username, loginCredentials.qa.passwd)
         dashboardPage.dashboardLabelDiv().should('have.text', 'Dashboard')
 
-        dashboardPage.arrowImg().click()
-        dashboardPage.settingsLi().click()
-        dashboardPage.dateConfigInput().click()
-        dashboardPage.saveConfigBtn().click()
+        dashboardPage.setupStockNumberDateSettings()
 
         cy.visit('./inventory/create')
 

@@ -6,6 +6,8 @@ const createInv = new CreateInventoryPage()
  * This should create general info section
  * for an inventory based on provided options
  * 
+ * impacted page create-inventory-page.js
+ * 
  * @typedef CreateInventoryGeneralInfo
  * @property {String} listingMileage
  * @property {String} cityFuelEco
