@@ -1,5 +1,3 @@
-# DealerTouch test automation framework
-
 #### Setup
 + Run ``npm install``
 
