@@ -6,5 +6,6 @@
         "dev": "https://dev.dealertouch.ca/",
         "qa": "https://qa.dealertouch.ca/",
         "vin": "https://randomvin.com/"
-    }
+    },
+    "retries": 1
 }
