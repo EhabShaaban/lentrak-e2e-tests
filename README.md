@@ -1,29 +1,10 @@
-# README #
+# DealerTouch test automation framework
 
-This README would normally document whatever steps are necessary to get your application up and running.
+#### Setup
++ Run ``npm install``
 
-### What is this repository for? ###
+#### How to run
++ Type ``npm run cy:open`` to run tests on browser
++ Type ``npx cypress run`` to run tests headless
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+> Most test json data should be living under *../cypress/fixtures*
