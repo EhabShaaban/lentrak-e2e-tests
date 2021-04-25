@@ -6,7 +6,7 @@ class CreateInventoryPage
     vinId(){
         return cy.get("#vin")
     }
-    decodeBtn(){
+    decodeBtn(){ // id added
         return cy.get("button[class='ant-btn']")
     }
     stockNumberId(){
@@ -29,26 +29,26 @@ class CreateInventoryPage
         return cy.get("div[style='color: rgb(87, 98, 117);']").eq(idx)
     }
     // Specs >> Drivetrain
-    fourWdDiv(){
+    fourWdDiv(){ // id added
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(0)
     }
-    awdDiv(){
+    awdDiv(){ // id added
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(1)
     }
-    fwdDiv(){
+    fwdDiv(){ // id added
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(2)
     }
-    rwdDiv(){
+    rwdDiv(){ // id added
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(3)
     }
     fuelTypeId(){
         return cy.get("#fuel_type")
     }
     // Specs >> Transmission
-    automaticDiv(){
+    automaticDiv(){ // id added
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(3)
     }
-    manualDiv(){
+    manualDiv(){ // id added
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(4)
     }
     cylindersId(){
@@ -61,19 +61,19 @@ class CreateInventoryPage
         return cy.get("#body")
     }
     // Specs >> Number of Doors
-    numberOfDoors2Div(){
+    numberOfDoors2Div(){  // id added
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(4)
     }
-    numberOfDoors3Div(){
+    numberOfDoors3Div(){ // id added
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(5)
     }
-    numberOfDoors4Div(){
+    numberOfDoors4Div(){ // id added
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(6)
     }
-    numberOfDoors5Div(){
+    numberOfDoors5Div(){ // id added
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(7)
     }
-    numberOfDoorsOtherDiv(){
+    numberOfDoorsOtherDiv(){ // id added
         return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(8)
     }
     cityFuelEcoId(){
