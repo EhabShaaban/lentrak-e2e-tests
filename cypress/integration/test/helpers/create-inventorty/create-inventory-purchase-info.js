@@ -1,6 +1,8 @@
 import CreateInventoryPage from '../../../page/create-inventory-page'
+import Utils from '../../../utils/utils'
 
 const createInv = new CreateInventoryPage()
+const utils = new Utils()
 
 
 /**
@@ -55,7 +57,9 @@ module.exports = ({
 
     let purchaseTax = purchasePrice * 0.13;
 
-    purchaseTax = purchaseTax.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    purchaseTax = utils.addThousandSeparator(purchaseTax)
+
+    cy.log (purchaseTax)
     
     createInv.purchaseTaxInput().should('have.value', purchaseTax)
 
@@ -63,9 +67,9 @@ module.exports = ({
 
     createInv.congratulationsMsgDiv().should('have.text', 'Congratulations!')
 
-    createInv.successMsgDiv().then(($text) => {
-        const stockNumber = $text.text().slice(-9);
-        cy.log(stockNumber)
+    createInv.generatedStockNumberDiv().then(($text) => {
+        const stockNumber = $text.text();
+        cy.log("Stock Number: "+stockNumber)
         cy.visit('./inventory/'+stockNumber)
     });
     

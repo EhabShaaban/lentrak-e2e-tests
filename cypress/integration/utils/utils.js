@@ -66,6 +66,10 @@ class Utils {
     generateName() {
         return this.capFirst(names[this.getRandomInt(0, names.length + 1)]);
     }
+    addThousandSeparator(amount){
+        amount = amount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        return amount
+    }
 }
 
 export default Utils
