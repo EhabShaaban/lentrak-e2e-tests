@@ -24,7 +24,6 @@ class CreateInventoryPage
     interiorColorColorDiv(interiorColor){
         return cy.get("div[data-testid='interior-"+interiorColor+"']");
     }
-    // .eq(i) >> from 0 to 19 >> 20 total feature
     featuresDiv(specType){
         return cy.get("div[data-testid='"+specType+"'")
     }
@@ -166,6 +165,9 @@ class CreateInventoryPage
     }
     clickNext(){
         this.nextBtn().click()
+    }
+    selectFeature(specType){
+        this.featuresDiv(specType).click()
     }
 }
 
