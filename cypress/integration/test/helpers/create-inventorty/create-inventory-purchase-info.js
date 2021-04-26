@@ -6,12 +6,12 @@ const utils = new Utils()
 
 
 /**
- * This should create inventory drivetrain section
- * for an inventory based on provided options
+ * This should create inventory purchase info
+ * section for an inventory based on provided options
  * 
  * impacted page create-inventory-page.js
  * 
- * @typedef CreateInventoryPurchaseInfo
+ * @typedef CreateInventoryPurchaseInfoParams
  * @property {String} source
  * @property {String} vendor
  * @property {String} purchasePrice

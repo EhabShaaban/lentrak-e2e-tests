@@ -12,8 +12,8 @@ const createInv = new CreateInventoryPage()
  * @property {String} exteriorColor
  * @property {String} interiorColor
  * 
- * @param {CreateInventoryColorsParams} exteriorColor  - Inventory's exterior color
- * @param {CreateInventoryColorsParams} interiorColor  - Inventory's interior color
+ * @param {CreateInventoryColors} exteriorColor  - Inventory's exterior color
+ * @param {CreateInventoryColors} interiorColor  - Inventory's interior color
  */
 
 

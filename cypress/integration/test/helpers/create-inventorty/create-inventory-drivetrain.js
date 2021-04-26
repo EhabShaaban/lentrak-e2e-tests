@@ -8,12 +8,12 @@ const createInv = new CreateInventoryPage()
  * 
  * impacted page create-inventory-page.js
  * 
- * @typedef CreateInventoryDrivetrainParam
+ * @typedef CreateInventoryDrivetrainParams
  * @property {String} inventoryType
  * @property {String} fuelType
  * 
- * @param {CreateInventoryDrivetrainParam} inventoryType  - Inventory's type
- * @param {CreateInventoryDrivetrainParam} fuelType       - Inventory's fuel type
+ * @param {CreateInventoryDrivetrain} inventoryType  - Inventory's type
+ * @param {CreateInventoryDrivetrain} fuelType       - Inventory's fuel type
  */
 
 module.exports = ({

@@ -8,7 +8,7 @@ const createInv = new CreateInventoryPage()
  * 
  * impacted page create-inventory-page.js
  * 
- * @typedef CreateInventoryGeneralInfo
+ * @typedef CreateInventoryGeneralInfoParams
  * @property {String} listingMileage
  * @property {String} cityFuelEco
  * @property {String} highwayFuelEco

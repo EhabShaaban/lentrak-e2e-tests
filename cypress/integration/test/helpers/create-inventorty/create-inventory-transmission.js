@@ -3,20 +3,20 @@ import CreateInventoryPage from "../../../page/create-inventory-page"
 const createInv = new CreateInventoryPage()
 
 /**
- * This should create inventory drivetrain section
+ * This should create inventory transmission section
  * for an inventory based on provided options
  * 
  * impacted page create-inventory-page.js
  * 
- * @typedef CreateInventoryPurchaseInfo
+ * @typedef CreateInventoryTransmissionParams
  * @property {String} gearType
  * @property {String} cylinders
  * @property {String} bodyType
 
  * 
- * @param {CreateInventoryPurchaseInfo} gearType        - Inventory's gear type
- * @param {CreateInventoryPurchaseInfo} cylinders       - Inventory's cylinders
- * @param {CreateInventoryPurchaseInfo} bodyType        - Inventory's body type
+ * @param {CreateInventoryTransmission} gearType        - Inventory's gear type
+ * @param {CreateInventoryTransmission} cylinders       - Inventory's cylinders
+ * @param {CreateInventoryTransmission} bodyType        - Inventory's body type
  */
 
 module.exports = ({
