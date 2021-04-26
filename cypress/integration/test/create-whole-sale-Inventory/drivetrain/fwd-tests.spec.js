@@ -7,6 +7,7 @@ import createInventoryDrivetrain from '../../helpers/create-inventorty/create-in
 import createInventoryTransmission from '../../helpers/create-inventorty/create-inventory-transmission'
 import createInventoryGeneralInfo from '../../helpers/create-inventorty/create-inventory-general-info'
 import createInventoryPurchaseInfo from '../../helpers/create-inventorty/create-inventory-purchase-info'
+import createInventoryColors from '../../helpers/create-inventorty/create-inventory-colors'
 
 const dashboardPage = new DashboardPage()
 const createInventory = new CreateInventoryPage()
@@ -15,9 +16,9 @@ const utils = new Utils()
 let loginCredentials
 let inventoryData
 
-let vinGenerator = require('vin-generator')
+let vinGenerator = require('vin-generator');
 
-describe('new whole-sale, fwd suite, focusing on changing drivetrain', function() {
+describe('new whole-sale, fwd suite', function() {
 
     before(() => {
         cy.fixture('login_credentials').then(cred => loginCredentials = cred)
@@ -53,234 +54,396 @@ describe('new whole-sale, fwd suite, focusing on changing drivetrain', function(
             purchaseComments : inventoryData.purchaseInfo.comments,
         })
 
-        utils.logout();
-        
-        // createInv.saveBtn().click()
-        // createInv.congratulationsMsgDiv().should('have.text', 'Congratulations!')
-        // createInv.successMsgDiv().then(($text) => {
-        //     const stockNumber = $text.text().slice(-9);
-        //     cy.visit('./inventory/'+stockNumber)
-        //     //from here make sure to assert on newly created inventory data
-        // });
+        // utils.logout();
+
     })
 
-    it('create fwd, gasoline, automatic, cy3, sedan, 2 doors', function(){
+    //////////////////////////////////////////////////////////////////////////////////
+    //                          TESTS STARTS FROM HERE                              //
+    //////////////////////////////////////////////////////////////////////////////////
+
+    it('create fwd, gasoline, automatic, cy3, sedan, exterior white, \
+        interior grey, two doors, features: airConditioning, alarm, alloyWheels, \
+        bluetooth, dualClimateControl, entertainmentPackage and fogLights', function(){
 
         createInventory.typeVin(vinGenerator.generateVin())
         createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
         createInventoryDrivetrain({
-            inventoryType : "fwd",
+            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
         })
 
         createInventoryTransmission({
-            gearType  : "automatic",
+            gearType  : inventoryData.generalInfo.transmission.gearType.automatic,
             cylinders : inventoryData.generalInfo.transmission.cylinders.cy3,
             bodyType  : inventoryData.generalInfo.transmission.bodyType.sedan,
         })
 
-        createInventory.selectDoorNumber(2)
+        createInventoryColors({
+            exteriorColor : inventoryData.generalInfo.exteriorColors.white,
+            interiorColor : inventoryData.generalInfo.interiorColor.grey
+        })
+
+        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two)
+        
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.airConditioning)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.alarm)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.alloyWheels)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.bluetooth)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.dualClimateControl)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.entertainmentPackage)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.fogLights)
         
     })
 
-    it('create fwd, flex, automatic, cy6, convertible, 3 doors', function(){
+    it('create fwd, flex, automatic, cy6, convertible, exterior beige, \
+        interior brown, three doors, features: heatedMirror, memorySeat, alloyWheels, \
+        powerMirrors, towPackage, entertainmentPackage and navigationSystem', function(){
 
         createInventory.typeVin(vinGenerator.generateVin())
         createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
         createInventoryDrivetrain({
-            inventoryType : "fwd",
+            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
         })
 
         createInventoryTransmission({
-            gearType  : "automatic",
+            gearType  : inventoryData.generalInfo.transmission.gearType.automatic,
             cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
             bodyType  : inventoryData.generalInfo.transmission.bodyType.convertible,
         })
 
-        createInventory.selectDoorNumber(3)
+        createInventoryColors({
+            exteriorColor : inventoryData.generalInfo.exteriorColors.beige,
+            interiorColor : inventoryData.generalInfo.interiorColor.brown
+        })
+
+        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three)
+        
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedMirror)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.memorySeat)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.alloyWheels)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerMirrors)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.towPackage)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.entertainmentPackage)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.navigationSystem)
         
     })
 
-    it('create fwd, gasoline, manual, cy3, van, 2 doors', function(){
+    it('create fwd, gasoline, manual, cy3, van, exterior lightBlue, \
+        interior white, two doors, features: powerWindows, heatedSeats, entertainmentPackage, \
+        powerLocks, alloyWheels, xeonHeadlights and airConditioning', function(){
 
         createInventory.typeVin(vinGenerator.generateVin())
         createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
         createInventoryDrivetrain({
-            inventoryType : "fwd",
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.electric,
+            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fwd,
+            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
         })
 
         createInventoryTransmission({
-            gearType  : "manual",
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
+            gearType  : inventoryData.generalInfo.transmission.gearType.manual,
+            cylinders : inventoryData.generalInfo.transmission.cylinders.cy3,
             bodyType  : inventoryData.generalInfo.transmission.bodyType.van,
         })
 
-        createInventory.selectDoorNumber(4)
+        createInventoryColors({
+            exteriorColor : inventoryData.generalInfo.exteriorColors.lightBlue,
+            interiorColor : inventoryData.generalInfo.interiorColor.white
+        })
+
+        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two)
+        
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerWindows)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedSeats)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.entertainmentPackage)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerLocks)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.alloyWheels)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.xeonHeadlights)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.airConditioning)
         
     })
 
-    it('create fwd, hybrid, automatic, cy5, wagon, 5 doors', function(){
+    it('create fwd, hybrid, automatic, cy5, wagon, exterior yellow, \
+        interior grey, five doors, features: bluetooth, heatedSeats, powerSeats, \
+        fogLights, towPackage, sunroof and stabilityControl', function(){
 
         createInventory.typeVin(vinGenerator.generateVin())
         createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
         createInventoryDrivetrain({
-            inventoryType : "fwd",
+            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
         })
 
         createInventoryTransmission({
-            gearType  : "automatic",
+            gearType  : inventoryData.generalInfo.transmission.gearType.automatic,
             cylinders : inventoryData.generalInfo.transmission.cylinders.cy5,
             bodyType  : inventoryData.generalInfo.transmission.bodyType.wagon,
         })
 
-        createInventory.selectDoorNumber(5)
+        createInventoryColors({
+            exteriorColor : inventoryData.generalInfo.exteriorColors.yellow,
+            interiorColor : inventoryData.generalInfo.interiorColor.grey
+        })
+
+        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.five)
+        
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.bluetooth)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedSeats)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerSeats)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.fogLights)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.towPackage)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.sunroof)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.stabilityControl)
         
     })
 
-    it('create fwd, electric, manual, cy6, crossover, 4 doors', function(){
+    it('create fwd, electric, manual, cy6, crossover, exterior gold, \
+        interior black, four doors, features: powerMirrors, heatedSeats, entertainmentPackage, \
+        alarm, sunroof, powerSeats and powerLocks', function(){
 
         createInventory.typeVin(vinGenerator.generateVin())
         createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
         createInventoryDrivetrain({
-            inventoryType : "fwd",
+            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.electric,
         })
 
         createInventoryTransmission({
-            gearType  : "manual",
+            gearType  : inventoryData.generalInfo.transmission.gearType.manual,
             cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
             bodyType  : inventoryData.generalInfo.transmission.bodyType.crossover,
         })
 
-        createInventory.selectDoorNumber(4)
+        createInventoryColors({
+            exteriorColor : inventoryData.generalInfo.exteriorColors.gold,
+            interiorColor : inventoryData.generalInfo.interiorColor.black
+        })
+
+        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.four)
+        
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerMirrors)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedSeats)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.entertainmentPackage)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.alarm)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.sunroof)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerSeats)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerLocks)
         
     })
 
-    it('create fwd, diesel, automatic, cy10, pickupTruck, 3 doors', function(){
+    it('create fwd, diesel, automatic, cy10, pickupTruck, exterior maroon, \
+        interior brown, three doors, features: dualClimateControl, alloyWheels, heatedMirror, \
+        memorySeat, powerSeats, stabilityControl and towPackage', function(){
 
         createInventory.typeVin(vinGenerator.generateVin())
         createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
         createInventoryDrivetrain({
-            inventoryType : "fwd",
+            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
         })
 
         createInventoryTransmission({
-            gearType  : "automatic",
+            gearType  : inventoryData.generalInfo.transmission.gearType.automatic,
             cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
             bodyType  : inventoryData.generalInfo.transmission.bodyType.pickupTruck,
         })
 
-        createInventory.selectDoorNumber(3)
+        createInventoryColors({
+            exteriorColor : inventoryData.generalInfo.exteriorColors.maroon,
+            interiorColor : inventoryData.generalInfo.interiorColor.brown
+        })
+
+        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three)
+        
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.dualClimateControl)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.alloyWheels)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedMirror)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.memorySeat)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerSeats)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.stabilityControl)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.towPackage)
         
     })
 
-    it('create fwd, flex, manual, c10, sedan, 2 doors', function(){
+    it('create fwd, flex, manual, cy10, sedan, exterior orange, \
+        interior black, three doors, features: sunroof, powerLocks, powerWindows, \
+        stabilityControl, xeonHeadlights, alarm and dualClimateControl', function(){
 
         createInventory.typeVin(vinGenerator.generateVin())
         createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
         createInventoryDrivetrain({
-            inventoryType : "fwd",
+            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
         })
 
         createInventoryTransmission({
-            gearType  : "manual",
+            gearType  : inventoryData.generalInfo.transmission.gearType.manual,
             cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
             bodyType  : inventoryData.generalInfo.transmission.bodyType.sedan,
         })
 
-        createInventory.selectDoorNumber(2)
+        createInventoryColors({
+            exteriorColor : inventoryData.generalInfo.exteriorColors.orange,
+            interiorColor : inventoryData.generalInfo.interiorColor.black
+        })
+
+        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three)
+        
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.sunroof)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerLocks)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerWindows)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.stabilityControl)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.xeonHeadlights)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.alarm)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.dualClimateControl)
         
     })
 
-    it('create fwd, hybrid, manual, cy3, hatchback, 3 doors', function(){
+    it('create fwd, hybrid, manual, cy3, hatchback, exterior silver, \
+        interior brown, other doors, features: dualClimateControl, entertainmentPackage, \
+        fogLights, heatedMirror, heatedSeats, keylessEntry and navigationSystem', function(){
 
         createInventory.typeVin(vinGenerator.generateVin())
         createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
         createInventoryDrivetrain({
-            inventoryType : "fwd",
+            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
         })
 
         createInventoryTransmission({
-            gearType  : "manual",
+            gearType  : inventoryData.generalInfo.transmission.gearType.manual,
             cylinders : inventoryData.generalInfo.transmission.cylinders.cy3,
             bodyType  : inventoryData.generalInfo.transmission.bodyType.hatchback,
         })
 
-        createInventory.selectDoorNumber(3)
+        createInventoryColors({
+            exteriorColor : inventoryData.generalInfo.exteriorColors.silver,
+            interiorColor : inventoryData.generalInfo.interiorColor.brown
+        })
+
+        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.other)
+        
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.dualClimateControl)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.entertainmentPackage)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.fogLights)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedMirror)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedSeats)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.keylessEntry)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.navigationSystem)
         
     })
 
-    it('create fwd, diesel, automatic, cy6, coupe, 4 doors', function(){
+    it('create fwd, diesel, automatic, cy6, coupe, exterior beige, \
+    interior brown, four doors, features: sunroof, fogLights, powerLocks \
+    alarm, navigationSystem, heatedMirror and towPackage', function(){
 
         createInventory.typeVin(vinGenerator.generateVin())
         createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
         createInventoryDrivetrain({
-            inventoryType : "fwd",
+            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
         })
 
         createInventoryTransmission({
-            gearType  : "automatic",
+            gearType  : inventoryData.generalInfo.transmission.gearType.automatic,
             cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
             bodyType  : inventoryData.generalInfo.transmission.bodyType.coupe,
         })
 
-        createInventory.selectDoorNumber(4)
+        createInventoryColors({
+            exteriorColor : inventoryData.generalInfo.exteriorColors.beige,
+            interiorColor : inventoryData.generalInfo.interiorColor.brown
+        })
+
+        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.four)
+        
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.sunroof)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.fogLights)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerLocks)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.alarm)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.navigationSystem)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedMirror)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.towPackage)
         
     })
 
-    it('create fwd, alternate, manual, cy8, suv, 2 doors', function(){
+    it('create fwd, alternate, manual, cy8, suv, exterior purple, \
+        interior brown,  other doors, features: bluetooth, heatedMirror, \
+        entertainmentPackage, powerLocks, powerWindows, powerSeats and sunroof', function(){
 
         createInventory.typeVin(vinGenerator.generateVin())
         createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
         createInventoryDrivetrain({
-            inventoryType : "fwd",
+            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.alternate,
         })
 
         createInventoryTransmission({
-            gearType  : "manual",
+            gearType  : inventoryData.generalInfo.transmission.gearType.manual,
             cylinders : inventoryData.generalInfo.transmission.cylinders.cy8,
             bodyType  : inventoryData.generalInfo.transmission.bodyType.suv,
         })
 
-        createInventory.selectDoorNumber(2)
+        createInventoryColors({
+            exteriorColor : inventoryData.generalInfo.exteriorColors.purple,
+            interiorColor : inventoryData.generalInfo.interiorColor.brown
+        })
+
+        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.other)
+        
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.bluetooth)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedMirror)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.entertainmentPackage)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerLocks)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerWindows)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerSeats)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.sunroof)
         
     })
 
-    it('create fwd, flex, automatic, cy6, convertible, 5 doors', function(){
+    it('create fwd, flex, automatic, cy6, convertible, exterior brown, \
+        interior grey,  three doors, features: alloyWheels, bluetooth, \
+        towPackage, powerWindows, memorySeat, heatedMirror and navigationSystem', function(){
 
         createInventory.typeVin(vinGenerator.generateVin())
         createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
         createInventoryDrivetrain({
-            inventoryType : "fwd",
+            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
         })
 
         createInventoryTransmission({
-            gearType  : "automatic",
+            gearType  : inventoryData.generalInfo.transmission.gearType.automatic,
             cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
             bodyType  : inventoryData.generalInfo.transmission.bodyType.convertible,
         })
 
-        createInventory.selectDoorNumber(5)
+        createInventoryColors({
+            exteriorColor : inventoryData.generalInfo.exteriorColors.brown,
+            interiorColor : inventoryData.generalInfo.interiorColor.grey
+        })
+
+        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three)
+        
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.alloyWheels)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.bluetooth)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.towPackage)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerWindows)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.memorySeat)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedMirror)
+        createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.navigationSystem)
         
     })
 })
