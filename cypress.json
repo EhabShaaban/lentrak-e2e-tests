@@ -1,11 +1,1 @@
-{
-    "baseUrl": "https://qa.dealertouch.ca/",
-    "video": false,
-    "env": {
-        "prod": "https://app.dealertouch.ca/",
-        "dev": "https://dev.dealertouch.ca/",
-        "qa": "https://qa.dealertouch.ca/",
-        "vin": "https://randomvin.com/"
-    },
-    "retries": 1
-}
+{}

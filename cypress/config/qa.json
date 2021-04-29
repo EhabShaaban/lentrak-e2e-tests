@@ -1,0 +1,5 @@
+{
+    "baseUrl": "https://qa.dealertouch.ca/",
+    "video": false,
+    "retries": 1
+}
