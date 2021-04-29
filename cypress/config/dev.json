@@ -1,5 +1,9 @@
 {
     "baseUrl": "https://dev.dealertouch.ca/",
     "video": false,
-    "retries": 1
+    "retries": 1,
+    "env": {
+        "username": "test@example.com",
+        "passwd": "password"
+    }
 }

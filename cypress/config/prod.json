@@ -1,5 +1,9 @@
 {
     "baseUrl": "https://app.dealertouch.ca/",
     "video": false,
-    "retries": 1
+    "retries": 1,
+    "env": {
+        "username": "mhosseini@dealertouch.ca",
+        "passwd": "password"
+    }
 }
