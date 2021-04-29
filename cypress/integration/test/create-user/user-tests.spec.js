@@ -8,19 +8,17 @@ const utils = new Utils()
 const userPage = new UserPage()
 const dashboardPage = new DashboardPage()
 
-let loginCredentials
 let userData
 
 describe('Valid user creation test suite', function() {
 
     before(() => {
-    cy.fixture('login_credentials').then(cred => loginCredentials = cred)
     cy.fixture('create_user_data').then(usr => userData = usr)
     })
 
     beforeEach(function(){
         cy.visit('/')
-        utils.login(loginCredentials.dev.username, loginCredentials.dev.passwd)
+        utils.login(Cypress.env('username'), Cypress.env('passwd'))
         dashboardPage.dashboardLabelDiv().should('have.text', 'Dashboard')
         cy.visit('./users')
         userPage.clickAddUserBtn();
@@ -74,13 +72,12 @@ describe('Valid user creation test suite', function() {
 describe('Negative/User creation test suite', function() {
 
     before(() => {
-        cy.fixture('login_credentials').then(cred => loginCredentials = cred)
         cy.fixture('create_user_data').then(usr => userData = usr)
         })
         
     beforeEach(function(){
         cy.visit('/')
-        utils.login(loginCredentials.dev.username, loginCredentials.dev.passwd)
+        utils.login(Cypress.env('username'), Cypress.env('passwd'))
         dashboardPage.dashboardLabelDiv().should('have.text', 'Dashboard')
         cy.visit('./users')
         userPage.clickAddUserBtn();

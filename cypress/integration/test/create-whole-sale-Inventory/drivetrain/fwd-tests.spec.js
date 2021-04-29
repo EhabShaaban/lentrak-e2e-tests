@@ -13,7 +13,6 @@ const dashboardPage = new DashboardPage()
 const createInventory = new CreateInventoryPage()
 const utils = new Utils()
 
-let loginCredentials
 let inventoryData
 
 let vinGenerator = require('vin-generator');
@@ -21,14 +20,13 @@ let vinGenerator = require('vin-generator');
 describe('new whole-sale, fwd suite', function() {
 
     before(() => {
-        cy.fixture('login_credentials').then(cred => loginCredentials = cred)
         cy.fixture('new_inventory_data').then(inv => inventoryData = inv)
     })
 
     beforeEach(function(){
 
         cy.visit('/')
-        utils.login(loginCredentials.qa.username, loginCredentials.qa.passwd)
+        utils.login(Cypress.env('username'), Cypress.env('passwd'))
         dashboardPage.dashboardLabelDiv().should('have.text', 'Dashboard')
 
         cy.visit('./inventory/create')
