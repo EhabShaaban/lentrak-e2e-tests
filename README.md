@@ -2,10 +2,11 @@
 + Run ``npm install``
 
 #### How to run
-+ Type ``npm run cy:open`` to run tests on browser
-+ Type ``npx cypress run`` to run tests headless
++ ``npm run cy:open:prod`` to run tests browser mode on production
++ ``npm run cy:run:prod`` to run tests headless on production
 
-#### Change envs
-In cypress.json change ``baseUrl`` with qa, dev or prod
++ ``npm run cy:open:dev`` to run tests browser mode on develop
++ ``npm run cy:run:dev`` to run tests headless on develop
 
-> Most test json data should be living under *../cypress/fixtures*
++ ``npm run cy:open:qa`` to run tests browser mode on qa
++ ``npm run cy:run:qa`` to run tests headless on qa
