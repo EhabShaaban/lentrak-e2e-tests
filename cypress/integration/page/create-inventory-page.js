@@ -7,7 +7,7 @@ class CreateInventoryPage
         return cy.get("#vin")
     }
     decodeBtn(){
-        return cy.get("#decode")
+        return cy.get("#decode-vin")
     }
     stockNumberId(){
         return cy.get("#stock_number")
