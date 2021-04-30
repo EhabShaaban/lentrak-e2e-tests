@@ -1,6 +1,7 @@
 import CreateInventoryPage from '../../../page/create-inventory-page'
 
-const createInv = new CreateInventoryPage()
+const createInventory = new CreateInventoryPage()
+let vinGenerator = require('vin-generator');
 
 /**
  * This should create general info section
@@ -15,6 +16,7 @@ const createInv = new CreateInventoryPage()
  * @property {String} passengers
  * @property {String} combinedFuelEco
  * @property {String} engineDisplacement
+ * @property {String} listingPrice
  * 
  * @param {CreateInventoryGeneralInfo} listingMileage       - Inventory's listing mileage
  * @param {CreateInventoryGeneralInfo} cityFuelEco          - Inventory's city fuel economy
@@ -22,6 +24,7 @@ const createInv = new CreateInventoryPage()
  * @param {CreateInventoryGeneralInfo} passengers           - Inventory's passengers number
  * @param {CreateInventoryGeneralInfo} combinedFuelEco      - Inventory's combined economy value
  * @param {CreateInventoryGeneralInfo} engineDisplacement   - Inventory's engine displacement value
+ * @param {CreateInventoryGeneralInfo} listingPrice         - Inventory's listing price
  */
 
 module.exports = ({
@@ -31,18 +34,23 @@ module.exports = ({
     passengers,
     combinedFuelEco,
     engineDisplacement,
+    listingPrice,
 }) => {
 
-    createInv.listingMileageId().type(listingMileage)
+    createInventory.typeVin(vinGenerator.generateVin())
 
-    createInv.cityFuelEcoId().type(cityFuelEco)
+    createInventory.typeListingPrice(listingPrice)
 
-    createInv.highwayFuelEcoId().type(highwayFuelEco)
+    createInventory.listingMileageId().type(listingMileage)
 
-    createInv.passengersId().type(passengers)
+    createInventory.cityFuelEcoId().type(cityFuelEco)
 
-    createInv.combinedFuelEcoId().type(combinedFuelEco)
+    createInventory.highwayFuelEcoId().type(highwayFuelEco)
 
-    createInv.engineDisplacementId().type(engineDisplacement)
+    createInventory.passengersId().type(passengers)
+
+    createInventory.combinedFuelEcoId().type(combinedFuelEco)
+
+    createInventory.engineDisplacementId().type(engineDisplacement)
     
 }
