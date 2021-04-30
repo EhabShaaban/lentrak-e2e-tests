@@ -3,19 +3,17 @@
 import DashboardPage from '../../../page/dashboard-page'
 import Utils from '../../../utils/utils'
 import CreateInventoryPage from '../../../page/create-inventory-page'
-import createInventoryDrivetrain from '../../helpers/create-inventorty/create-inventory-drivetrain'
-import createInventoryTransmission from '../../helpers/create-inventorty/create-inventory-transmission'
-import createInventoryGeneralInfo from '../../helpers/create-inventorty/create-inventory-general-info'
-import createInventoryPurchaseInfo from '../../helpers/create-inventorty/create-inventory-purchase-info'
-import createInventoryColors from '../../helpers/create-inventorty/create-inventory-colors'
+import createInventoryDrivetrain from '../../helpers/create-inventorty/inventory-drivetrain'
+import createInventoryTransmission from '../../helpers/create-inventorty/inventory-transmission'
+import createInventoryGeneralInfo from '../../helpers/create-inventorty/inventory-general-info'
+import createInventoryPurchaseInfo from '../../helpers/create-inventorty/inventory-purchase-info'
+import selectColorsAndDoors from '../../helpers/create-inventorty/inventory-colors-and-doors'
 
 const dashboardPage = new DashboardPage()
 const createInventory = new CreateInventoryPage()
 const utils = new Utils()
 
 let inventoryData
-
-let vinGenerator = require('vin-generator');
 
 describe('new whole-sale, 4wd suite', function() {
 
@@ -37,7 +35,8 @@ describe('new whole-sale, 4wd suite', function() {
             highwayFuelEco     : inventoryData.generalInfo.transmission.highwayFuelEconomy,
             passengers         : inventoryData.generalInfo.numberOfDoors.passengers,
             combinedFuelEco    : inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy,
-            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement
+            engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
+            listingPrice       : inventoryData.generalInfo.ListingPrice
         })
     })
 
@@ -52,7 +51,7 @@ describe('new whole-sale, 4wd suite', function() {
             purchaseComments : inventoryData.purchaseInfo.comments,
         })
 
-        // utils.logout();
+        utils.logout();
 
     })
 
@@ -63,9 +62,6 @@ describe('new whole-sale, 4wd suite', function() {
     it('create 4wd, gasoline, automatic, cy3, sedan, exterior white, \
         interior grey, two doors, features: airConditioning, alarm, alloyWheels, \
         bluetooth, dualClimateControl, entertainmentPackage and fogLights', function(){
-
-        createInventory.typeVin(vinGenerator.generateVin())
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
 
         createInventoryDrivetrain({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fourwd,
@@ -78,12 +74,11 @@ describe('new whole-sale, 4wd suite', function() {
             bodyType  : inventoryData.generalInfo.transmission.bodyType.sedan,
         })
 
-        createInventoryColors({
+        selectColorsAndDoors({
             exteriorColor : inventoryData.generalInfo.exteriorColors.white,
-            interiorColor : inventoryData.generalInfo.interiorColor.grey
+            interiorColor : inventoryData.generalInfo.interiorColor.grey,
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two
         })
-
-        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two)
         
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.airConditioning)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.alarm)
@@ -99,9 +94,6 @@ describe('new whole-sale, 4wd suite', function() {
         interior brown, three doors, features: heatedMirror, memorySeat, alloyWheels, \
         powerMirrors, towPackage, entertainmentPackage and navigationSystem', function(){
 
-        createInventory.typeVin(vinGenerator.generateVin())
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
-
         createInventoryDrivetrain({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fourwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
@@ -113,13 +105,12 @@ describe('new whole-sale, 4wd suite', function() {
             bodyType  : inventoryData.generalInfo.transmission.bodyType.convertible,
         })
 
-        createInventoryColors({
+        selectColorsAndDoors({
             exteriorColor : inventoryData.generalInfo.exteriorColors.beige,
-            interiorColor : inventoryData.generalInfo.interiorColor.brown
+            interiorColor : inventoryData.generalInfo.interiorColor.brown,
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three
         })
 
-        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three)
-        
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedMirror)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.memorySeat)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.alloyWheels)
@@ -134,9 +125,6 @@ describe('new whole-sale, 4wd suite', function() {
         interior white, two doors, features: powerWindows, heatedSeats, entertainmentPackage, \
         powerLocks, alloyWheels, xeonHeadlights and airConditioning', function(){
 
-        createInventory.typeVin(vinGenerator.generateVin())
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
-
         createInventoryDrivetrain({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fourwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
@@ -148,13 +136,13 @@ describe('new whole-sale, 4wd suite', function() {
             bodyType  : inventoryData.generalInfo.transmission.bodyType.van,
         })
 
-        createInventoryColors({
+        selectColorsAndDoors({
             exteriorColor : inventoryData.generalInfo.exteriorColors.lightBlue,
-            interiorColor : inventoryData.generalInfo.interiorColor.white
+            interiorColor : inventoryData.generalInfo.interiorColor.white,
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two
+
         })
 
-        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two)
-        
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerWindows)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedSeats)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.entertainmentPackage)
@@ -169,9 +157,6 @@ describe('new whole-sale, 4wd suite', function() {
         interior grey, five doors, features: bluetooth, heatedSeats, powerSeats, \
         fogLights, towPackage, sunroof and stabilityControl', function(){
 
-        createInventory.typeVin(vinGenerator.generateVin())
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
-
         createInventoryDrivetrain({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fourwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
@@ -183,13 +168,12 @@ describe('new whole-sale, 4wd suite', function() {
             bodyType  : inventoryData.generalInfo.transmission.bodyType.wagon,
         })
 
-        createInventoryColors({
+        selectColorsAndDoors({
             exteriorColor : inventoryData.generalInfo.exteriorColors.yellow,
-            interiorColor : inventoryData.generalInfo.interiorColor.grey
+            interiorColor : inventoryData.generalInfo.interiorColor.grey,
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.five
         })
 
-        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.five)
-        
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.bluetooth)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedSeats)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerSeats)
@@ -204,9 +188,6 @@ describe('new whole-sale, 4wd suite', function() {
         interior black, four doors, features: powerMirrors, heatedSeats, entertainmentPackage, \
         alarm, sunroof, powerSeats and powerLocks', function(){
 
-        createInventory.typeVin(vinGenerator.generateVin())
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
-
         createInventoryDrivetrain({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fourwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.electric,
@@ -218,13 +199,12 @@ describe('new whole-sale, 4wd suite', function() {
             bodyType  : inventoryData.generalInfo.transmission.bodyType.crossover,
         })
 
-        createInventoryColors({
+        selectColorsAndDoors({
             exteriorColor : inventoryData.generalInfo.exteriorColors.gold,
-            interiorColor : inventoryData.generalInfo.interiorColor.black
+            interiorColor : inventoryData.generalInfo.interiorColor.black,
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.four
         })
 
-        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.four)
-        
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerMirrors)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedSeats)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.entertainmentPackage)
@@ -239,9 +219,6 @@ describe('new whole-sale, 4wd suite', function() {
         interior brown, three doors, features: dualClimateControl, alloyWheels, heatedMirror, \
         memorySeat, powerSeats, stabilityControl and towPackage', function(){
 
-        createInventory.typeVin(vinGenerator.generateVin())
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
-
         createInventoryDrivetrain({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fourwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
@@ -253,13 +230,13 @@ describe('new whole-sale, 4wd suite', function() {
             bodyType  : inventoryData.generalInfo.transmission.bodyType.pickupTruck,
         })
 
-        createInventoryColors({
+        selectColorsAndDoors({
             exteriorColor : inventoryData.generalInfo.exteriorColors.maroon,
-            interiorColor : inventoryData.generalInfo.interiorColor.brown
+            interiorColor : inventoryData.generalInfo.interiorColor.brown,
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three
+            
         })
 
-        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three)
-        
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.dualClimateControl)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.alloyWheels)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedMirror)
@@ -274,9 +251,6 @@ describe('new whole-sale, 4wd suite', function() {
         interior black, three doors, features: sunroof, powerLocks, powerWindows, \
         stabilityControl, xeonHeadlights, alarm and dualClimateControl', function(){
 
-        createInventory.typeVin(vinGenerator.generateVin())
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
-
         createInventoryDrivetrain({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fourwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
@@ -288,13 +262,13 @@ describe('new whole-sale, 4wd suite', function() {
             bodyType  : inventoryData.generalInfo.transmission.bodyType.sedan,
         })
 
-        createInventoryColors({
+        selectColorsAndDoors({
             exteriorColor : inventoryData.generalInfo.exteriorColors.orange,
-            interiorColor : inventoryData.generalInfo.interiorColor.black
+            interiorColor : inventoryData.generalInfo.interiorColor.black,
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three
+            
         })
 
-        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three)
-        
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.sunroof)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerLocks)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerWindows)
@@ -309,9 +283,6 @@ describe('new whole-sale, 4wd suite', function() {
         interior brown, other doors, features: dualClimateControl, entertainmentPackage, \
         fogLights, heatedMirror, heatedSeats, keylessEntry and navigationSystem', function(){
 
-        createInventory.typeVin(vinGenerator.generateVin())
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
-
         createInventoryDrivetrain({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fourwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
@@ -323,13 +294,12 @@ describe('new whole-sale, 4wd suite', function() {
             bodyType  : inventoryData.generalInfo.transmission.bodyType.hatchback,
         })
 
-        createInventoryColors({
+        selectColorsAndDoors({
             exteriorColor : inventoryData.generalInfo.exteriorColors.silver,
-            interiorColor : inventoryData.generalInfo.interiorColor.brown
+            interiorColor : inventoryData.generalInfo.interiorColor.brown,
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.other
         })
 
-        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.other)
-        
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.dualClimateControl)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.entertainmentPackage)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.fogLights)
@@ -344,9 +314,6 @@ describe('new whole-sale, 4wd suite', function() {
     interior brown, four doors, features: sunroof, fogLights, powerLocks \
     alarm, navigationSystem, heatedMirror and towPackage', function(){
 
-        createInventory.typeVin(vinGenerator.generateVin())
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
-
         createInventoryDrivetrain({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fourwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
@@ -358,13 +325,12 @@ describe('new whole-sale, 4wd suite', function() {
             bodyType  : inventoryData.generalInfo.transmission.bodyType.coupe,
         })
 
-        createInventoryColors({
+        selectColorsAndDoors({
             exteriorColor : inventoryData.generalInfo.exteriorColors.beige,
-            interiorColor : inventoryData.generalInfo.interiorColor.brown
+            interiorColor : inventoryData.generalInfo.interiorColor.brown,
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.four
         })
 
-        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.four)
-        
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.sunroof)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.fogLights)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.powerLocks)
@@ -379,9 +345,6 @@ describe('new whole-sale, 4wd suite', function() {
         interior brown,  other doors, features: bluetooth, heatedMirror, \
         entertainmentPackage, powerLocks, powerWindows, powerSeats and sunroof', function(){
 
-        createInventory.typeVin(vinGenerator.generateVin())
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
-
         createInventoryDrivetrain({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fourwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.alternate,
@@ -393,13 +356,12 @@ describe('new whole-sale, 4wd suite', function() {
             bodyType  : inventoryData.generalInfo.transmission.bodyType.suv,
         })
 
-        createInventoryColors({
+        selectColorsAndDoors({
             exteriorColor : inventoryData.generalInfo.exteriorColors.purple,
-            interiorColor : inventoryData.generalInfo.interiorColor.brown
+            interiorColor : inventoryData.generalInfo.interiorColor.brown,
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.other
         })
 
-        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.other)
-        
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.bluetooth)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.heatedMirror)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.entertainmentPackage)
@@ -414,9 +376,6 @@ describe('new whole-sale, 4wd suite', function() {
         interior grey,  three doors, features: alloyWheels, bluetooth, \
         towPackage, powerWindows, memorySeat, heatedMirror and navigationSystem', function(){
 
-        createInventory.typeVin(vinGenerator.generateVin())
-        createInventory.typeListingPrice(inventoryData.generalInfo.ListingPrice)
-
         createInventoryDrivetrain({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.fourwd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
@@ -428,13 +387,12 @@ describe('new whole-sale, 4wd suite', function() {
             bodyType  : inventoryData.generalInfo.transmission.bodyType.convertible,
         })
 
-        createInventoryColors({
+        selectColorsAndDoors({
             exteriorColor : inventoryData.generalInfo.exteriorColors.brown,
-            interiorColor : inventoryData.generalInfo.interiorColor.grey
+            interiorColor : inventoryData.generalInfo.interiorColor.grey,
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three
         })
 
-        createInventory.selectDoorNumber(inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three)
-        
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.alloyWheels)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.bluetooth)
         createInventory.selectFeature(inventoryData.generalInfo.featuresAndSpecs.towPackage)
