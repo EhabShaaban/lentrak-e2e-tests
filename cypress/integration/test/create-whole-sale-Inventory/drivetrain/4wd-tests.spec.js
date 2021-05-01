@@ -187,7 +187,7 @@ describe('new whole-sale, 4wd suite', function() {
         selectInventorySpecs({
             exteriorColor : inventoryData.generalInfo.exteriorColors.yellow,
             interiorColor : inventoryData.generalInfo.interiorColor.grey,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.five.CreateInventoryPage,
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.five,
             features      : features
         })
         
