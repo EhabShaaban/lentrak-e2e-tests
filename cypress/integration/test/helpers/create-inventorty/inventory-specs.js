@@ -3,9 +3,8 @@ import CreateInventoryPage from '../../../page/create-inventory-page'
 const createInventory = new CreateInventoryPage()
 
 /**
- * This should select exterior colors and interior
- * colors and number of doors for an inventory
- * based on provided options
+ * This should select specs and features
+ * for an inventory based on provided options
  * 
  * impacted page create-inventory-page.js
  * 
@@ -24,6 +23,7 @@ const createInventory = new CreateInventoryPage()
     exteriorColor,
     interiorColor,
     numberOfDoors,
+    features,
 }) => {
     
     createInventory.exteriorColorDiv(exteriorColor).click()
@@ -31,5 +31,7 @@ const createInventory = new CreateInventoryPage()
     createInventory.interiorColorColorDiv(interiorColor).click()
 
     createInventory.selectDoorNumber(numberOfDoors)
+
+    createInventory.selectMultipleFeatures(...features)
 
 }
