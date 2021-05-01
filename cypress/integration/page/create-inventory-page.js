@@ -166,8 +166,10 @@ class CreateInventoryPage
     clickNext(){
         this.nextBtn().click()
     }
-    selectFeature(specType){
-        this.featuresDiv(specType).click()
+    selectMultipleFeatures(...features){
+        for(let feature of features){
+            this.featuresDiv(feature).click()
+        }
     }
 }
 
