@@ -13,8 +13,8 @@ let inventoryData
 
 describe('new whole-sale, rwd suite', function() {
 
-    before(() => {
-        cy.fixture('new_inventory_data').then(inv => inventoryData = inv)
+    before(function() {
+        cy.fixture('new_inventory_data').then(function(inv) {inventoryData = inv})
     })
 
     beforeEach(function(){

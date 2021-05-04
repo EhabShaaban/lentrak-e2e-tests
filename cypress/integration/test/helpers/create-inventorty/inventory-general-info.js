@@ -26,7 +26,6 @@ let vinGenerator = require('vin-generator');
  * @param {CreateInventoryGeneralInfo} engineDisplacement   - Inventory's engine displacement value
  * @param {CreateInventoryGeneralInfo} listingPrice         - Inventory's listing price
  */
-
 module.exports = ({
     listingMileage,
     cityFuelEco,

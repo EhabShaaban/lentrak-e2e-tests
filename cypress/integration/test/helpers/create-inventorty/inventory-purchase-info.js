@@ -27,7 +27,6 @@ const utils = new Utils()
  * @param {CreateInventoryPurchaseInfo} purchaseInvoice      - Inventory's purchase invoice
  * @param {CreateInventoryPurchaseInfo} purchaseComments     - Inventory's purchase comments
  */
-
 module.exports = ({
     source,
     vendor,

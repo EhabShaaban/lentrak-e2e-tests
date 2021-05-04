@@ -15,7 +15,6 @@ const createInv = new CreateInventoryPage()
  * @param {CreateInventoryDrivetrain} inventoryType  - Inventory's type
  * @param {CreateInventoryDrivetrain} fuelType       - Inventory's fuel type
  */
-
 module.exports = ({
     inventoryType,
     fuelType,

@@ -17,8 +17,6 @@ const createInventory = new CreateInventoryPage()
  * @param {InventoryColorsAndDoors} interiorColor  - Inventory's interior color
  * @param {InventoryColorsAndDoors} numberOfDoors  - Inventory's number of doors
  */
-
-
  module.exports = ({
     exteriorColor,
     interiorColor,

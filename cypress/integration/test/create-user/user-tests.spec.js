@@ -12,8 +12,8 @@ let userData
 
 describe('Valid user creation test suite', function() {
 
-    before(() => {
-    cy.fixture('create_user_data').then(usr => userData = usr)
+    before(function() {
+    cy.fixture('create_user_data').then(function(usr) {userData = usr})
     })
 
     beforeEach(function(){
@@ -71,8 +71,8 @@ describe('Valid user creation test suite', function() {
 
 describe('Negative/User creation test suite', function() {
 
-    before(() => {
-        cy.fixture('create_user_data').then(usr => userData = usr)
+    before(function() {
+        cy.fixture('create_user_data').then(function(usr) {userData = usr})
         })
         
     beforeEach(function(){

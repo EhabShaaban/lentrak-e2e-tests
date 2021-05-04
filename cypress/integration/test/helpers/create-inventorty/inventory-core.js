@@ -28,7 +28,6 @@ import selectInventorySpecs from '../../helpers/create-inventorty/inventory-spec
  * @param {CreateInventoryCore} interiorColor    - Inventory's interior color
  * @param {CreateInventoryCore} numberOfDoors    - Inventory's number of doors
  */
-
 module.exports =({
     inventoryType,
     fuelType,

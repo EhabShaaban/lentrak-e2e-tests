@@ -18,7 +18,6 @@ const createInv = new CreateInventoryPage()
  * @param {CreateInventoryTransmission} cylinders       - Inventory's cylinders
  * @param {CreateInventoryTransmission} bodyType        - Inventory's body type
  */
-
 module.exports = ({
     gearType,
     cylinders,
