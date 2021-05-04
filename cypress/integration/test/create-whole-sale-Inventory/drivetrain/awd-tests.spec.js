@@ -2,11 +2,9 @@
 
 import DashboardPage from '../../../page/dashboard-page'
 import Utils from '../../../utils/utils'
-import createInventoryDrivetrain from '../../helpers/create-inventorty/inventory-drivetrain'
-import createInventoryTransmission from '../../helpers/create-inventorty/inventory-transmission'
 import createInventoryGeneralInfo from '../../helpers/create-inventorty/inventory-general-info'
 import createInventoryPurchaseInfo from '../../helpers/create-inventorty/inventory-purchase-info'
-import selectInventorySpecs from '../../helpers/create-inventorty/inventory-specs'
+import createInventoryCore from '../../helpers/create-inventorty/inventory-core'
 
 const dashboardPage = new DashboardPage()
 const utils = new Utils()
@@ -71,18 +69,12 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.fogLights,
         ];
 
-        createInventoryDrivetrain({
+        createInventoryCore({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
-        })
-
-        createInventoryTransmission({
-            gearType  : inventoryData.generalInfo.transmission.gearType.automatic,
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy3,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.sedan,
-        })
-
-        selectInventorySpecs({
+            gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
+            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy3,
+            bodyType      : inventoryData.generalInfo.transmission.bodyType.sedan,
             exteriorColor : inventoryData.generalInfo.exteriorColors.white,
             interiorColor : inventoryData.generalInfo.interiorColor.grey,
             numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two,
@@ -105,18 +97,12 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.navigationSystem,
         ];
 
-        createInventoryDrivetrain({
+        createInventoryCore({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
-        })
-
-        createInventoryTransmission({
-            gearType  : inventoryData.generalInfo.transmission.gearType.automatic,
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.convertible,
-        })
-
-        selectInventorySpecs({
+            gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
+            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy6,
+            bodyType      : inventoryData.generalInfo.transmission.bodyType.convertible,
             exteriorColor : inventoryData.generalInfo.exteriorColors.beige,
             interiorColor : inventoryData.generalInfo.interiorColor.brown,
             numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three,
@@ -139,18 +125,12 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.airConditioning,
         ];
 
-        createInventoryDrivetrain({
+        createInventoryCore({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
-        })
-
-        createInventoryTransmission({
-            gearType  : inventoryData.generalInfo.transmission.gearType.manual,
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy3,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.van,
-        })
-
-        selectInventorySpecs({
+            gearType      : inventoryData.generalInfo.transmission.gearType.manual,
+            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy3,
+            bodyType      : inventoryData.generalInfo.transmission.bodyType.van,
             exteriorColor : inventoryData.generalInfo.exteriorColors.lightBlue,
             interiorColor : inventoryData.generalInfo.interiorColor.white,
             numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two,
@@ -173,18 +153,12 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.stabilityControl,
         ];
 
-        createInventoryDrivetrain({
+        createInventoryCore({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
-        })
-
-        createInventoryTransmission({
-            gearType  : inventoryData.generalInfo.transmission.gearType.automatic,
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy5,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.wagon,
-        })
-
-        selectInventorySpecs({
+            gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
+            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy5,
+            bodyType      : inventoryData.generalInfo.transmission.bodyType.wagon,
             exteriorColor : inventoryData.generalInfo.exteriorColors.yellow,
             interiorColor : inventoryData.generalInfo.interiorColor.grey,
             numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.five,
@@ -207,18 +181,12 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.powerLocks,
         ];
 
-        createInventoryDrivetrain({
+        createInventoryCore({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.electric,
-        })
-
-        createInventoryTransmission({
-            gearType  : inventoryData.generalInfo.transmission.gearType.manual,
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.crossover,
-        })
-
-        selectInventorySpecs({
+            gearType      : inventoryData.generalInfo.transmission.gearType.manual,
+            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy6,
+            bodyType      : inventoryData.generalInfo.transmission.bodyType.crossover,
             exteriorColor : inventoryData.generalInfo.exteriorColors.gold,
             interiorColor : inventoryData.generalInfo.interiorColor.black,
             numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.four,
@@ -241,18 +209,12 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.towPackage,
         ];
 
-        createInventoryDrivetrain({
+        createInventoryCore({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
-        })
-
-        createInventoryTransmission({
-            gearType  : inventoryData.generalInfo.transmission.gearType.automatic,
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.pickupTruck,
-        })
-
-        selectInventorySpecs({
+            gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
+            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy10,
+            bodyType      : inventoryData.generalInfo.transmission.bodyType.pickupTruck,
             exteriorColor : inventoryData.generalInfo.exteriorColors.maroon,
             interiorColor : inventoryData.generalInfo.interiorColor.brown,
             numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three,
@@ -275,18 +237,12 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.dualClimateControl,
         ];
 
-        createInventoryDrivetrain({
+        createInventoryCore({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
-        })
-
-        createInventoryTransmission({
-            gearType  : inventoryData.generalInfo.transmission.gearType.manual,
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy10,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.sedan,
-        })
-
-        selectInventorySpecs({
+            gearType      : inventoryData.generalInfo.transmission.gearType.manual,
+            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy10,
+            bodyType      : inventoryData.generalInfo.transmission.bodyType.sedan,
             exteriorColor : inventoryData.generalInfo.exteriorColors.orange,
             interiorColor : inventoryData.generalInfo.interiorColor.black,
             numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three,
@@ -309,18 +265,12 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.navigationSystem,
         ];
 
-        createInventoryDrivetrain({
+        createInventoryCore({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
-        })
-
-        createInventoryTransmission({
-            gearType  : inventoryData.generalInfo.transmission.gearType.manual,
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy3,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.hatchback,
-        })
-
-        selectInventorySpecs({
+            gearType      : inventoryData.generalInfo.transmission.gearType.manual,
+            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy3,
+            bodyType      : inventoryData.generalInfo.transmission.bodyType.hatchback,
             exteriorColor : inventoryData.generalInfo.exteriorColors.silver,
             interiorColor : inventoryData.generalInfo.interiorColor.brown,
             numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.other,
@@ -343,18 +293,12 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.towPackage,
         ];
 
-        createInventoryDrivetrain({
+        createInventoryCore({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
-        })
-
-        createInventoryTransmission({
-            gearType  : inventoryData.generalInfo.transmission.gearType.automatic,
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.coupe,
-        })
-
-        selectInventorySpecs({
+            gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
+            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy6,
+            bodyType      : inventoryData.generalInfo.transmission.bodyType.coupe,
             exteriorColor : inventoryData.generalInfo.exteriorColors.beige,
             interiorColor : inventoryData.generalInfo.interiorColor.brown,
             numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.four,
@@ -377,18 +321,12 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.sunroof,
         ];
 
-        createInventoryDrivetrain({
+        createInventoryCore({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.alternate,
-        })
-
-        createInventoryTransmission({
-            gearType  : inventoryData.generalInfo.transmission.gearType.manual,
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy8,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.suv,
-        })
-
-        selectInventorySpecs({
+            gearType      : inventoryData.generalInfo.transmission.gearType.manual,
+            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy8,
+            bodyType      : inventoryData.generalInfo.transmission.bodyType.suv,
             exteriorColor : inventoryData.generalInfo.exteriorColors.purple,
             interiorColor : inventoryData.generalInfo.interiorColor.brown,
             numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.other,
@@ -411,18 +349,12 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.navigationSystem,
         ];
 
-        createInventoryDrivetrain({
+        createInventoryCore({
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
-        })
-
-        createInventoryTransmission({
-            gearType  : inventoryData.generalInfo.transmission.gearType.automatic,
-            cylinders : inventoryData.generalInfo.transmission.cylinders.cy6,
-            bodyType  : inventoryData.generalInfo.transmission.bodyType.convertible,
-        })
-
-        selectInventorySpecs({
+            gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
+            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy6,
+            bodyType      : inventoryData.generalInfo.transmission.bodyType.convertible,
             exteriorColor : inventoryData.generalInfo.exteriorColors.brown,
             interiorColor : inventoryData.generalInfo.interiorColor.grey,
             numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three,
