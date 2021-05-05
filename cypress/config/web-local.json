@@ -1,0 +1,10 @@
+{
+    "baseUrl": "http://localhost:3000/",
+    "video": false,
+    "retries": 1,
+    "env": {
+        "username": "ehabsfeki@gmail.com",
+        "passwd": "password"
+    },
+    "gatewayUrl": "https://gateway.qa.dealertouch.ca/api"
+}
