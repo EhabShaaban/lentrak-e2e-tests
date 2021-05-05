@@ -1,29 +1,35 @@
 /// <reference types="Cypress" />
 
-import DashboardPage from '../../../page/dashboard-page'
+import {adaptToReduxPersist} from '../../../utils/redux'
+import CreateInventoryPage from '../../../page/create-inventory-page'
 import Utils from '../../../utils/utils'
 import createInventoryGeneralInfo from '../../helpers/create-inventorty/inventory-general-info'
 import createInventoryPurchaseInfo from '../../helpers/create-inventorty/inventory-purchase-info'
 import createInventoryCore from '../../helpers/create-inventorty/inventory-core'
 
-const dashboardPage = new DashboardPage()
+const createInventoryPage = new CreateInventoryPage()
 const utils = new Utils()
 
 let inventoryData
+let loginCredentials
 
 describe('new whole-sale, 4wd suite', function() {
 
     before(function() {
         cy.fixture('new_inventory_data').then(function(inv) {inventoryData = inv})
+
+        cy.login(Cypress.env("USERNAME"), Cypress.env("PASSWD")).then(function(creds) {loginCredentials = creds})
     })
 
     beforeEach(function(){
 
-        cy.visit('/')
-        utils.login(Cypress.env('username'), Cypress.env('passwd'))
-        dashboardPage.dashboardLabelDiv().should('have.text', 'Dashboard')
+        cy.visit('./inventory/create', {
+            onBeforeLoad (win) {
+                win.localStorage.setItem('persist:root', adaptToReduxPersist(loginCredentials))
+            }
+        })
 
-        cy.visit('./inventory/create')
+        // createInventoryPage.createInventoryId().should('have.text', 'Create Inventory')
 
         createInventoryGeneralInfo({
             listingMileage     : inventoryData.generalInfo.listingMileage,
