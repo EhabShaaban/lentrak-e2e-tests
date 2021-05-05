@@ -1,24 +1,37 @@
 {
-  "name": "vuetodo",
+  "name": "dealertouch",
   "version": "1.0.0",
-  "description": "vuetodo-e2e-framework",
+  "description": "dealertouch-ui-framework",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cy:open": "cypress open"
+    "cy:open:dev": "cypress open --env configFile=dev",
+    "cy:run:dev": "cypress run --env configFile=dev",
+    "cy:open:qa": "cypress open --env configFile=qa",
+    "cy:run:qa": "cypress run --env configFile=qa",
+    "cy:open:prod": "cypress open --env configFile=prod",
+    "cy:run:prod": "cypress run --env configFile=prod"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EhabShaaban/cypress-vuetodo.git"
+    "url": "git+https://ehabsfeki@bitbucket.org/dealertouch/ui-framework.git"
   },
   "author": "Ehab S.",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/EhabShaaban/cypress-vuetodo/issues"
+    "url": "https://ehabsfeki@bitbucket.org/dealertouch/ui-framework.git"
   },
-  "homepage": "https://github.com/EhabShaaban/cypress-vuetodo#readme",
+  "homepage": "https://ehabsfeki@bitbucket.org/dealertouch/ui-framework.git",
   "devDependencies": {
     "cypress": "^6.5.0",
-    "cypress-image-snapshot": "^4.0.1"
+    "cypress-image-snapshot": "^4.0.1",
+    "cypress-xpath": "^1.6.2",
+    "fs-extra": "^9.1.0",
+    "path": "^0.12.7"
+  },
+  "dependencies": {
+    "cypress-commands": "^1.1.0",
+    "puppeteer": "^8.0.0",
+    "vin-generator": "^1.0.1"
   }
 }

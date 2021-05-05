@@ -1,0 +1,26 @@
+{
+  "user":{
+     "firstName":"William",
+     "lastName":"Trubridge",
+     "emailID":"Trubridge@William.com",
+     "contact":"613-555-0179",
+     "salesRegNo":"00624",
+     "title":"Mr. Deep"
+  },
+  "department":[
+     "Sales",
+     "IT",
+     "Accountants",
+     "Marketing",
+     "Service"
+  ],
+  "role":[
+    "Data Entry",
+    "Marketing",
+    "Sales",
+    "Finance",
+    "Accounting",
+    "Services",
+    "Admin"
+ ]
+}
