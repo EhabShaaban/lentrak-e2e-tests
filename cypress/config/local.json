@@ -3,8 +3,8 @@
     "video": false,
     "retries": 1,
     "env": {
-        "username": "ehabsfeki@gmail.com",
-        "passwd": "password"
+        "USERNAME": "ehabsfeki@gmail.com",
+        "PASSWD": "password"
     },
     "gatewayUrl": "https://gateway.qa.dealertouch.ca/api"
 }
