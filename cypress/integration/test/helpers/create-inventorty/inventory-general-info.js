@@ -1,7 +1,7 @@
 import CreateInventoryPage from '../../../page/create-inventory-page'
 
 const createInventory = new CreateInventoryPage()
-let vinGenerator = require('vin-generator');
+const vinGenerator = require('vin-generator');
 
 /**
  * This should create general info section
