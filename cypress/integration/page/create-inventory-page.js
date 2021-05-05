@@ -2,6 +2,9 @@
 
 class CreateInventoryPage
 {
+    createInventoryId(){
+        return cy.get("#create-inventory-id")
+    }
     // 1. General Information
     vinId(){
         return cy.get("#vin")
