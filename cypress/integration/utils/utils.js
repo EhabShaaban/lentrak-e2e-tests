@@ -6,7 +6,7 @@ class Utils {
     
     // logout locators
     userIconDiv() {
-        return cy.get("div[class='sc-gsTCUz dMzJOQ flex-x center cursor-pointer an-13 bold-text']")
+        return cy.get("img[src='/static/media/dropdown-arrow.c047baef.svg']")
     }
     logoutImg() {
         return cy.get("img[alt='Logout']")
@@ -65,6 +65,11 @@ class Utils {
     
     generateName() {
         return this.capFirst(names[this.getRandomInt(0, names.length + 1)]);
+    }
+    addThousandSeparator(amount){
+        // this should add thousand separator (,) to parsed amount 3000 >> 3,000
+        amount = amount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        return amount
     }
 }
 

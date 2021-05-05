@@ -7,7 +7,7 @@ class CreateInventoryPage
         return cy.get("#vin")
     }
     decodeBtn(){
-        return cy.get("button[class='ant-btn']")
+        return cy.get("#decode-vin")
     }
     stockNumberId(){
         return cy.get("#stock_number")
@@ -18,38 +18,37 @@ class CreateInventoryPage
     listingPriceInput(){
         return cy.get("input[data-testid='Listing Price']")
     }
-    exteriorColorDiv(){
-        return cy.get("div[style='background-color: rgb(255, 255, 255); margin-right: 5px;']").eq(0)
+    exteriorColorDiv(exteriorColor){
+        return cy.get("div[data-testid='exterior-"+exteriorColor+"']");
     }
-    interiorColorColorDiv(){
-        return cy.get("div[style='background-color: rgb(255, 255, 255); margin-right: 5px;']").eq(1)
+    interiorColorColorDiv(interiorColor){
+        return cy.get("div[data-testid='interior-"+interiorColor+"']");
     }
-    // .eq(i) >> from 0 to 19 >> 20 total feature
-    featuresDiv(idx){
-        return cy.get("div[style='color: rgb(87, 98, 117);']").eq(idx)
+    featuresDiv(specType){
+        return cy.get("div[data-testid='"+specType+"'")
     }
     // Specs >> Drivetrain
     fourWdDiv(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(0)
+        return cy.get("#four_wd")
     }
     awdDiv(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(1)
+        return cy.get("#awd")
     }
     fwdDiv(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(2)
+        return cy.get("#fwd")
     }
     rwdDiv(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(3)
+        return cy.get("#rwd")
     }
     fuelTypeId(){
         return cy.get("#fuel_type")
     }
     // Specs >> Transmission
     automaticDiv(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(3)
+        return cy.get("#automatic")
     }
     manualDiv(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(4)
+        return cy.get("#manual")
     }
     cylindersId(){
         return cy.get("#cylinders")
@@ -62,19 +61,19 @@ class CreateInventoryPage
     }
     // Specs >> Number of Doors
     numberOfDoors2Div(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(4)
+        return cy.get("#door_2")
     }
     numberOfDoors3Div(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(5)
+        return cy.get("#door_3")
     }
     numberOfDoors4Div(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(6)
+        return cy.get("#door_4")
     }
     numberOfDoors5Div(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(7)
+        return cy.get("#door_5")
     }
-    numberOfDoorsOtherDiv(){
-        return cy.get("div[class='an-14 lh-20 regular-text flex-1 flex-x center px25 py10 cursor-pointer single-block dark-grey--text']").eq(8)
+    numberOfDoorsOtherDiv(){ 
+        return cy.get("#other")
     }
     cityFuelEcoId(){
         return cy.get("input[data-testid='City Fuel Economy']")
@@ -106,7 +105,7 @@ class CreateInventoryPage
         return cy.get("#purchase_coments")
     }
     purchasePriceInput(){
-        return cy.get("input[class='input currency-input ant-input']")
+        return cy.get("div[data-testid='purchase-price'] input")
     }
     purchaseTaxInput(){
         return cy.get("input[data-testid='Tax']")
@@ -117,11 +116,11 @@ class CreateInventoryPage
     saveBtn(){
         return cy.get("button[type='submit']")
     }
-    successMsgDiv(){
-        return cy.get("div[class='an-16 lh-25 pt10']")
+    generatedStockNumberDiv(){
+        return cy.get("#created-stock-number")
     }
     congratulationsMsgDiv(){
-        return cy.get("div[class='an-25 bold-text congratulations-text pt15']")
+        return cy.get("#congratulations")
     }
 
     // actions that this page can do
@@ -166,6 +165,11 @@ class CreateInventoryPage
     }
     clickNext(){
         this.nextBtn().click()
+    }
+    selectMultipleFeatures(...features){
+        for(let feature of features){
+            this.featuresDiv(feature).click()
+        }
     }
 }
 

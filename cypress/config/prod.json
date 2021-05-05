@@ -1,0 +1,9 @@
+{
+    "baseUrl": "https://app.dealertouch.ca/",
+    "video": false,
+    "retries": 1,
+    "env": {
+        "username": "ehabsfeki@gmail.com",
+        "passwd": "password"
+    }
+}

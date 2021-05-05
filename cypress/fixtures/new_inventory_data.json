@@ -15,9 +15,19 @@
             "other":"Other"
          },
          "cityFuelEconomy":90,
-         "engineDisplacement":3.3
+         "engineDisplacement":3.3,
+         "drivetrainTypes": {
+            "fourwd": "4wd",
+            "awd": "awd",
+            "fwd": "fwd",
+            "rwd": "rwd"
+         }
       },
       "transmission":{
+         "gearType":{
+            "automatic": "automatic",
+            "manual": "manual"
+         },
          "cylinders":{
             "cy3": "3",
             "cy4": "4",
@@ -42,8 +52,63 @@
          }
       },
       "numberOfDoors":{
+         "numberOfDoorsValue": {
+            "two": 2,
+            "three": 3,
+            "four": 4,
+            "five": 5,
+            "other": "other"
+         },
          "passengers":2,
          "combinedFuelEconomy":95
+      },
+      "featuresAndSpecs":{
+         "airConditioning": "air_conditioning",
+         "alarm": "alarm",
+         "alloyWheels": "alloy_wheels",
+         "bluetooth": "bluetooth",
+         "dualClimateControl": "dual_climate_control",
+         "entertainmentPackage": "entertainment_package",
+         "fogLights": "fog_lights",
+         "heatedMirror": "heated_mirror",
+         "heatedSeats": "heated_seats",
+         "keylessEntry": "keyless_entry",
+         "memorySeat": "memory_seat",
+         "navigationSystem": "navigation_system",
+         "powerLocks": "power_locks",
+         "powerMirrors": "power_mirrors",
+         "powerSeats": "power_seats",
+         "powerWindows": "power_windows",
+         "stabilityControl": "stability_control",
+         "sunroof": "sunroof",
+         "towPackage": "tow_package",
+         "xeonHeadlights": "xeon_headlights"
+      },
+      "exteriorColors":{
+         "white": "white",
+         "black": "black",
+         "grey": "grey",
+         "silver": "silver",
+         "red": "red",
+         "blue": "blue",
+         "beige": "beige",
+         "brown": "brown",
+         "gold": "gold",
+         "green": "green",
+         "lightBlue": "light_blue",
+         "maroon": "maroon",
+         "orange": "orange",
+         "purple": "purple",
+         "yellow": "yellow"
+      },
+      "interiorColor":{
+         "beige": "beige",
+         "black": "black",
+         "blue": "blue",
+         "brown": "brown",
+         "grey": "grey",
+         "red": "red",
+         "white": "white"
       }
    },
    "purchaseInfo":{
