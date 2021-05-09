@@ -1,7 +1,6 @@
 /// <reference types="Cypress" />
 
 let faker = require('faker');
-let name = faker.name.findName();
 
 class UserPage
 {
@@ -51,10 +50,10 @@ class UserPage
         return this.saveUserBtn().click().wait(1500);
     }
     typeFirstName(){
-        return this.firstNameID().type(name);
+        return this.firstNameID().type(faker.name.firstName());
     }
     typeLastName(){
-        return this.lastNameID().type(name);
+        return this.lastNameID().type(faker.name.lastName());
     }
     typeEmail(){
         return this.emailID().type(faker.internet.email());
