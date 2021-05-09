@@ -1,10 +1,13 @@
 /// <reference types="Cypress" />
 
+let faker = require('faker');
+let name = faker.name.findName();
+
 class UserPage
 {
     // './user/ > add user btn 
     addUserBtn(){
-        return cy.get("button[class='ant-btn sc-eCssSg bjuFNh bredcrumb-action-btn-large-screen ml15']")
+        return cy.get("button[class='ant-btn sc-eCssSg hVVsYy bredcrumb-action-btn-large-screen ml15']")
     }
     firstNameID(){
         return cy.get("#first_name")
@@ -46,6 +49,24 @@ class UserPage
     }
     clickSaveNewUser(){
         return this.saveUserBtn().click().wait(1500);
+    }
+    typeFirstName(){
+        return this.firstNameID().type(name);
+    }
+    typeLastName(){
+        return this.lastNameID().type(name);
+    }
+    typeEmail(){
+        return this.emailID().type(faker.internet.email());
+    }
+    typeContact(){
+        return this.contactID().type(faker.phone.phoneNumber());
+    }
+    typeSaleNo(){
+        return this.salesID().type(faker.finance.account());
+    }
+    typeTitle(){
+        return this.titleID().type(faker.name.title());
     }
 }
 
