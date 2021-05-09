@@ -36,56 +36,89 @@ describe('create users suite', function() {
         createUserCore()
     })
 
-    it('create new user in sales department with most of the roles', function(){
+    it('create new user in sales department with multiple roles', function(){
+        
+        let roles =[
+            userData.role.marketing,
+            userData.role.sales,
+            userData.role.finance,
+            userData.role.accounting,
+            userData.role.services,
+            userData.role.admin
+        ]
 
-        userPage.departmentID().type(userData.department[0]).type('{enter}')
-        for(var i = 1; i <=4; i++){
-            userPage.roleID().type(userData.role[i], {force: true}).type('{enter}')
-        }
+        userPage.departmentID().type(userData.department.sales).type('{enter}')
+        userPage.selectMultipleRoles(...roles)
 
     })
 
-    it('create new user in IT department with Services & Admin role', function(){
+    it('create new user in sales department with multiple roles', function(){
+        
+        let roles =[
+            userData.role.sales,
+            userData.role.accounting,
+            userData.role.admin
+        ]
 
-        userPage.departmentID().type(userData.department[1]).type('{enter}')
-        userPage.roleID().type(userData.role[5], {force: true}).type('{enter}')
-        userPage.roleID().type(userData.role[6], {force: true}).type('{enter}')
+        userPage.departmentID().type(userData.department.sales).type('{enter}')
+        userPage.selectMultipleRoles(...roles)
 
+    })
+
+    it('create new user in IT department with services role', function(){
+        userPage.slectDepartmentAndRole(userData.department.it, userData.role.services)
     })
     
-    it('create new user in accountants department with Accounting role', function(){
-
-        userPage.departmentID().type(userData.department[2]).type('{enter}')
-        userPage.roleID().type(userData.role[4], {force: true}).type('{enter}')
-
+    it('create new user in accountants department with accounting role', function(){
+        userPage.slectDepartmentAndRole(userData.department.accountants, userData.role.accounting)
     })
 
-    it('create new user in marketing department with Marketing role', function(){
-
-        userPage.departmentID().type(userData.department[3]).type('{enter}')
-        userPage.roleID().type(userData.role[1], {force: true}).type('{enter}')
-
+    it('create new user in marketing department with marketing role', function(){
+        userPage.slectDepartmentAndRole(userData.department.marketing, userData.role.marketing)
     })
 
-    it('create new user in service department with Services role', function(){
-
-        userPage.departmentID().type(userData.department[4]).type('{enter}')
-        userPage.roleID().type(userData.role[5], {force: true}).type('{enter}')
-
+    it('create new user in service department with services role', function(){
+        userPage.slectDepartmentAndRole(userData.department.service, userData.role.services)
     })
 
-    it('create new user in sales department with Sales role', function(){
-
-        userPage.departmentID().type(userData.department[0]).type('{enter}')
-        userPage.roleID().type(userData.role[2], {force: true}).type('{enter}')
-
+    it('create new user in sales department with sales role', function(){
+        userPage.slectDepartmentAndRole(userData.department.sales, userData.role.sales)
     })
+
+    it('create new user in IT department with admin role', function(){
+        userPage.slectDepartmentAndRole(userData.department.it, userData.role.admin)
+    })
+
+    it('create new user in IT department with sales role', function(){
+        userPage.slectDepartmentAndRole(userData.department.it, userData.role.sales)
+    })
+
+    it('create new user in sales department with admin role', function(){
+        userPage.slectDepartmentAndRole(userData.department.sales, userData.role.admin)
+    })
+
+    it('create new user in accountants department with marketing role', function(){
+        userPage.slectDepartmentAndRole(userData.department.accountants, userData.role.marketing)
+    })
+
+    it('create new user in marketing department with finance role', function(){
+        userPage.slectDepartmentAndRole(userData.department.marketing, userData.role.finance)
+    })
+
+    it('create new user in IT department with admin role', function(){
+        userPage.slectDepartmentAndRole(userData.department.it, userData.role.services)
+    })
+
+    it('create new user in accountants department with admin role', function(){
+        userPage.slectDepartmentAndRole(userData.department.accountants, userData.role.admin)
+    })
+
 
     afterEach(function(){
 
         userPage.clickSaveNewUser()
         userPage.newUserSuccessMsg().should('have.text','User added successfully.')
-        
+
     })
 })
 

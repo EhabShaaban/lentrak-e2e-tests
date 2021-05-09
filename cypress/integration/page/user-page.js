@@ -42,7 +42,7 @@ class UserPage
         return cy.get("div[class='ant-message-custom-content ant-message-error']")
     }
 
-    // action methods
+    // action this page can do
     clickAddUserBtn(){
         return this.addUserBtn().click();
     }
@@ -66,6 +66,15 @@ class UserPage
     }
     typeTitle(){
         return this.titleID().type(faker.name.title());
+    }
+    slectDepartmentAndRole(department, role){
+        this.departmentID().type(department).type('{enter}')
+        this.roleID().type(role, {force: true}).type('{enter}')
+    }
+    selectMultipleRoles(...roles){
+        for(let role of roles){
+            this.roleID().type(role, {force: true}).type('{enter}')
+        }
     }
 }
 

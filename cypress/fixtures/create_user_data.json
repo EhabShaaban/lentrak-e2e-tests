@@ -7,20 +7,20 @@
      "salesRegNo":"00624",
      "title":"Mr. Deep"
   },
-  "department":[
-     "Sales",
-     "IT",
-     "Accountants",
-     "Marketing",
-     "Service"
-  ],
-  "role":[
-    "Data Entry",
-    "Marketing",
-    "Sales",
-    "Finance",
-    "Accounting",
-    "Services",
-    "Admin"
- ]
+  "department":{
+   "sales":"Sales",
+   "it":"IT",
+   "accountants":"Accountants",
+   "marketing":"Marketing",
+   "service":"Service"
+  },
+  "role": {
+    "dataEntry":"Data Entry",
+    "marketing":"Marketing",
+    "sales":"Sales",
+    "finance":"Finance",
+    "accounting":"Accounting",
+    "services":"Services",
+    "admin":"Admin"
+ }
 }
