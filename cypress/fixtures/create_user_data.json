@@ -1,11 +1,6 @@
 {
   "user":{
-     "firstName":"William",
-     "lastName":"Trubridge",
-     "emailID":"ehabsfeki@gmail.com",
-     "contact":"613-555-0179",
-     "salesRegNo":"00624",
-     "title":"Mr. Deep"
+     "emailID":"ehabsfeki@gmail.com"
   },
   "department":{
    "sales":"Sales",
