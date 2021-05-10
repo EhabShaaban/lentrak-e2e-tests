@@ -7,13 +7,13 @@ import createInventoryGeneralInfo from '../../helpers/create-inventorty/inventor
 import createInventoryPurchaseInfo from '../../helpers/create-inventorty/inventory-purchase-info'
 import createInventoryCore from '../../helpers/create-inventorty/inventory-core'
 
-const createInventoryPage = new CreateInventoryPage()
-const utils = new Utils()
-
-let inventoryData
-let loginCredentials
-
 describe('new whole-sale, 4wd suite', function() {
+
+    const createInventoryPage = new CreateInventoryPage()
+    const utils = new Utils()
+
+    let inventoryData
+    let loginCredentials
 
     before(function() {
         cy.fixture('new_inventory_data').then(function(inv) {inventoryData = inv})
