@@ -5,6 +5,7 @@ import DashboardPage from '../../page/dashboard-page'
 import UserPage from '../../page/user-page'
 import Utils from '../../utils/utils'
 import createUserCore from '../helpers/create-user/user-core'
+import faker from 'faker'
 
 const utils = new Utils()
 const userPage = new UserPage()
@@ -33,7 +34,7 @@ describe('create users suite', function() {
 
         userPage.addUserBtn().should('have.text', 'Add User')
 
-        createUserCore()
+        createUserCore({userEmail:faker.internet.email()})
     })
 
     it('create new user in sales department with multiple roles', function(){
@@ -113,7 +114,6 @@ describe('create users suite', function() {
         userPage.slectDepartmentAndRole(userData.department.accountants, userData.role.admin)
     })
 
-
     afterEach(function(){
 
         userPage.clickSaveNewUser()
@@ -122,31 +122,39 @@ describe('create users suite', function() {
     })
 })
 
-// describe('Negative/User creation test suite', function() {
+describe('negative/create users suite', function() {
 
-//     before(function() {
-//         cy.fixture('create_user_data').then(function(usr) {userData = usr})
-//         })
-        
-//     beforeEach(function(){
-//         cy.visit('/')
-//         utils.login(Cypress.env('username'), Cypress.env('passwd'))
-//         dashboardPage.dashboardLabelDiv().should('have.text', 'Dashboard')
-//         cy.visit('./users')
-//         userPage.clickAddUserBtn();
-//     })
+    before(function() {
 
-//     it('NEG/Create new user with existing email', function(){
-//         userPage.firstNameID().type(utils.generateName())
-//         userPage.lastNameID().type(utils.generateName())
-//         userPage.emailID().type(userData.user.emailID)
-//         userPage.contactID().type(userData.user.contact)
-//         userPage.salesID().type(userData.user.salesRegNo)
-//         userPage.titleID().type(userData.user.title)
-//         userPage.departmentID().type(userData.department[0]).type('{enter}')
-//         userPage.roleID().type(userData.role[2], {force: true}).type('{enter}')
-//         userPage.clickSaveNewUser()
-//         userPage.emailExists().should('have.text', 'User with this email exists')
-//     })
+        cy.fixture('create_user_data').then(function(usr) {userData = usr})
 
-// })
+        cy.login(Cypress.env("USERNAME"), Cypress.env("PASSWD")).then(function(creds) {loginCredentials = creds})
+
+    })
+
+    beforeEach(function(){
+
+        cy.visit('./users', {
+            onBeforeLoad (win) {
+                win.localStorage.setItem('persist:root', adaptToReduxPersist(loginCredentials))
+            }
+        })
+
+        userPage.addUserBtn().should('have.text', 'Add User')
+
+        createUserCore({userEmail:userData.user.emailID})
+    })
+
+    it('NEG/Create new user with existing email', function(){
+        userPage.departmentID().type(userData.department.it).type('{enter}')
+        userPage.roleID().type(userData.role.admin, {force: true}).type('{enter}')
+    })
+
+    afterEach(function(){
+
+        userPage.clickSaveNewUser()
+        userPage.emailExists().should('have.text', 'User with this email exists')
+
+    })
+
+})
