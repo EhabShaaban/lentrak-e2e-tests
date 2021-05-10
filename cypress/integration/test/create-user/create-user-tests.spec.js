@@ -1,15 +1,11 @@
 /// <reference types="Cypress" />
 
 import {adaptToReduxPersist} from '../../utils/redux'
-import DashboardPage from '../../page/dashboard-page'
 import UserPage from '../../page/user-page'
-import Utils from '../../utils/utils'
 import createUserCore from '../helpers/create-user/user-core'
 import faker from 'faker'
 
-const utils = new Utils()
 const userPage = new UserPage()
-const dashboardPage = new DashboardPage()
 
 let userData
 let loginCredentials
