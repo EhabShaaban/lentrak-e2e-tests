@@ -6,7 +6,7 @@ class UserPage
 {
     // './user/ > add user btn 
     addUserBtn(){
-        return cy.get("button[class='ant-btn sc-eCssSg hVVsYy bredcrumb-action-btn-large-screen ml15']")
+        return cy.get("button[class='ant-btn sc-jSgupP fOyugb bredcrumb-action-btn-large-screen ml15']")
     }
     firstNameID(){
         return cy.get("#first_name")
