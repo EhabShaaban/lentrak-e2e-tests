@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-let faker = require('faker');
+import faker from 'faker'
 
 class UserPage
 {
