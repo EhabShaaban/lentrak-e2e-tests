@@ -1,15 +1,26 @@
 import UserPage from '../../../page/user-page'
 
-const userPage = new UserPage()
+/**
+ * This should create system user based on provided options
+ * 
+ * impacted page user-page.js
+ * 
+ * @typedef CreateUserCoreParams
+ * @property {String} userEmail
+ * 
+ * @param {CreateUserCore} userEmail    - user's email
+ */
+module.exports = ({
+    userEmail
+}) => {
 
-module.exports = function createUserCore(){
-
+    const userPage = new UserPage()
     userPage.clickAddUserBtn()
     userPage.typeFirstName()
     userPage.typeLastName()
-    userPage.typeEmail()
+    userPage.typeEmail(userEmail)
     userPage.typeContact()
     userPage.typeSaleNo()
     userPage.typeTitle()
-    
+
 }

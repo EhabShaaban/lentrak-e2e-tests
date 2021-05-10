@@ -55,8 +55,8 @@ class UserPage
     typeLastName(){
         return this.lastNameID().type(faker.name.lastName());
     }
-    typeEmail(){
-        return this.emailID().type(faker.internet.email());
+    typeEmail(userEmail){
+        return this.emailID().type(userEmail);
     }
     typeContact(){
         return this.contactID().type(faker.phone.phoneNumber());
