@@ -49,23 +49,23 @@ class UserPage
     clickSaveNewUser(){
         return this.saveUserBtn().click().wait(1500);
     }
-    typeFirstName(){
-        return this.firstNameID().type(faker.name.firstName());
+    typeFirstName(firstName){
+        return this.firstNameID().type(firstName);
     }
-    typeLastName(){
-        return this.lastNameID().type(faker.name.lastName());
+    typeLastName(lastName){
+        return this.lastNameID().type(lastName);
     }
-    typeEmail(userEmail){
-        return this.emailID().type(userEmail);
+    typeEmail(email){
+        return this.emailID().type(email);
     }
-    typeContact(){
-        return this.contactID().type(faker.phone.phoneNumber());
+    typeContact(contactNumber){
+        return this.contactID().type(contactNumber);
     }
-    typeSaleNo(){
-        return this.salesID().type(faker.finance.account());
+    typeSaleNo(salesNumber){
+        return this.salesID().type(salesNumber);
     }
-    typeTitle(){
-        return this.titleID().type(faker.name.title());
+    typeTitle(title){
+        return this.titleID().type(title);
     }
     slectDepartmentAndRole(department, role){
         this.departmentID().type(department).type('{enter}')

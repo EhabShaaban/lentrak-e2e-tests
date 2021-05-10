@@ -11,16 +11,16 @@ import UserPage from '../../../page/user-page'
  * @param {CreateUserCore} userEmail    - user's email
  */
 module.exports = ({
-    userEmail
+    usrInfo
 }) => {
 
     const userPage = new UserPage()
     userPage.clickAddUserBtn()
-    userPage.typeFirstName()
-    userPage.typeLastName()
-    userPage.typeEmail(userEmail)
-    userPage.typeContact()
-    userPage.typeSaleNo()
-    userPage.typeTitle()
+    userPage.typeFirstName(usrInfo.firstName)
+    userPage.typeLastName(usrInfo.lastName)
+    userPage.typeEmail(usrInfo.email)
+    userPage.typeContact(usrInfo.contactNumber)
+    userPage.typeSaleNo(usrInfo.salesNumber)
+    userPage.typeTitle(usrInfo.title)
 
 }
