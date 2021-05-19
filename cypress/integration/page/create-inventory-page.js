@@ -2,6 +2,15 @@
 
 class CreateInventoryPage
 {
+    jokerLocatorInfoInput(value){
+        return cy.get("#inventory-info-input-"+value)
+    }
+    jokerLocatorIndSelect(value){
+        return cy.get("#inventory-ind-select-"+value)
+    }
+    jokerLocatorIndInput(value){
+        return cy.get("#inventory-ind-input-"+value)
+    }
     createInventoryId(){
         return cy.get("#create-inventory-id")
     }
@@ -16,10 +25,10 @@ class CreateInventoryPage
         return cy.get("#stock_number")
     }
     listingMileageId(){
-        return cy.get("#mileage")
+        return this.jokerLocatorInfoInput(6223)
     }
     listingPriceInput(){
-        return cy.get("input[data-testid='Listing Price']")
+        return this.jokerLocatorInfoInput(8388)
     }
     exteriorColorDiv(exteriorColor){
         return cy.get("div[data-testid='exterior-"+exteriorColor+"']");
@@ -32,89 +41,89 @@ class CreateInventoryPage
     }
     // Specs >> Drivetrain
     fourWdDiv(){
-        return cy.get("#four_wd")
+        return this.jokerLocatorIndSelect(12210)
     }
     awdDiv(){
-        return cy.get("#awd")
+        return this.jokerLocatorIndSelect(12211)
     }
     fwdDiv(){
-        return cy.get("#fwd")
+        return this.jokerLocatorIndSelect(12212)
     }
     rwdDiv(){
-        return cy.get("#rwd")
+        return this.jokerLocatorIndSelect(12213)
     }
     fuelTypeId(){
-        return cy.get("#fuel_type")
+        return this.jokerLocatorIndSelect(6840)
     }
     // Specs >> Transmission
     automaticDiv(){
-        return cy.get("#automatic")
+        return this.jokerLocatorIndSelect('02430')
     }
     manualDiv(){
-        return cy.get("#manual")
+        return this.jokerLocatorIndSelect('02431')
     }
     cylindersId(){
-        return cy.get("#cylinders")
+        return this.jokerLocatorIndSelect(9917)
     }
     highwayFuelEcoId(){
-        return cy.get("input[data-testid='Highway Fuel Economy']")
+        return this.jokerLocatorIndInput(9008)
     }
     bodyTypeId(){
-        return cy.get("#body")
+        return cy.get("#specs-body-type-9570")
     }
     // Specs >> Number of Doors
     numberOfDoors2Div(){
-        return cy.get("#door_2")
+        return this.jokerLocatorIndSelect(18990)
     }
     numberOfDoors3Div(){
-        return cy.get("#door_3")
+        return this.jokerLocatorIndSelect(18991)
     }
     numberOfDoors4Div(){
-        return cy.get("#door_4")
+        return this.jokerLocatorIndSelect(18992)
     }
     numberOfDoors5Div(){
-        return cy.get("#door_5")
+        return this.jokerLocatorIndSelect(18993)
     }
     numberOfDoorsOtherDiv(){ 
-        return cy.get("#other")
+        return this.jokerLocatorIndSelect(18994)
     }
     cityFuelEcoId(){
-        return cy.get("input[data-testid='City Fuel Economy']")
+        return this.jokerLocatorIndInput('0335')
     }
     engineDisplacementId(){
-        return cy.get("input[data-testid='Engine Displacement (e.g. 0.0)']")
+        return this.jokerLocatorIndInput(8670)
     }
     passengersId(){
-        return cy.get("input[data-testid='Passangers']")
+        return this.jokerLocatorIndInput(1843)
     }
     combinedFuelEcoId(){
-        return cy.get("input[data-testid='Combined Fuel Economy']")
+        return this.jokerLocatorIndInput(9726)
     }
     // next btn to next page
     nextBtn(){
-        return cy.get("button[type='submit']")
+        return cy.get("#inventory-info-btn-0752")
     }
     // 2. Purchase Information
     sourceSpan(){
-        return cy.get("#source")
+        return cy.get("#inventory-purchase-info-select-3662")
     }
     vendorId(){
-        return cy.get("#purchase_vendor")
+        return cy.get("#inventory-purchase-info-select-8161")
     }
     purchaseMileageId(){
-        return cy.get("#purchase_mileage")
+        return cy.get("#inventory-purchase-info-input-1168")
     }
     purchaseCommentsId(){
-        return cy.get("#purchase_coments")
+        return cy.get("#inventory-purchase-info-text-3833")
     }
     purchasePriceInput(){
         return cy.get("div[data-testid='purchase-price'] input")
     }
     purchaseTaxInput(){
-        return cy.get("input[data-testid='Tax']")
+        return cy.get("#inventory-purchase-info-input-0437")
     }
     purchaseInvoiceId(){
-        return cy.get("#purchase_invoice")
+        return cy.get("#inventory-purchase-info-input-3796")
     }
     saveBtn(){
         return cy.get("button[type='submit']")
