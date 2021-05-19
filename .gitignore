@@ -50,3 +50,6 @@ Thumbs.db
 
 cypress/snapshots/
 cypress/screenshots/
+
+package-lock.json
+yarn.lock
