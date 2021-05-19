@@ -9,6 +9,8 @@ import selectInventorySpecs from '../../helpers/create-inventorty/inventory-spec
  * 
  * impacted page create-inventory-page.js
  * 
+ * accepting inventoryCore object as an argument with the following values
+ * 
  * @typedef CreateInventoryCoreParams
  * @property {String} inventoryType
  * @property {String} fuelType
@@ -18,43 +20,37 @@ import selectInventorySpecs from '../../helpers/create-inventorty/inventory-spec
  * @property {String} exteriorColor
  * @property {String} interiorColor
  * @property {String} numberOfDoors
+ * @property {List} features
  * 
- * @param {CreateInventoryCore} inventoryType  - Inventory's type
- * @param {CreateInventoryCore} fuelType       - Inventory's fuel type
- * @param {CreateInventoryCore} gearType     - Inventory's gear type
- * @param {CreateInventoryCore} cylinders    - Inventory's cylinders
- * @param {CreateInventoryCore} bodyType     - Inventory's body type
+ * @param {CreateInventoryCore} inventoryType    - Inventory's type
+ * @param {CreateInventoryCore} fuelType         - Inventory's fuel type
+ * @param {CreateInventoryCore} gearType         - Inventory's gear type
+ * @param {CreateInventoryCore} cylinders        - Inventory's cylinders
+ * @param {CreateInventoryCore} bodyType         - Inventory's body type
  * @param {CreateInventoryCore} exteriorColor    - Inventory's exterior color
  * @param {CreateInventoryCore} interiorColor    - Inventory's interior color
  * @param {CreateInventoryCore} numberOfDoors    - Inventory's number of doors
+ * @param {CreateInventoryCore} features         - Inventory's list of features
  */
 module.exports =({
-    inventoryType,
-    fuelType,
-    gearType,
-    cylinders,
-    bodyType,
-    exteriorColor,
-    interiorColor,
-    numberOfDoors,
-    features
+    inventoryCore
 }) => {
 
     createInventoryDrivetrain({
-        inventoryType : inventoryType,
-        fuelType      : fuelType
+        inventoryType : inventoryCore.inventoryType,
+        fuelType      : inventoryCore.fuelType
     })
 
     createInventoryTransmission({
-        gearType      : gearType,
-        cylinders     : cylinders,
-        bodyType      : bodyType
+        gearType      : inventoryCore.gearType,
+        cylinders     : inventoryCore.cylinders,
+        bodyType      : inventoryCore.bodyType
     })
 
     selectInventorySpecs({
-        exteriorColor : exteriorColor,
-        interiorColor : interiorColor,
-        numberOfDoors : numberOfDoors,
-        features      : features,
+        exteriorColor : inventoryCore.exteriorColor,
+        interiorColor : inventoryCore.interiorColor,
+        numberOfDoors : inventoryCore.numberOfDoors,
+        features      : inventoryCore.features,
     })
 }

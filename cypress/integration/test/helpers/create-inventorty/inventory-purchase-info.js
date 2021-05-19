@@ -11,6 +11,8 @@ const utils = new Utils()
  * 
  * impacted page create-inventory-page.js
  * 
+ * accepting purchaseInfo object as an argument with the following values
+ * 
  * @typedef CreateInventoryPurchaseInfoParams
  * @property {String} source
  * @property {String} vendor
@@ -18,7 +20,6 @@ const utils = new Utils()
  * @property {String} purchaseMileage
  * @property {String} purchaseInvoice
  * @property {String} purchaseComments
-
  * 
  * @param {CreateInventoryPurchaseInfo} source               - Inventory's source
  * @param {CreateInventoryPurchaseInfo} vendor               - Inventory's vendor
@@ -28,33 +29,28 @@ const utils = new Utils()
  * @param {CreateInventoryPurchaseInfo} purchaseComments     - Inventory's purchase comments
  */
 module.exports = ({
-    source,
-    vendor,
-    purchasePrice,
-    purchaseMileage,
-    purchaseInvoice,
-    purchaseComments,
+    purchaseInfo
 }) => {
 
     createInv.nextBtn().click()
 
     createInv.sourceSpan().click({force: true})
 
-    createInv.sourceSpan().type(source).type('{enter}')
+    createInv.sourceSpan().type(purchaseInfo.source).type('{enter}')
 
-    createInv.vendorId().type(vendor).type('{enter}')
+    createInv.vendorId().type(purchaseInfo.vendor).type('{enter}')
 
     createInv.purchasePriceInput().click({force: true})
 
-    createInv.purchasePriceInput().type(purchasePrice)
+    createInv.purchasePriceInput().type(purchaseInfo.purchasePrice)
 
-    createInv.purchaseMileageId().type(purchaseMileage)
+    createInv.purchaseMileageId().type(purchaseInfo.purchaseMileage)
 
-    createInv.purchaseInvoiceId().type(purchaseInvoice)
+    createInv.purchaseInvoiceId().type(purchaseInfo.purchaseInvoice)
 
-    createInv.purchaseCommentsId().type(purchaseComments)
+    createInv.purchaseCommentsId().type(purchaseInfo.purchaseComments)
 
-    let purchaseTax = purchasePrice * 0.13;
+    let purchaseTax = purchaseInfo.purchasePrice * 0.13;
 
     purchaseTax = utils.addThousandSeparator(purchaseTax)
 

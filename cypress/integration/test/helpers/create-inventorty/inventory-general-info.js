@@ -9,6 +9,8 @@ const vinGenerator = require('vin-generator');
  * 
  * impacted page create-inventory-page.js
  * 
+ * accepting generalInfo as an argument with the following values
+ * 
  * @typedef CreateInventoryGeneralInfoParams
  * @property {String} listingMileage
  * @property {String} cityFuelEco
@@ -27,29 +29,23 @@ const vinGenerator = require('vin-generator');
  * @param {CreateInventoryGeneralInfo} listingPrice         - Inventory's listing price
  */
 module.exports = ({
-    listingMileage,
-    cityFuelEco,
-    highwayFuelEco,
-    passengers,
-    combinedFuelEco,
-    engineDisplacement,
-    listingPrice,
+    generalInfo
 }) => {
 
     createInventory.typeVin(vinGenerator.generateVin())
 
-    createInventory.typeListingPrice(listingPrice)
+    createInventory.typeListingPrice(generalInfo.listingPrice)
 
-    createInventory.listingMileageId().type(listingMileage)
+    createInventory.listingMileageId().type(generalInfo.listingMileage)
 
-    createInventory.cityFuelEcoId().type(cityFuelEco)
+    createInventory.cityFuelEcoId().type(generalInfo.cityFuelEco)
 
-    createInventory.highwayFuelEcoId().type(highwayFuelEco)
+    createInventory.highwayFuelEcoId().type(generalInfo.highwayFuelEco)
 
-    createInventory.passengersId().type(passengers)
+    createInventory.passengersId().type(generalInfo.passengers)
 
-    createInventory.combinedFuelEcoId().type(combinedFuelEco)
+    createInventory.combinedFuelEcoId().type(generalInfo.combinedFuelEco)
 
-    createInventory.engineDisplacementId().type(engineDisplacement)
+    createInventory.engineDisplacementId().type(generalInfo.engineDisplacement)
     
 }
