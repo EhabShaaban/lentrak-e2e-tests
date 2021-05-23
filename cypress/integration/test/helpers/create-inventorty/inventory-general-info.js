@@ -1,7 +1,6 @@
 import CreateInventoryPage from '../../../page/create-inventory-page'
 
 const createInventory = new CreateInventoryPage()
-const vinGenerator = require('vin-generator');
 
 /**
  * This should create general info section
@@ -32,7 +31,7 @@ module.exports = ({
     generalInfo
 }) => {
 
-    createInventory.typeVin(vinGenerator.generateVin())
+    createInventory.typeVin(generalInfo.vin)
 
     createInventory.typeListingPrice(generalInfo.listingPrice)
 
