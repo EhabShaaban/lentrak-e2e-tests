@@ -6,6 +6,7 @@ import Utils from '../../../utils/utils'
 import createInventoryGeneralInfo from '../../helpers/create-inventorty/inventory-general-info'
 import createInventoryPurchaseInfo from '../../helpers/create-inventorty/inventory-purchase-info'
 import createInventoryCore from '../../helpers/create-inventorty/inventory-core'
+import assertInventory from '../../helpers/create-inventorty/assert-inventory'
 
 describe('new whole-sale, awd suite', function() {
 
@@ -14,6 +15,7 @@ describe('new whole-sale, awd suite', function() {
 
     let inventoryData
     let loginCredentials
+    let inventory = []
 
     before(function() {
         cy.fixture('new_inventory_data').then(function(inv) {inventoryData = inv})
@@ -29,9 +31,9 @@ describe('new whole-sale, awd suite', function() {
             }
         })
 
-        // createInventoryPage.createInventoryId().should('have.text', 'Create Inventory')
+        createInventoryPage.decodeBtn().should('have.text', 'Decode')
 
-        createInventoryGeneralInfo({
+        let inventoryGeneralInfo = {
             listingMileage     : inventoryData.generalInfo.listingMileage,
             cityFuelEco        : inventoryData.generalInfo.drivetrain.cityFuelEconomy,
             highwayFuelEco     : inventoryData.generalInfo.transmission.highwayFuelEconomy,
@@ -39,19 +41,36 @@ describe('new whole-sale, awd suite', function() {
             combinedFuelEco    : inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy,
             engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
             listingPrice       : inventoryData.generalInfo.ListingPrice
+        }
+
+        createInventoryGeneralInfo({
+            generalInfo : inventoryGeneralInfo
         })
+
+        inventory.push(inventoryGeneralInfo)
+
     })
 
     afterEach(function(){
 
-        createInventoryPurchaseInfo({
+        let inventoryPurchaseInfo ={ 
             source           : inventoryData.purchaseInfo.source.wholeSale,
             vendor           : inventoryData.purchaseInfo.vendor,
             purchasePrice    : inventoryData.purchaseInfo.purchasePrice,
             purchaseMileage  : inventoryData.purchaseInfo.purchaseMileage,
             purchaseInvoice  : inventoryData.purchaseInfo.purchaseInvoice,
-            purchaseComments : inventoryData.purchaseInfo.comments,
+            purchaseComments : inventoryData.purchaseInfo.comments
+        }
+
+        createInventoryPurchaseInfo({
+            purchaseInfo : inventoryPurchaseInfo
         })
+
+        inventory.push(inventoryPurchaseInfo)
+        
+        assertInventory({inventory:inventory})
+
+        inventory = []
 
         utils.logout();
 
@@ -75,7 +94,8 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.fogLights,
         ];
 
-        createInventoryCore({
+        let inventoryCore = {
+            features      : features,
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
             gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
@@ -83,9 +103,14 @@ describe('new whole-sale, awd suite', function() {
             bodyType      : inventoryData.generalInfo.transmission.bodyType.sedan,
             exteriorColor : inventoryData.generalInfo.exteriorColors.white,
             interiorColor : inventoryData.generalInfo.interiorColor.grey,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two,
-            features      : features
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two
+        };
+
+        createInventoryCore({
+            inventoryCore : inventoryCore
         })
+
+        inventory.push(features)
         
     })
 
@@ -103,7 +128,8 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.navigationSystem,
         ];
 
-        createInventoryCore({
+        let inventoryCore = {
+            features      : features,
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
             gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
@@ -111,9 +137,14 @@ describe('new whole-sale, awd suite', function() {
             bodyType      : inventoryData.generalInfo.transmission.bodyType.convertible,
             exteriorColor : inventoryData.generalInfo.exteriorColors.beige,
             interiorColor : inventoryData.generalInfo.interiorColor.brown,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three,
-            features      : features
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three
+        }
+
+        createInventoryCore({
+            inventoryCore : inventoryCore
         })
+
+        inventory.push(features)
 
     })
 
@@ -131,7 +162,8 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.airConditioning,
         ];
 
-        createInventoryCore({
+        let inventoryCore = {
+            features      : features,
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
             gearType      : inventoryData.generalInfo.transmission.gearType.manual,
@@ -139,9 +171,14 @@ describe('new whole-sale, awd suite', function() {
             bodyType      : inventoryData.generalInfo.transmission.bodyType.van,
             exteriorColor : inventoryData.generalInfo.exteriorColors.lightBlue,
             interiorColor : inventoryData.generalInfo.interiorColor.white,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two,
-            features      : features
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two
+        }
+
+        createInventoryCore({
+            inventoryCore : inventoryCore
         })
+
+        inventory.push(features)
 
     })
 
@@ -159,7 +196,8 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.stabilityControl,
         ];
 
-        createInventoryCore({
+        let inventoryCore = {
+            features      : features,
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
             gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
@@ -167,9 +205,13 @@ describe('new whole-sale, awd suite', function() {
             bodyType      : inventoryData.generalInfo.transmission.bodyType.wagon,
             exteriorColor : inventoryData.generalInfo.exteriorColors.yellow,
             interiorColor : inventoryData.generalInfo.interiorColor.grey,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.five,
-            features      : features
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.five
+        }
+        createInventoryCore({
+            inventoryCore : inventoryCore
         })
+
+        inventory.push(features)
         
     })
 
@@ -187,7 +229,8 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.powerLocks,
         ];
 
-        createInventoryCore({
+        let inventoryCore = {
+            features      : features,
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.electric,
             gearType      : inventoryData.generalInfo.transmission.gearType.manual,
@@ -195,9 +238,14 @@ describe('new whole-sale, awd suite', function() {
             bodyType      : inventoryData.generalInfo.transmission.bodyType.crossover,
             exteriorColor : inventoryData.generalInfo.exteriorColors.gold,
             interiorColor : inventoryData.generalInfo.interiorColor.black,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.four,
-            features      : features
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.four
+        }
+
+        createInventoryCore({
+            inventoryCore : inventoryCore
         })
+
+        inventory.push(features)
 
     })
 
@@ -215,7 +263,8 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.towPackage,
         ];
 
-        createInventoryCore({
+        let inventoryCore = {
+            features      : features,
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
             gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
@@ -223,9 +272,14 @@ describe('new whole-sale, awd suite', function() {
             bodyType      : inventoryData.generalInfo.transmission.bodyType.pickupTruck,
             exteriorColor : inventoryData.generalInfo.exteriorColors.maroon,
             interiorColor : inventoryData.generalInfo.interiorColor.brown,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three,
-            features      : features
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three
+        }
+
+        createInventoryCore({
+            inventoryCore : inventoryCore  
         })
+
+        inventory.push(features)
 
     })
 
@@ -243,7 +297,8 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.dualClimateControl,
         ];
 
-        createInventoryCore({
+        let inventoryCore = {
+            features      : features,
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
             gearType      : inventoryData.generalInfo.transmission.gearType.manual,
@@ -251,9 +306,15 @@ describe('new whole-sale, awd suite', function() {
             bodyType      : inventoryData.generalInfo.transmission.bodyType.sedan,
             exteriorColor : inventoryData.generalInfo.exteriorColors.orange,
             interiorColor : inventoryData.generalInfo.interiorColor.black,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three,
-            features      : features
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three
+        }
+
+        createInventoryCore({
+            inventoryCore : inventoryCore
+
         })
+
+        inventory.push(features)
 
     })
 
@@ -271,7 +332,8 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.navigationSystem,
         ];
 
-        createInventoryCore({
+        let inventoryCore = {
+            features      : features,
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.hybrid,
             gearType      : inventoryData.generalInfo.transmission.gearType.manual,
@@ -279,9 +341,14 @@ describe('new whole-sale, awd suite', function() {
             bodyType      : inventoryData.generalInfo.transmission.bodyType.hatchback,
             exteriorColor : inventoryData.generalInfo.exteriorColors.silver,
             interiorColor : inventoryData.generalInfo.interiorColor.brown,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.other,
-            features      : features
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.other
+        }
+
+        createInventoryCore({
+            inventoryCore : inventoryCore
         })
+
+        inventory.push(features)
         
     })
 
@@ -299,7 +366,8 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.towPackage,
         ];
 
-        createInventoryCore({
+        let inventoryCore = {
+            features      : features,
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
             gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
@@ -307,9 +375,14 @@ describe('new whole-sale, awd suite', function() {
             bodyType      : inventoryData.generalInfo.transmission.bodyType.coupe,
             exteriorColor : inventoryData.generalInfo.exteriorColors.beige,
             interiorColor : inventoryData.generalInfo.interiorColor.brown,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.four,
-            features      : features
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.four
+        }
+
+        createInventoryCore({
+            inventoryCore : inventoryCore
         })
+
+        inventory.push(features)
 
     })
 
@@ -327,7 +400,8 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.sunroof,
         ];
 
-        createInventoryCore({
+        let inventoryCore = {
+            features      : features,
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.alternate,
             gearType      : inventoryData.generalInfo.transmission.gearType.manual,
@@ -335,9 +409,14 @@ describe('new whole-sale, awd suite', function() {
             bodyType      : inventoryData.generalInfo.transmission.bodyType.suv,
             exteriorColor : inventoryData.generalInfo.exteriorColors.purple,
             interiorColor : inventoryData.generalInfo.interiorColor.brown,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.other,
-            features      : features
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.other
+        }
+
+        createInventoryCore({
+            inventoryCore : inventoryCore
         })
+
+        inventory.push(features)
         
     })
 
@@ -355,7 +434,8 @@ describe('new whole-sale, awd suite', function() {
             inventoryData.generalInfo.featuresAndSpecs.navigationSystem,
         ];
 
-        createInventoryCore({
+        let inventoryCore = {
+            features      : features,
             inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.awd,
             fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
             gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
@@ -363,9 +443,14 @@ describe('new whole-sale, awd suite', function() {
             bodyType      : inventoryData.generalInfo.transmission.bodyType.convertible,
             exteriorColor : inventoryData.generalInfo.exteriorColors.brown,
             interiorColor : inventoryData.generalInfo.interiorColor.grey,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three,
-            features      : features
+            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three
+        };
+
+        createInventoryCore({
+            inventoryCore : inventoryCore
         })
+        
+        inventory.push(features)
         
     })
 })
