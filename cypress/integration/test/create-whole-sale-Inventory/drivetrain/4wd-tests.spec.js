@@ -12,10 +12,11 @@ describe('new whole-sale, 4wd suite', function() {
 
     const createInventoryPage = new CreateInventoryPage()
     const utils = new Utils()
+    const vinGenerator = require('vin-generator');
 
     let inventoryData
     let loginCredentials
-    let inventory = []
+    let inventory = {}
 
     before(function() {
         cy.fixture('new_inventory_data').then(function(inv) {inventoryData = inv})
@@ -40,14 +41,15 @@ describe('new whole-sale, 4wd suite', function() {
             passengers         : inventoryData.generalInfo.numberOfDoors.passengers,
             combinedFuelEco    : inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy,
             engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
-            listingPrice       : inventoryData.generalInfo.ListingPrice
+            listingPrice       : inventoryData.generalInfo.ListingPrice,
+            vin                : vinGenerator.generateVin()
         }
 
         createInventoryGeneralInfo({
             generalInfo : inventoryGeneralInfo
         })
 
-        inventory.push(inventoryGeneralInfo)
+        inventory.generalInfo = inventoryGeneralInfo
     })
 
     afterEach(function(){
@@ -65,7 +67,7 @@ describe('new whole-sale, 4wd suite', function() {
             purchaseInfo : inventoryPurchaseInfo
         })
 
-        inventory.push(inventoryPurchaseInfo)
+        inventory.purchaseInfo = inventoryPurchaseInfo
         
         assertInventory({inventory:inventory})
 
@@ -109,7 +111,7 @@ describe('new whole-sale, 4wd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
 
     })
 
@@ -143,7 +145,7 @@ describe('new whole-sale, 4wd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
         
     })
 
@@ -177,7 +179,7 @@ describe('new whole-sale, 4wd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
         
     })
 
@@ -210,7 +212,7 @@ describe('new whole-sale, 4wd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
         
     })
 
@@ -244,7 +246,7 @@ describe('new whole-sale, 4wd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
         
     })
 
@@ -278,7 +280,7 @@ describe('new whole-sale, 4wd suite', function() {
             inventoryCore : inventoryCore  
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
         
     })
 
@@ -313,7 +315,7 @@ describe('new whole-sale, 4wd suite', function() {
 
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
         
     })
 
@@ -347,7 +349,7 @@ describe('new whole-sale, 4wd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
         
     })
 
@@ -381,7 +383,7 @@ describe('new whole-sale, 4wd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
         
     })
 
@@ -415,7 +417,7 @@ describe('new whole-sale, 4wd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
         
     })
 
@@ -449,7 +451,7 @@ describe('new whole-sale, 4wd suite', function() {
             inventoryCore : inventoryCore
         })
         
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
         
     })
 })
