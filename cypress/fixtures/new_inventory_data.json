@@ -82,7 +82,7 @@
          "stabilityControl": "stability_control",
          "sunroof": "sunroof",
          "towPackage": "tow_package",
-         "xeonHeadlights": "xeon_headlights"
+         "xeonHeadlights": "xenon_headlight"
       },
       "exteriorColors":{
          "white": "white",
