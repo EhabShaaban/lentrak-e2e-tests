@@ -49,15 +49,22 @@ module.exports =({
 }) => {
 
     console.log(inventory)
-
+    // assert header area
     inventoryPage.inventoryStatusId().should('have.text', 'In Stock')
     inventoryPage.vinId().should('have.text', inventory.generalInfo.vin)
     inventoryPage.bodyTypeId().should('contain', inventory.inventoryCore.bodyType)
     inventoryPage.mileageId().should('contain', utils.addThousandSeparator(inventory.generalInfo.listingMileage))
-
+    // assert price area
     inventoryPage.listingPriceId().should('contain', utils.addThousandSeparator(inventory.generalInfo.listingPrice))
     inventoryPage.purchasePrice().should('contain', utils.addThousandSeparator(inventory.purchaseInfo.purchasePrice))
-    
+    // assert spec area
     inventoryPage.gearTypeId().should('contain', inventory.inventoryCore.gearType.charAt(0).toUpperCase()+inventory.inventoryCore.gearType.slice(1))
+    inventoryPage.drivetrainTypeId().should('contain', inventory.inventoryCore.inventoryType.toUpperCase())
+    inventoryPage.numberOfDoorsId().should('contain', inventory.inventoryCore.numberOfDoors+' Doors')
+    inventoryPage.cylindersId().should('contain', inventory.inventoryCore.cylinders+' Cylinders')
+    inventoryPage.cityFuelEcoId().should('contain', inventory.generalInfo.cityFuelEco+ 'LP 100km City')
+    inventoryPage.combinedFuelEcoId().should('contain', inventory.generalInfo.highwayFuelEco+'LP 100km Highway')
+    inventoryPage.highwayFuelEcoId().should('contain', inventory.generalInfo.combinedFuelEco+'LP 100km Highway')
+    inventoryPage.engineDisplacementId().should('contain', inventory.generalInfo.engineDisplacement)
 
 }
