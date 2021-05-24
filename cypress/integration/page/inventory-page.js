@@ -45,6 +45,36 @@ class InventoryPage
     gearTypeId(){
         return this.jokerSpecSpan(7251)
     }
+    drivetrainTypeId(){
+        return this.jokerSpecSpan(3156)
+    }
+    numberOfDoorsId(){
+        return this.jokerSpecSpan(2058)
+    }
+    fuelTypeId(){
+        return this.jokerSpecSpan(5062)
+    }
+    cylindersId(){
+        return this.jokerSpecSpan(7062)
+    }
+    cityFuelEcoId(){
+        return this.jokerSpecSpan(7878)
+    }
+    combinedFuelEcoId(){
+        return this.jokerSpecSpan(5033)
+    }
+    highwayFuelEcoId(){
+        return this.jokerSpecSpan(9681)
+    }
+    engineDisplacementId(){
+        return this.jokerSpecSpan(7444)
+    }
+    engineDisplacementId(){
+        return this.jokerSpecSpan(7444)
+    }
+    bodyTypeSpecId(){
+        return this.jokerSpecSpan(9839)
+    }
 }
 
 export default InventoryPage
