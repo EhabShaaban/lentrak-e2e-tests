@@ -6,5 +6,5 @@
         "USERNAME": "ehabsfeki@gmail.com",
         "PASSWD": "password"
     },
-    "gatewayUrl": "https://gateway.qa.dealertouch.ca/api"
+    "gatewayUrl": "https://gateway.dev.dealertouch.ca/api"
 }
