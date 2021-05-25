@@ -12,10 +12,11 @@ describe('new whole-sale, rwd suite', function() {
 
     const createInventoryPage = new CreateInventoryPage()
     const utils = new Utils()
+    const vinGenerator = require('vin-generator');
 
     let inventoryData
     let loginCredentials
-    let inventory = []
+    let inventory = {}
 
     before(function() {
         cy.fixture('new_inventory_data').then(function(inv) {inventoryData = inv})
@@ -40,14 +41,15 @@ describe('new whole-sale, rwd suite', function() {
             passengers         : inventoryData.generalInfo.numberOfDoors.passengers,
             combinedFuelEco    : inventoryData.generalInfo.numberOfDoors.combinedFuelEconomy,
             engineDisplacement : inventoryData.generalInfo.drivetrain.engineDisplacement,
-            listingPrice       : inventoryData.generalInfo.ListingPrice
+            listingPrice       : inventoryData.generalInfo.ListingPrice,
+            vin                : vinGenerator.generateVin()
         }
 
         createInventoryGeneralInfo({
             generalInfo : inventoryGeneralInfo
         })
 
-        inventory.push(inventoryGeneralInfo)
+        inventory.generalInfo = inventoryGeneralInfo
     })
 
     afterEach(function(){
@@ -65,11 +67,11 @@ describe('new whole-sale, rwd suite', function() {
             purchaseInfo : inventoryPurchaseInfo
         })
 
-        inventory.push(inventoryPurchaseInfo)
+        inventory.purchaseInfo = inventoryPurchaseInfo
         
         assertInventory({inventory:inventory})
 
-        inventory = []
+        inventory = {}
 
         utils.logout();
 
@@ -109,7 +111,7 @@ describe('new whole-sale, rwd suite', function() {
                 inventoryCore : inventoryCore
             })
     
-            inventory.push(features)
+        inventory.inventoryCore = inventoryCore
         
     })
 
@@ -143,43 +145,46 @@ describe('new whole-sale, rwd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
 
     })
 
-    it('create rwd, gasoline, manual, cy3, van, exterior lightBlue, \
-        interior white, two doors, features: powerWindows, heatedSeats, entertainmentPackage, \
-        powerLocks, alloyWheels, xeonHeadlights and airConditioning', function(){
+    /**
+     * Bugged flow
+     */
+    // it('create rwd, gasoline, manual, cy3, van, exterior lightBlue, \
+    //     interior white, two doors, features: powerWindows, heatedSeats, entertainmentPackage, \
+    //     powerLocks, alloyWheels, xeonHeadlights and airConditioning', function(){
 
-        const features = [
-            inventoryData.generalInfo.featuresAndSpecs.powerWindows,
-            inventoryData.generalInfo.featuresAndSpecs.heatedSeats,
-            inventoryData.generalInfo.featuresAndSpecs.entertainmentPackage,
-            inventoryData.generalInfo.featuresAndSpecs.powerLocks,
-            inventoryData.generalInfo.featuresAndSpecs.alloyWheels,
-            inventoryData.generalInfo.featuresAndSpecs.xeonHeadlights,
-            inventoryData.generalInfo.featuresAndSpecs.airConditioning,
-        ];
+    //     const features = [
+    //         inventoryData.generalInfo.featuresAndSpecs.powerWindows,
+    //         inventoryData.generalInfo.featuresAndSpecs.heatedSeats,
+    //         inventoryData.generalInfo.featuresAndSpecs.entertainmentPackage,
+    //         inventoryData.generalInfo.featuresAndSpecs.powerLocks,
+    //         inventoryData.generalInfo.featuresAndSpecs.alloyWheels,
+    //         inventoryData.generalInfo.featuresAndSpecs.xeonHeadlights,
+    //         inventoryData.generalInfo.featuresAndSpecs.airConditioning,
+    //     ];
 
-        let inventoryCore = {
-            features      : features,
-            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.rwd,
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
-            gearType      : inventoryData.generalInfo.transmission.gearType.manual,
-            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy3,
-            bodyType      : inventoryData.generalInfo.transmission.bodyType.van,
-            exteriorColor : inventoryData.generalInfo.exteriorColors.lightBlue,
-            interiorColor : inventoryData.generalInfo.interiorColor.white,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two
-        }
+    //     let inventoryCore = {
+    //         features      : features,
+    //         inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.rwd,
+    //         fuelType      : inventoryData.generalInfo.drivetrain.fuelType.gasoline,
+    //         gearType      : inventoryData.generalInfo.transmission.gearType.manual,
+    //         cylinders     : inventoryData.generalInfo.transmission.cylinders.cy3,
+    //         bodyType      : inventoryData.generalInfo.transmission.bodyType.van,
+    //         exteriorColor : inventoryData.generalInfo.exteriorColors.lightBlue,
+    //         interiorColor : inventoryData.generalInfo.interiorColor.white,
+    //         numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.two
+    //     }
 
-        createInventoryCore({
-            inventoryCore : inventoryCore
-        })
+    //     createInventoryCore({
+    //         inventoryCore : inventoryCore
+    //     })
 
-        inventory.push(features)
+    //     inventory.inventoryCore = inventoryCore
         
-    })
+    // })
 
     it('create rwd, hybrid, automatic, cy5, wagon, exterior yellow, \
         interior grey, five doors, features: bluetooth, heatedSeats, powerSeats, \
@@ -210,7 +215,7 @@ describe('new whole-sale, rwd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
         
     })
 
@@ -244,78 +249,84 @@ describe('new whole-sale, rwd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
 
     })
 
-    it('create rwd, diesel, automatic, cy10, pickupTruck, exterior maroon, \
-        interior brown, three doors, features: dualClimateControl, alloyWheels, heatedMirror, \
-        memorySeat, powerSeats, stabilityControl and towPackage', function(){
+    /**
+     * Bugged flow
+     */
+    // it('create rwd, diesel, automatic, cy10, pickupTruck, exterior maroon, \
+    //     interior brown, three doors, features: dualClimateControl, alloyWheels, heatedMirror, \
+    //     memorySeat, powerSeats, stabilityControl and towPackage', function(){
 
-        const features = [
-            inventoryData.generalInfo.featuresAndSpecs.dualClimateControl,
-            inventoryData.generalInfo.featuresAndSpecs.alloyWheels,
-            inventoryData.generalInfo.featuresAndSpecs.heatedMirror,
-            inventoryData.generalInfo.featuresAndSpecs.memorySeat,
-            inventoryData.generalInfo.featuresAndSpecs.powerSeats,
-            inventoryData.generalInfo.featuresAndSpecs.stabilityControl,
-            inventoryData.generalInfo.featuresAndSpecs.towPackage,
-        ];
+    //     const features = [
+    //         inventoryData.generalInfo.featuresAndSpecs.dualClimateControl,
+    //         inventoryData.generalInfo.featuresAndSpecs.alloyWheels,
+    //         inventoryData.generalInfo.featuresAndSpecs.heatedMirror,
+    //         inventoryData.generalInfo.featuresAndSpecs.memorySeat,
+    //         inventoryData.generalInfo.featuresAndSpecs.powerSeats,
+    //         inventoryData.generalInfo.featuresAndSpecs.stabilityControl,
+    //         inventoryData.generalInfo.featuresAndSpecs.towPackage,
+    //     ];
 
-        let inventoryCore = {
-            features      : features,
-            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.rwd,
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
-            gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
-            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy10,
-            bodyType      : inventoryData.generalInfo.transmission.bodyType.pickupTruck,
-            exteriorColor : inventoryData.generalInfo.exteriorColors.maroon,
-            interiorColor : inventoryData.generalInfo.interiorColor.brown,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three
-        }
+    //     let inventoryCore = {
+    //         features      : features,
+    //         inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.rwd,
+    //         fuelType      : inventoryData.generalInfo.drivetrain.fuelType.diesel,
+    //         gearType      : inventoryData.generalInfo.transmission.gearType.automatic,
+    //         cylinders     : inventoryData.generalInfo.transmission.cylinders.cy10,
+    //         bodyType      : inventoryData.generalInfo.transmission.bodyType.pickupTruck,
+    //         exteriorColor : inventoryData.generalInfo.exteriorColors.maroon,
+    //         interiorColor : inventoryData.generalInfo.interiorColor.brown,
+    //         numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three
+    //     }
 
-        createInventoryCore({
-            inventoryCore : inventoryCore  
-        })
+    //     createInventoryCore({
+    //         inventoryCore : inventoryCore  
+    //     })
 
-        inventory.push(features)
+    //     inventory.inventoryCore = inventoryCore
         
-    })
+    // })
 
-    it('create rwd, flex, manual, cy10, sedan, exterior orange, \
-        interior black, three doors, features: sunroof, powerLocks, powerWindows, \
-        stabilityControl, xeonHeadlights, alarm and dualClimateControl', function(){
+    /**
+     * Bugged flow
+     */
+    // it('create rwd, flex, manual, cy10, sedan, exterior orange, \
+    //     interior black, three doors, features: sunroof, powerLocks, powerWindows, \
+    //     stabilityControl, xeonHeadlights, alarm and dualClimateControl', function(){
 
-        const features = [
-            inventoryData.generalInfo.featuresAndSpecs.sunroof,
-            inventoryData.generalInfo.featuresAndSpecs.powerLocks,
-            inventoryData.generalInfo.featuresAndSpecs.powerWindows,
-            inventoryData.generalInfo.featuresAndSpecs.stabilityControl,
-            inventoryData.generalInfo.featuresAndSpecs.xeonHeadlights,
-            inventoryData.generalInfo.featuresAndSpecs.alarm,
-            inventoryData.generalInfo.featuresAndSpecs.dualClimateControl,
-        ];
+    //     const features = [
+    //         inventoryData.generalInfo.featuresAndSpecs.sunroof,
+    //         inventoryData.generalInfo.featuresAndSpecs.powerLocks,
+    //         inventoryData.generalInfo.featuresAndSpecs.powerWindows,
+    //         inventoryData.generalInfo.featuresAndSpecs.stabilityControl,
+    //         inventoryData.generalInfo.featuresAndSpecs.xeonHeadlights,
+    //         inventoryData.generalInfo.featuresAndSpecs.alarm,
+    //         inventoryData.generalInfo.featuresAndSpecs.dualClimateControl,
+    //     ];
 
-        let inventoryCore = {
-            features      : features,
-            inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.rwd,
-            fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
-            gearType      : inventoryData.generalInfo.transmission.gearType.manual,
-            cylinders     : inventoryData.generalInfo.transmission.cylinders.cy10,
-            bodyType      : inventoryData.generalInfo.transmission.bodyType.sedan,
-            exteriorColor : inventoryData.generalInfo.exteriorColors.orange,
-            interiorColor : inventoryData.generalInfo.interiorColor.black,
-            numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three
-        }
+    //     let inventoryCore = {
+    //         features      : features,
+    //         inventoryType : inventoryData.generalInfo.drivetrain.drivetrainTypes.rwd,
+    //         fuelType      : inventoryData.generalInfo.drivetrain.fuelType.flex,
+    //         gearType      : inventoryData.generalInfo.transmission.gearType.manual,
+    //         cylinders     : inventoryData.generalInfo.transmission.cylinders.cy10,
+    //         bodyType      : inventoryData.generalInfo.transmission.bodyType.sedan,
+    //         exteriorColor : inventoryData.generalInfo.exteriorColors.orange,
+    //         interiorColor : inventoryData.generalInfo.interiorColor.black,
+    //         numberOfDoors : inventoryData.generalInfo.numberOfDoors.numberOfDoorsValue.three
+    //     }
 
-        createInventoryCore({
-            inventoryCore : inventoryCore
+    //     createInventoryCore({
+    //         inventoryCore : inventoryCore
 
-        })
+    //     })
 
-        inventory.push(features)
+    //     inventory.inventoryCore = inventoryCore
 
-    })
+    // })
 
     it('create rwd, hybrid, manual, cy3, hatchback, exterior silver, \
         interior brown, other doors, features: dualClimateControl, entertainmentPackage, \
@@ -347,7 +358,7 @@ describe('new whole-sale, rwd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
 
     })
 
@@ -381,7 +392,7 @@ describe('new whole-sale, rwd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
 
     })
 
@@ -415,7 +426,7 @@ describe('new whole-sale, rwd suite', function() {
             inventoryCore : inventoryCore
         })
 
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
 
     })
 
@@ -449,7 +460,7 @@ describe('new whole-sale, rwd suite', function() {
             inventoryCore : inventoryCore
         })
         
-        inventory.push(features)
+        inventory.inventoryCore = inventoryCore
 
     })
 })

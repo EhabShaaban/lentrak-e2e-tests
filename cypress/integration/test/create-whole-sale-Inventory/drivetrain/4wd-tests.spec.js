@@ -71,7 +71,7 @@ describe('new whole-sale, 4wd suite', function() {
         
         assertInventory({inventory:inventory})
 
-        inventory = []
+        inventory = {}
 
         utils.logout();
 
@@ -150,7 +150,7 @@ describe('new whole-sale, 4wd suite', function() {
     })
 
     /**
-     * Not working on dev
+     * Bugged flow
      */
     // it('create 4wd, gasoline, manual, cy3, van, exterior lightBlue, \
     //     interior white, two doors, features: powerWindows, heatedSeats, entertainmentPackage, \
@@ -291,7 +291,7 @@ describe('new whole-sale, 4wd suite', function() {
     // })
 
     /**
-     * Not working on dev
+     * Bugged flow
      */
     // it('create 4wd, flex, manual, cy10, sedan, exterior orange, \
     //     interior black, three doors, features: sunroof, powerLocks, powerWindows, \
