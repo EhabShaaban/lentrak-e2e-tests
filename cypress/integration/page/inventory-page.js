@@ -75,6 +75,24 @@ class InventoryPage
     bodyTypeSpecId(){
         return this.jokerSpecSpan(9839)
     }
+    featuresDiv(specType){
+        return cy.get("#"+specType)
+    }
+    sourceId(){
+        return cy.get("#purchase_information_43")
+    }
+    invoiceNumberId(){
+        return cy.get("#purchase_information_47")
+    }
+    taxId(){
+        return cy.get("#purchase_information_51")
+    }
+    purchaseMileageId(){
+        return cy.get("#purchase_information_53")
+    }
+    comments(){
+        return cy.get("#purchase_information_55")
+    }
 }
 
 export default InventoryPage
