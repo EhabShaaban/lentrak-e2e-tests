@@ -76,8 +76,8 @@ module.exports =({
         for (let i = 0; i < featureUISplitted.length; i++) {
             featureUISplitted[i] = featureUISplitted[i][0].toUpperCase() + featureUISplitted[i].substr(1);
         }
-        console.log(featureDOM)
-        console.log(featureUISplitted.join(" "))
+        // console.log(featureDOM)
+        // console.log(featureUISplitted.join(" "))
         // inventoryPage.featuresDiv(featureDOM).should('contain', featureUISplitted.join(" "))
     }
 

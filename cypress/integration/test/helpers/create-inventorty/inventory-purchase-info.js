@@ -3,6 +3,9 @@ import Utils from '../../../utils/utils'
 
 const createInv = new CreateInventoryPage()
 const utils = new Utils()
+const fs = require('fs')
+
+let stocks=[];
 
 
 /**
@@ -66,6 +69,10 @@ module.exports = ({
         const stockNumber = $text.text();
         cy.log("Stock Number: "+stockNumber)
         cy.visit('./inventory/'+stockNumber)
+
+        stocks.push(stockNumber);
+
+        cy.writeFile('./cypress/fixtures/stocks.json', stocks)
     });
     
 }
