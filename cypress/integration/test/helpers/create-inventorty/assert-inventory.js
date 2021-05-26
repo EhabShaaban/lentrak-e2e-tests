@@ -54,9 +54,11 @@ module.exports =({
     inventoryPage.vinId().should('have.text', inventory.generalInfo.vin)
     inventoryPage.bodyTypeId().should('contain', inventory.inventoryCore.bodyType)
     inventoryPage.mileageId().should('contain', utils.addThousandSeparator(inventory.generalInfo.listingMileage))
+
     // assert price area
     inventoryPage.listingPriceId().should('contain', utils.addThousandSeparator(inventory.generalInfo.listingPrice))
     inventoryPage.purchasePrice().should('contain', utils.addThousandSeparator(inventory.purchaseInfo.purchasePrice))
+
     // assert spec area
     inventoryPage.gearTypeId().should('contain', inventory.inventoryCore.gearType.charAt(0).toUpperCase()+inventory.inventoryCore.gearType.slice(1))
     inventoryPage.drivetrainTypeId().should('contain', inventory.inventoryCore.inventoryType.toUpperCase())
@@ -66,5 +68,20 @@ module.exports =({
     inventoryPage.combinedFuelEcoId().should('contain', inventory.generalInfo.highwayFuelEco+'LP 100km Highway')
     inventoryPage.highwayFuelEcoId().should('contain', inventory.generalInfo.combinedFuelEco+'LP 100km Highway')
     inventoryPage.engineDisplacementId().should('contain', inventory.generalInfo.engineDisplacement)
+
+    // assert featura area
+    for(let featureDOM of inventory.inventoryCore.features){
+        let featureUI = featureDOM.replace('_', ' ')
+        const featureUISplitted = featureUI.split(" ");
+        for (let i = 0; i < featureUISplitted.length; i++) {
+            featureUISplitted[i] = featureUISplitted[i][0].toUpperCase() + featureUISplitted[i].substr(1);
+        }
+        console.log(featureDOM)
+        console.log(featureUISplitted.join(" "))
+        // inventoryPage.featuresDiv(featureDOM).should('contain', featureUISplitted.join(" "))
+    }
+
+    // assert purchase information, locators are chaning in dom
+    // inventoryPage.sourceId().should('contain', inventory.purchaseInfo.source)
 
 }
