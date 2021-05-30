@@ -1,5 +1,7 @@
 import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
-import {gql, request} from 'graphql-request'
+import {gql, request, GraphQLClient} from 'graphql-request'
+
+let accessToken = "";
 
 addMatchImageSnapshotCommand({
     failureThreshold: 0.00,
@@ -50,6 +52,7 @@ Cypress.Commands.add("login", (username, password) => {
             }
         }
     }`).then((data) => {
+        accessToken = data.login.access_token;
         return cy.wrap({
             auth: {
                 isLogin: true,
@@ -72,3 +75,43 @@ Cypress.Commands.add("login", (username, password) => {
         })
     })
 })
+
+// need to return stockNumber to test files & update query
+function createInventory() {
+    const vinGenerator = require('vin-generator');
+    const graphQLClient = new GraphQLClient(Cypress.config("gatewayUrl"), {
+        headers: {
+          authorization: 'Bearer '+accessToken,
+        },
+      })
+      const query = gql`mutation {
+        createInventory(input: {
+          stock_number:"xwd_123"
+          vehicle: {
+            vin:"${vinGenerator.generateVin()}"
+            year:2021
+            make:"car"
+            model:"carModel"
+            features: [alarm, alloy_wheels, bluetooth]
+          }
+          medias: [
+            {
+              id:"id_string"
+              content_type:"string"
+              file_name:"string"
+              media_type:image
+            }
+          ]
+        }) {
+          id
+          stock_number
+          status
+        }
+      }`
+      const data = graphQLClient.request(query).then((data) =>{
+        let stockNumber = data.createInventory.stock_number
+        console.log(stockNumber)
+        return cy.wrap(stockNumber)
+      })
+}
+Cypress.Commands.add("createInventory", createInventory)
