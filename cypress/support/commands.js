@@ -108,10 +108,18 @@ function createInventory() {
           status
         }
       }`
-      const data = graphQLClient.request(query).then((data) =>{
-        let stockNumber = data.createInventory.stock_number
-        console.log(stockNumber)
-        return cy.wrap(stockNumber)
+      graphQLClient.request(query).then((data) =>{
+        cy.setSessionStorage('stock', data.createInventory.stock_number)
       })
 }
 Cypress.Commands.add("createInventory", createInventory)
+
+Cypress.Commands.add('getSessionStorage', (key) => {
+  cy.window().then((window) => window.sessionStorage.getItem(key))
+})
+
+Cypress.Commands.add('setSessionStorage', (key, value) => {
+  cy.window().then((window) => {
+    window.sessionStorage.setItem(key, value)
+  })
+})

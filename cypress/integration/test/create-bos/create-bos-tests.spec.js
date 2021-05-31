@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 import {adaptToReduxPersist} from '../../utils/redux'
+import {getStockNumber} from '/home/ehab/dev/lentrak/ui-framework/cypress/support/commands.js'
 
 let loginCredentials
 
@@ -20,7 +21,9 @@ describe('create bos suite', function() {
             }
         })
 
-        cy.createInventory().then((value)=>console.log(value))
+        cy.createInventory()
+        cy.getSessionStorage('stock').should('exist')
+
     })
 
     it('create bos', function(){
