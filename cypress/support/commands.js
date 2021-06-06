@@ -2,9 +2,8 @@ import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 import {gql, request, GraphQLClient} from 'graphql-request'
 import "cypress-localstorage-commands"
 import faker from 'faker'
+import bosInventory from '../integration/test/helpers/create-bos/bos-inventory.js'
 
-let accessToken = "";
-let purchasePirce = faker.datatype.number(15000)
 let vehicleFeatureArray = [
   "air_conditioning",
   "alarm",
@@ -102,6 +101,50 @@ let vehicleCylindersArray = [
   "cylinders_12"
 ]
 
+let accessToken = "";
+
+let inventory = {}
+const vinGenerator = require('vin-generator');
+let vin = vinGenerator.generateVin()
+inventory.vin = vin
+let bodyType = getVehicleData(vehicleBodyTypeArray).toString()
+inventory.bodyType = bodyType
+let purchasePirce = faker.datatype.number(15000)
+inventory.purchasePirce = purchasePirce
+let interiorColor = getVehicleData(vehicleInteriorColorsArray).toString()
+inventory.interiorColor = interiorColor
+let exteriorColor = getVehicleData(vehicleExteriorColorsArray).toString()
+inventory.exteriorColor = exteriorColor
+let drivetrain = getVehicleData(vehicleDrivetrainArray).toString()
+inventory.drivetrain = drivetrain
+let transmission = getVehicleData(vehicleTransmissionArray).toString()
+inventory.transmission = transmission
+let doors = getVehicleData(vehicleDoorArray).toString()
+inventory.doors = doors
+let fuelType = getVehicleData(vehicleFuelTypeArray).toString()
+inventory.fuelType = fuelType
+let cylinders = getVehicleData(vehicleCylindersArray).toString()
+inventory.cylinders = cylinders
+let cityFuelEconomy = faker.datatype.number(200)
+inventory.cityFuelEconomy = cityFuelEconomy
+let highwayFuelEconomy = faker.datatype.number(200)
+inventory.highwayFuelEconomy = highwayFuelEconomy
+let combinedFuelEconomy = faker.datatype.number(200)
+inventory.combinedFuelEconomy = combinedFuelEconomy
+let sevenFeatures = getSevenFeatures()
+inventory.sevenFeatures = sevenFeatures
+let listingPrice = faker.datatype.number({
+  'min': 16000,
+  'max': 25000
+})
+inventory.listingPrice = listingPrice
+let listingMileage = faker.datatype.number(10000)
+inventory.listingMileage = listingMileage
+let purchaseMileage = faker.datatype.number(150)
+inventory.purchaseMileage = purchaseMileage
+console.log(inventory)
+bosInventory(inventory)
+
 function getSevenFeatures(){
   return vehicleFeatureArray.sort(() => Math.random() - Math.random()).slice(0, 7).toString().replace(/"/g, "")
 }
@@ -111,7 +154,6 @@ function getVehicleData(arr){
 
 // this will be query for whole-sale only, different trade-in query should be implemented
 function createWholeSaleInventory() {
-  const vinGenerator = require('vin-generator');
   const graphQLClient = new GraphQLClient(Cypress.config("gatewayUrl"), {
       headers: {
         authorization: 'Bearer '+accessToken,
@@ -121,40 +163,37 @@ function createWholeSaleInventory() {
       createInventory(input: {
         stock_number:"xwd_123"
         vehicle: {
-          vin:"${vinGenerator.generateVin()}"
+          vin:"${vin}"
           year:2021
           make:"test"
           model:"car"
-          body:${getVehicleData(vehicleBodyTypeArray)}
-          interior_color:${getVehicleData(vehicleInteriorColorsArray)}
-          exterior_color:${getVehicleData(vehicleExteriorColorsArray)}
+          body:${bodyType}
+          interior_color:${interiorColor}
+          exterior_color:${exteriorColor}
           passengers: 2
           engine_displacement:"3.3"
-          drivetrain: ${getVehicleData(vehicleDrivetrainArray)}
-          transmission: ${getVehicleData(vehicleTransmissionArray)}
-          doors: ${getVehicleData(vehicleDoorArray)}
-          fuel_type:${getVehicleData(vehicleFuelTypeArray)}
-          cylinders: ${getVehicleData(vehicleCylindersArray)}
+          drivetrain: ${drivetrain}
+          transmission: ${transmission}
+          doors: ${doors}
+          fuel_type:${fuelType}
+          cylinders: ${cylinders}
           city_fuel_economy: {
-            amount:${faker.datatype.number(200)}
+            amount:${cityFuelEconomy}
             unit: lp100km 
           }
           highway_fuel_economy: {
-            amount: ${faker.datatype.number(200)}
+            amount: ${highwayFuelEconomy}
             unit: lp100km
           }
           combined_fuel_economy: {
-            amount: ${faker.datatype.number(200)}
+            amount: ${combinedFuelEconomy}
             unit: lp100km
           }
-          features: [${getSevenFeatures()}]
+          features: [${sevenFeatures}]
         }
-        price: ${faker.datatype.number({
-          'min': 16000,
-          'max': 25000
-      })}
+        price: ${listingPrice}
         mileage: {
-          distance:${faker.datatype.number(10000)}
+          distance:${listingMileage}
           unit: km	
         }
         source: {
@@ -163,7 +202,7 @@ function createWholeSaleInventory() {
             tax: ${purchasePirce*0.13}
             date: "2017-11-25T23:45:35.116Z"
             mileage: {
-              distance: ${faker.datatype.number(150)}
+              distance: ${purchaseMileage}
               unit: km
             }
             comments: "this is a test comment"
