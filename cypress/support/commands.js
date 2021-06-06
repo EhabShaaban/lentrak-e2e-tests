@@ -1,7 +1,185 @@
 import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 import {gql, request, GraphQLClient} from 'graphql-request'
+import "cypress-localstorage-commands"
+import faker from 'faker'
 
 let accessToken = "";
+let purchasePirce = faker.datatype.number(15000)
+let vehicleFeatureArray = [
+  "air_conditioning",
+  "alarm",
+  "alloy_wheels",
+  "bluetooth",
+  "dual_climate_control",
+  "entertainment_package",
+  "fog_lights",
+  "heated_mirror",
+  "heated_seats",
+  "keyless_entry",
+  "memory_seat",
+  "navigation_system",
+  "power_locks",
+  "power_mirrors",
+  "power_seats",
+  "power_windows",
+  "stability_control",
+  "sunroof",
+  "tow_package",
+  "xeon_headlights"
+]
+let vehicleBodyTypeArray = [
+  "sedan",
+  "coupe",
+  "hatchback",
+  "suv",
+  "crossover",
+  "minivan",
+  "van",
+  "pickup_truck",
+  "wagon",
+  "convertible",
+]
+let vehicleInteriorColorsArray = [
+  "beige",
+  "black",
+  "blue",
+  "brown",
+  "grey",
+  "red",
+  "white"
+]
+let vehicleExteriorColorsArray = [
+  "beige",
+  "black",
+  "blue",
+  "brown",
+  "copper",
+  "gold",
+  "green",
+  "grey",
+  "light_blue",
+  "maroon",
+  "orange",
+  "purple",
+  "red",
+  "silver",
+  "white",
+  "yellow",
+]
+let vehicleDrivetrainArray = [
+  "four_wd",
+  "awd",
+  "fwd",
+  "rwd"
+]
+let vehicleTransmissionArray = [
+  "automatic",
+  "manual"
+]
+let vehicleDoorArray = [
+  "door_2",
+  "door_3",
+  "door_4",
+  "door_5",
+  "other"
+]
+let vehicleFuelTypeArray = [
+  "gasoline",
+  "diesel",
+  "flex",
+  "hybrid",
+  "electric",
+  "alternate",
+  "other"
+]
+let vehicleCylindersArray = [
+  "cylinders_3",
+  "cylinders_4",
+  "cylinders_5",
+  "cylinders_6",
+  "cylinders_8",
+  "cylinders_10",
+  "cylinders_12"
+]
+
+function getSevenFeatures(){
+  return vehicleFeatureArray.sort(() => Math.random() - Math.random()).slice(0, 7).toString().replace(/"/g, "")
+}
+function getVehicleData(arr){
+  return arr.sort(() => Math.random() - Math.random()).slice(0, 1)
+}
+
+// this will be query for whole-sale only, different trade-in query should be implemented
+function createWholeSaleInventory() {
+  const vinGenerator = require('vin-generator');
+  const graphQLClient = new GraphQLClient(Cypress.config("gatewayUrl"), {
+      headers: {
+        authorization: 'Bearer '+accessToken,
+      },
+    })
+    const query = gql`mutation {
+      createInventory(input: {
+        stock_number:"xwd_123"
+        vehicle: {
+          vin:"${vinGenerator.generateVin()}"
+          year:2021
+          make:"test"
+          model:"car"
+          body:${getVehicleData(vehicleBodyTypeArray)}
+          interior_color:${getVehicleData(vehicleInteriorColorsArray)}
+          exterior_color:${getVehicleData(vehicleExteriorColorsArray)}
+          passengers: 2
+          engine_displacement:"3.3"
+          drivetrain: ${getVehicleData(vehicleDrivetrainArray)}
+          transmission: ${getVehicleData(vehicleTransmissionArray)}
+          doors: ${getVehicleData(vehicleDoorArray)}
+          fuel_type:${getVehicleData(vehicleFuelTypeArray)}
+          cylinders: ${getVehicleData(vehicleCylindersArray)}
+          city_fuel_economy: {
+            amount:${faker.datatype.number(200)}
+            unit: lp100km 
+          }
+          highway_fuel_economy: {
+            amount: ${faker.datatype.number(200)}
+            unit: lp100km
+          }
+          combined_fuel_economy: {
+            amount: ${faker.datatype.number(200)}
+            unit: lp100km
+          }
+          features: [${getSevenFeatures()}]
+        }
+        price: ${faker.datatype.number({
+          'min': 16000,
+          'max': 25000
+      })}
+        mileage: {
+          distance:${faker.datatype.number(10000)}
+          unit: km	
+        }
+        source: {
+          wholesale: {
+            price: ${purchasePirce}
+            tax: ${purchasePirce*0.13}
+            date: "2017-11-25T23:45:35.116Z"
+            mileage: {
+              distance: ${faker.datatype.number(150)}
+              unit: km
+            }
+            comments: "this is a test comment"
+            invoice_number: "8768KHA2334"
+          }
+        }
+      }) {
+        id
+        stock_number
+        status
+      }
+    }`
+    graphQLClient.request(query).then((data) =>{
+      cy.setSessionStorage('stock', data.createInventory.stock_number)
+    })
+}
 
 addMatchImageSnapshotCommand({
     failureThreshold: 0.00,
@@ -10,6 +188,7 @@ addMatchImageSnapshotCommand({
     capture: 'viewport',
 });
 
+// cypress commands
 Cypress.Commands.add("setResolution", (size) => {
 if (Cypress._.isArray(size)) {
     cy.viewport(size[0], size[1]);
@@ -76,43 +255,7 @@ Cypress.Commands.add("login", (username, password) => {
     })
 })
 
-// need to return stockNumber to test files & update query
-function createInventory() {
-    const vinGenerator = require('vin-generator');
-    const graphQLClient = new GraphQLClient(Cypress.config("gatewayUrl"), {
-        headers: {
-          authorization: 'Bearer '+accessToken,
-        },
-      })
-      const query = gql`mutation {
-        createInventory(input: {
-          stock_number:"xwd_123"
-          vehicle: {
-            vin:"${vinGenerator.generateVin()}"
-            year:2021
-            make:"car"
-            model:"carModel"
-            features: [alarm, alloy_wheels, bluetooth]
-          }
-          medias: [
-            {
-              id:"id_string"
-              content_type:"string"
-              file_name:"string"
-              media_type:image
-            }
-          ]
-        }) {
-          id
-          stock_number
-          status
-        }
-      }`
-      graphQLClient.request(query).then((data) =>{
-        cy.setSessionStorage('stock', data.createInventory.stock_number)
-      })
-}
-Cypress.Commands.add("createInventory", createInventory)
+Cypress.Commands.add("createWholeSaleInventory", createWholeSaleInventory)
 
 Cypress.Commands.add('getSessionStorage', (key) => {
   cy.window().then((window) => window.sessionStorage.getItem(key))
