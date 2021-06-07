@@ -93,6 +93,9 @@ class InventoryPage
     comments(){
         return cy.get("#purchase_information_55")
     }
+    createBillOfSale(){
+        return cy.get("button[class='ant-btn ant-btn-default'] span").click()
+    }
 }
 
 export default InventoryPage
