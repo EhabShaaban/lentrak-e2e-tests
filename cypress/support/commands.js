@@ -142,8 +142,7 @@ let listingMileage = faker.datatype.number(10000)
 inventory.listingMileage = listingMileage
 let purchaseMileage = faker.datatype.number(150)
 inventory.purchaseMileage = purchaseMileage
-console.log(inventory)
-bosInventory(inventory)
+bosInventory({inventory:inventory})
 
 function getSevenFeatures(){
   return vehicleFeatureArray.sort(() => Math.random() - Math.random()).slice(0, 7).toString().replace(/"/g, "")
