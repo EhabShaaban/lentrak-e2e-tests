@@ -149,7 +149,9 @@ describe('new whole-sale, awd suite', function() {
         inventory.inventoryCore = inventoryCore
 
     })
-
+    /**
+     * Bugged flow
+     */
     // it('create awd, gasoline, manual, cy3, van, exterior lightBlue, \
     //     interior white, two doors, features: powerWindows, heatedSeats, entertainmentPackage, \
     //     powerLocks, alloyWheels, xeonHeadlights and airConditioning', function(){
@@ -287,7 +289,10 @@ describe('new whole-sale, awd suite', function() {
     //     inventory.inventoryCore = inventoryCore
 
     // })
-
+    
+    /**
+     * Bugged flow
+     */
     // it('create awd, flex, manual, cy10, sedan, exterior orange, \
     //     interior black, three doors, features: sunroof, powerLocks, powerWindows, \
     //     stabilityControl, xeonHeadlights, alarm and dualClimateControl', function(){
