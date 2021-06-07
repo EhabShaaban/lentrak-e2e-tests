@@ -53,3 +53,4 @@ cypress/screenshots/
 
 package-lock.json
 yarn.lock
+cypress/fixtures/stocks.json
