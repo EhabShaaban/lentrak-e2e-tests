@@ -9,28 +9,28 @@ class UserPage
         return cy.get("button[class='ant-btn sc-jSgupP fOyugb bredcrumb-action-btn-large-screen ml15']")
     }
     firstNameID(){
-        return cy.get("#first_name")
+        return cy.get("#user-input-6695")
     }
     lastNameID(){
-        return cy.get("#last_name")
+        return cy.get("#user-input-4643")
     }
     emailID(){
-        return cy.get("#email")
+        return cy.get("#user-input-3096")
     }
     contactID(){
-        return cy.get("#phone_number")
+        return cy.get("#user-input-5780")
     }
     salesID(){
-        return cy.get("#sales")
+        return cy.get("#user-input-3157")
     }
     titleID(){
-        return cy.get("#title")
+        return cy.get("#user-input-2263")
     }
     departmentID(){
-        return cy.get("#department")
+        return cy.get("#user-select-8201")
     }
     roleID(){
-        return cy.get("#roles")
+        return cy.get("#user-select-7736")
     }
     saveUserBtn(){
         return cy.get("button[type='Submit']")
