@@ -2,7 +2,7 @@ import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 import {gql, request, GraphQLClient} from 'graphql-request'
 import "cypress-localstorage-commands"
 import faker from 'faker'
-import bosInventory from '../integration/test/helpers/create-bos/bos-inventory.js'
+// import bosInventory from '../integration/test/helpers/create-bos/create-bos'
 
 let vehicleFeatureArray = [
   "air_conditioning",
@@ -142,7 +142,7 @@ let listingMileage = faker.datatype.number(10000)
 inventory.listingMileage = listingMileage
 let purchaseMileage = faker.datatype.number(150)
 inventory.purchaseMileage = purchaseMileage
-bosInventory({inventory:inventory})
+// bosInventory({inventory:inventory})
 
 function getSevenFeatures(){
   return vehicleFeatureArray.sort(() => Math.random() - Math.random()).slice(0, 7).toString().replace(/"/g, "")
