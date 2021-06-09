@@ -2,7 +2,9 @@ import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 import {gql, request, GraphQLClient} from 'graphql-request'
 import "cypress-localstorage-commands"
 import faker from 'faker'
-// import bosInventory from '../integration/test/helpers/create-bos/create-bos'
+
+let accessToken = "";
+let inventory = {}
 
 let vehicleFeatureArray = [
   "air_conditioning",
@@ -101,49 +103,6 @@ let vehicleCylindersArray = [
   "cylinders_12"
 ]
 
-let accessToken = "";
-
-let inventory = {}
-const vinGenerator = require('vin-generator');
-let vin = vinGenerator.generateVin()
-inventory.vin = vin
-let bodyType = getVehicleData(vehicleBodyTypeArray).toString()
-inventory.bodyType = bodyType
-let purchasePirce = faker.datatype.number(15000)
-inventory.purchasePirce = purchasePirce
-let interiorColor = getVehicleData(vehicleInteriorColorsArray).toString()
-inventory.interiorColor = interiorColor
-let exteriorColor = getVehicleData(vehicleExteriorColorsArray).toString()
-inventory.exteriorColor = exteriorColor
-let drivetrain = getVehicleData(vehicleDrivetrainArray).toString()
-inventory.drivetrain = drivetrain
-let transmission = getVehicleData(vehicleTransmissionArray).toString()
-inventory.transmission = transmission
-let doors = getVehicleData(vehicleDoorArray).toString()
-inventory.doors = doors
-let fuelType = getVehicleData(vehicleFuelTypeArray).toString()
-inventory.fuelType = fuelType
-let cylinders = getVehicleData(vehicleCylindersArray).toString()
-inventory.cylinders = cylinders
-let cityFuelEconomy = faker.datatype.number(200)
-inventory.cityFuelEconomy = cityFuelEconomy
-let highwayFuelEconomy = faker.datatype.number(200)
-inventory.highwayFuelEconomy = highwayFuelEconomy
-let combinedFuelEconomy = faker.datatype.number(200)
-inventory.combinedFuelEconomy = combinedFuelEconomy
-let sevenFeatures = getSevenFeatures()
-inventory.sevenFeatures = sevenFeatures
-let listingPrice = faker.datatype.number({
-  'min': 16000,
-  'max': 25000
-})
-inventory.listingPrice = listingPrice
-let listingMileage = faker.datatype.number(10000)
-inventory.listingMileage = listingMileage
-let purchaseMileage = faker.datatype.number(150)
-inventory.purchaseMileage = purchaseMileage
-// bosInventory({inventory:inventory})
-
 function getSevenFeatures(){
   return vehicleFeatureArray.sort(() => Math.random() - Math.random()).slice(0, 7).toString().replace(/"/g, "")
 }
@@ -153,6 +112,44 @@ function getVehicleData(arr){
 
 // this will be query for whole-sale only, different trade-in query should be implemented
 function createWholeSaleInventory() {
+  const vinGenerator = require('vin-generator');
+  let vin = vinGenerator.generateVin()
+  inventory.vin = vin
+  let bodyType = getVehicleData(vehicleBodyTypeArray).toString()
+  inventory.bodyType = bodyType
+  let purchasePirce = faker.datatype.number(15000)
+  inventory.purchasePirce = purchasePirce
+  let interiorColor = getVehicleData(vehicleInteriorColorsArray).toString()
+  inventory.interiorColor = interiorColor
+  let exteriorColor = getVehicleData(vehicleExteriorColorsArray).toString()
+  inventory.exteriorColor = exteriorColor
+  let drivetrain = getVehicleData(vehicleDrivetrainArray).toString()
+  inventory.drivetrain = drivetrain
+  let transmission = getVehicleData(vehicleTransmissionArray).toString()
+  inventory.transmission = transmission
+  let doors = getVehicleData(vehicleDoorArray).toString()
+  inventory.doors = doors
+  let fuelType = getVehicleData(vehicleFuelTypeArray).toString()
+  inventory.fuelType = fuelType
+  let cylinders = getVehicleData(vehicleCylindersArray).toString()
+  inventory.cylinders = cylinders
+  let cityFuelEconomy = faker.datatype.number(200)
+  inventory.cityFuelEconomy = cityFuelEconomy
+  let highwayFuelEconomy = faker.datatype.number(200)
+  inventory.highwayFuelEconomy = highwayFuelEconomy
+  let combinedFuelEconomy = faker.datatype.number(200)
+  inventory.combinedFuelEconomy = combinedFuelEconomy
+  let sevenFeatures = getSevenFeatures()
+  inventory.sevenFeatures = sevenFeatures
+  let listingPrice = faker.datatype.number({
+    'min': 16000,
+    'max': 25000
+  })
+  inventory.listingPrice = listingPrice
+  let listingMileage = faker.datatype.number(10000)
+  inventory.listingMileage = listingMileage
+  let purchaseMileage = faker.datatype.number(150)
+  inventory.purchaseMileage = purchaseMileage
   const graphQLClient = new GraphQLClient(Cypress.config("gatewayUrl"), {
       headers: {
         authorization: 'Bearer '+accessToken,
@@ -225,6 +222,10 @@ addMatchImageSnapshotCommand({
     customDiffConfig: { threshold: 0.0 },
     capture: 'viewport',
 });
+
+export function getInventory() {
+  return inventory;
+}
 
 // cypress commands
 Cypress.Commands.add("setResolution", (size) => {
