@@ -44,6 +44,6 @@ module.exports = ({
 
     createBosPage.saveBos().should('have.text', 'Save').click();
 
-    cy.wait(10000)
+    cy.wait(11000)
     
 }
