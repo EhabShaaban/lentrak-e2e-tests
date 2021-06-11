@@ -67,13 +67,13 @@ let vehicleExteriorColorsArray = [
   "white",
   "yellow",
 ]
-let vehicleDrivetrainArray = [
+let inventoryTypeArray = [
   "four_wd",
   "awd",
   "fwd",
   "rwd"
 ]
-let vehicleTransmissionArray = [
+let inventoryGearTypeArray = [
   "automatic",
   "manual"
 ]
@@ -103,7 +103,7 @@ let vehicleCylindersArray = [
   "cylinders_12"
 ]
 
-function getSevenFeatures(){
+function getFeatures(){
   return vehicleFeatureArray.sort(() => Math.random() - Math.random()).slice(0, 7).toString().replace(/"/g, "")
 }
 function getVehicleData(arr){
@@ -113,44 +113,59 @@ function getVehicleData(arr){
 // this will be query for whole-sale only, different trade-in query should be implemented
 function createWholeSaleInventory() {
   return new Cypress.Promise((resolve, reject) => {
-    const vinGenerator = require('vin-generator');
+
+    const vinGenerator = require('vin-generator')
     let vin = vinGenerator.generateVin()
-    inventory.vin = vin
-    let bodyType = getVehicleData(vehicleBodyTypeArray).toString()
-    inventory.bodyType = bodyType
-    let purchasePirce = faker.datatype.number(15000)
-    inventory.purchasePirce = purchasePirce
-    let interiorColor = getVehicleData(vehicleInteriorColorsArray).toString()
-    inventory.interiorColor = interiorColor
-    let exteriorColor = getVehicleData(vehicleExteriorColorsArray).toString()
-    inventory.exteriorColor = exteriorColor
-    let drivetrain = getVehicleData(vehicleDrivetrainArray).toString()
-    inventory.drivetrain = drivetrain
-    let transmission = getVehicleData(vehicleTransmissionArray).toString()
-    inventory.transmission = transmission
-    let doors = getVehicleData(vehicleDoorArray).toString()
-    inventory.doors = doors
-    let fuelType = getVehicleData(vehicleFuelTypeArray).toString()
-    inventory.fuelType = fuelType
-    let cylinders = getVehicleData(vehicleCylindersArray).toString()
-    inventory.cylinders = cylinders
-    let cityFuelEconomy = faker.datatype.number(200)
-    inventory.cityFuelEconomy = cityFuelEconomy
-    let highwayFuelEconomy = faker.datatype.number(200)
-    inventory.highwayFuelEconomy = highwayFuelEconomy
-    let combinedFuelEconomy = faker.datatype.number(200)
-    inventory.combinedFuelEconomy = combinedFuelEconomy
-    let sevenFeatures = getSevenFeatures()
-    inventory.sevenFeatures = sevenFeatures
+    let cityFuelEco = faker.datatype.number(200)
+    let combinedFuelEco = faker.datatype.number(200)
+    let highwayFuelEco = faker.datatype.number(200)
+    let listingMileage = faker.datatype.number(10000)
     let listingPrice = faker.datatype.number({
       'min': 16000,
       'max': 25000
     })
-    inventory.listingPrice = listingPrice
-    let listingMileage = faker.datatype.number(10000)
-    inventory.listingMileage = listingMileage
+    let generalInfo = {
+      vin:vin,
+      cityFuelEco:cityFuelEco,
+      combinedFuelEco:combinedFuelEco,
+      highwayFuelEco:highwayFuelEco,
+      listingMileage:listingMileage,
+      listingPrice:listingPrice
+    }
+    inventory.generalInfo = generalInfo
+
+    let bodyType = getVehicleData(vehicleBodyTypeArray).toString()
+    let cylinders = getVehicleData(vehicleCylindersArray).toString()
+    let numberOfDoors = getVehicleData(vehicleDoorArray).toString()
+    let inventoryType = getVehicleData(inventoryTypeArray).toString()
+    let exteriorColor = getVehicleData(vehicleExteriorColorsArray).toString()
+    let fuelType = getVehicleData(vehicleFuelTypeArray).toString()
+    let interiorColor = getVehicleData(vehicleInteriorColorsArray).toString()
+    let features = getFeatures()
+    let gearType = getVehicleData(inventoryGearTypeArray).toString()
+    let inventoryCore = {
+      bodyType:bodyType,
+      cylinders:cylinders,
+      numberOfDoors:numberOfDoors,
+      inventoryType:inventoryType,
+      exteriorColor:exteriorColor,
+      fuelType:fuelType,
+      interiorColor:interiorColor,
+      features:features,
+      gearType:gearType
+    }
+    inventory.inventoryCore = inventoryCore
+
     let purchaseMileage = faker.datatype.number(150)
     inventory.purchaseMileage = purchaseMileage
+    let purchasePirce = faker.datatype.number(15000)
+    inventory.purchasePirce = purchasePirce
+    let purchaseInfo = {
+      purchaseMileage:purchaseMileage,
+      purchasePirce:purchasePirce
+    }
+    inventory.purchaseInfo = purchaseInfo
+
     const graphQLClient = new GraphQLClient(Cypress.config("gatewayUrl"), {
         headers: {
           authorization: 'Bearer '+accessToken,
@@ -169,24 +184,24 @@ function createWholeSaleInventory() {
             exterior_color:${exteriorColor}
             passengers: 2
             engine_displacement:"3.3"
-            drivetrain: ${drivetrain}
-            transmission: ${transmission}
-            doors: ${doors}
+            drivetrain: ${inventoryType}
+            transmission: ${gearType}
+            doors: ${numberOfDoors}
             fuel_type:${fuelType}
             cylinders: ${cylinders}
             city_fuel_economy: {
-              amount:${cityFuelEconomy}
+              amount:${cityFuelEco}
               unit: lp100km 
             }
             highway_fuel_economy: {
-              amount: ${highwayFuelEconomy}
+              amount: ${highwayFuelEco}
               unit: lp100km
             }
             combined_fuel_economy: {
-              amount: ${combinedFuelEconomy}
+              amount: ${combinedFuelEco}
               unit: lp100km
             }
-            features: [${sevenFeatures}]
+            features: [${features}]
           }
           price: ${listingPrice}
           mileage: {
