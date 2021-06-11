@@ -48,7 +48,6 @@ module.exports =({
     inventory
 }) => {
 
-    console.log(inventory)
     // assert header area
     inventoryPage.inventoryStatusId().should('have.text', 'In Stock')
     inventoryPage.vinId().should('have.text', inventory.generalInfo.vin)

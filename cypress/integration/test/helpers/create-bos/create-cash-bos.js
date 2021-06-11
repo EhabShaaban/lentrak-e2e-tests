@@ -16,7 +16,7 @@ module.exports = ({
 
     const inventoryPage = new InventoryPage()
     const createBosPage = new CreateBosPage()
-    let hstPrice = (inventory.listingPrice)*0.13
+    let hstPrice = (inventory.generalInfo.listingPrice)*0.13
 
     inventoryPage.createBillOfSale()
 
@@ -34,13 +34,13 @@ module.exports = ({
 
     createBosPage.clickTermOfSettlement()
 
-    createBosPage.vinId().should('have.text', inventory.vin)
+    createBosPage.vinId().should('have.text', inventory.generalInfo.vin)
 
     createBosPage.hstOnSubTotalInput().should('contain.text', utils.addThousandSeparator((hstPrice).toFixed(2)))
 
-    createBosPage.subTotalId().should('contain.text', "$"+utils.addThousandSeparator((inventory.listingPrice).toFixed(2)))
+    createBosPage.subTotalId().should('contain.text', "$"+utils.addThousandSeparator((inventory.generalInfo.listingPrice).toFixed(2)))
 
-    createBosPage.subTotalWithHst().should('contain.text', "$"+utils.addThousandSeparator(((inventory.listingPrice)+hstPrice).toFixed(2)))
+    createBosPage.subTotalWithHst().should('contain.text', "$"+utils.addThousandSeparator(((inventory.generalInfo.listingPrice)+hstPrice).toFixed(2)))
 
     createBosPage.saveBos().should('have.text', 'Save').click();
 
