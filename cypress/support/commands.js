@@ -112,108 +112,110 @@ function getVehicleData(arr){
 
 // this will be query for whole-sale only, different trade-in query should be implemented
 function createWholeSaleInventory() {
-  const vinGenerator = require('vin-generator');
-  let vin = vinGenerator.generateVin()
-  inventory.vin = vin
-  let bodyType = getVehicleData(vehicleBodyTypeArray).toString()
-  inventory.bodyType = bodyType
-  let purchasePirce = faker.datatype.number(15000)
-  inventory.purchasePirce = purchasePirce
-  let interiorColor = getVehicleData(vehicleInteriorColorsArray).toString()
-  inventory.interiorColor = interiorColor
-  let exteriorColor = getVehicleData(vehicleExteriorColorsArray).toString()
-  inventory.exteriorColor = exteriorColor
-  let drivetrain = getVehicleData(vehicleDrivetrainArray).toString()
-  inventory.drivetrain = drivetrain
-  let transmission = getVehicleData(vehicleTransmissionArray).toString()
-  inventory.transmission = transmission
-  let doors = getVehicleData(vehicleDoorArray).toString()
-  inventory.doors = doors
-  let fuelType = getVehicleData(vehicleFuelTypeArray).toString()
-  inventory.fuelType = fuelType
-  let cylinders = getVehicleData(vehicleCylindersArray).toString()
-  inventory.cylinders = cylinders
-  let cityFuelEconomy = faker.datatype.number(200)
-  inventory.cityFuelEconomy = cityFuelEconomy
-  let highwayFuelEconomy = faker.datatype.number(200)
-  inventory.highwayFuelEconomy = highwayFuelEconomy
-  let combinedFuelEconomy = faker.datatype.number(200)
-  inventory.combinedFuelEconomy = combinedFuelEconomy
-  let sevenFeatures = getSevenFeatures()
-  inventory.sevenFeatures = sevenFeatures
-  let listingPrice = faker.datatype.number({
-    'min': 16000,
-    'max': 25000
-  })
-  inventory.listingPrice = listingPrice
-  let listingMileage = faker.datatype.number(10000)
-  inventory.listingMileage = listingMileage
-  let purchaseMileage = faker.datatype.number(150)
-  inventory.purchaseMileage = purchaseMileage
-  const graphQLClient = new GraphQLClient(Cypress.config("gatewayUrl"), {
-      headers: {
-        authorization: 'Bearer '+accessToken,
-      },
+  return new Cypress.Promise((resolve, reject) => {
+    const vinGenerator = require('vin-generator');
+    let vin = vinGenerator.generateVin()
+    inventory.vin = vin
+    let bodyType = getVehicleData(vehicleBodyTypeArray).toString()
+    inventory.bodyType = bodyType
+    let purchasePirce = faker.datatype.number(15000)
+    inventory.purchasePirce = purchasePirce
+    let interiorColor = getVehicleData(vehicleInteriorColorsArray).toString()
+    inventory.interiorColor = interiorColor
+    let exteriorColor = getVehicleData(vehicleExteriorColorsArray).toString()
+    inventory.exteriorColor = exteriorColor
+    let drivetrain = getVehicleData(vehicleDrivetrainArray).toString()
+    inventory.drivetrain = drivetrain
+    let transmission = getVehicleData(vehicleTransmissionArray).toString()
+    inventory.transmission = transmission
+    let doors = getVehicleData(vehicleDoorArray).toString()
+    inventory.doors = doors
+    let fuelType = getVehicleData(vehicleFuelTypeArray).toString()
+    inventory.fuelType = fuelType
+    let cylinders = getVehicleData(vehicleCylindersArray).toString()
+    inventory.cylinders = cylinders
+    let cityFuelEconomy = faker.datatype.number(200)
+    inventory.cityFuelEconomy = cityFuelEconomy
+    let highwayFuelEconomy = faker.datatype.number(200)
+    inventory.highwayFuelEconomy = highwayFuelEconomy
+    let combinedFuelEconomy = faker.datatype.number(200)
+    inventory.combinedFuelEconomy = combinedFuelEconomy
+    let sevenFeatures = getSevenFeatures()
+    inventory.sevenFeatures = sevenFeatures
+    let listingPrice = faker.datatype.number({
+      'min': 16000,
+      'max': 25000
     })
-    const query = gql`mutation {
-      createInventory(input: {
-        stock_number:"xwd_123"
-        vehicle: {
-          vin:"${vin}"
-          year:2021
-          make:"test"
-          model:"car"
-          body:${bodyType}
-          interior_color:${interiorColor}
-          exterior_color:${exteriorColor}
-          passengers: 2
-          engine_displacement:"3.3"
-          drivetrain: ${drivetrain}
-          transmission: ${transmission}
-          doors: ${doors}
-          fuel_type:${fuelType}
-          cylinders: ${cylinders}
-          city_fuel_economy: {
-            amount:${cityFuelEconomy}
-            unit: lp100km 
-          }
-          highway_fuel_economy: {
-            amount: ${highwayFuelEconomy}
-            unit: lp100km
-          }
-          combined_fuel_economy: {
-            amount: ${combinedFuelEconomy}
-            unit: lp100km
-          }
-          features: [${sevenFeatures}]
-        }
-        price: ${listingPrice}
-        mileage: {
-          distance:${listingMileage}
-          unit: km	
-        }
-        source: {
-          wholesale: {
-            price: ${purchasePirce}
-            tax: ${purchasePirce*0.13}
-            date: "2017-11-25T23:45:35.116Z"
-            mileage: {
-              distance: ${purchaseMileage}
-              unit: km
+    inventory.listingPrice = listingPrice
+    let listingMileage = faker.datatype.number(10000)
+    inventory.listingMileage = listingMileage
+    let purchaseMileage = faker.datatype.number(150)
+    inventory.purchaseMileage = purchaseMileage
+    const graphQLClient = new GraphQLClient(Cypress.config("gatewayUrl"), {
+        headers: {
+          authorization: 'Bearer '+accessToken,
+        },
+      })
+      const query = gql`mutation {
+        createInventory(input: {
+          stock_number:"xwd_123"
+          vehicle: {
+            vin:"${vin}"
+            year:2021
+            make:"test"
+            model:"car"
+            body:${bodyType}
+            interior_color:${interiorColor}
+            exterior_color:${exteriorColor}
+            passengers: 2
+            engine_displacement:"3.3"
+            drivetrain: ${drivetrain}
+            transmission: ${transmission}
+            doors: ${doors}
+            fuel_type:${fuelType}
+            cylinders: ${cylinders}
+            city_fuel_economy: {
+              amount:${cityFuelEconomy}
+              unit: lp100km 
             }
-            comments: "this is a test comment"
-            invoice_number: "8768KHA2334"
+            highway_fuel_economy: {
+              amount: ${highwayFuelEconomy}
+              unit: lp100km
+            }
+            combined_fuel_economy: {
+              amount: ${combinedFuelEconomy}
+              unit: lp100km
+            }
+            features: [${sevenFeatures}]
           }
+          price: ${listingPrice}
+          mileage: {
+            distance:${listingMileage}
+            unit: km	
+          }
+          source: {
+            wholesale: {
+              price: ${purchasePirce}
+              tax: ${purchasePirce*0.13}
+              date: "2017-11-25T23:45:35.116Z"
+              mileage: {
+                distance: ${purchaseMileage}
+                unit: km
+              }
+              comments: "this is a test comment"
+              invoice_number: "8768KHA2334"
+            }
+          }
+        }) {
+          id
+          stock_number
+          status
         }
-      }) {
-        id
-        stock_number
-        status
-      }
-    }`
-    graphQLClient.request(query).then((data) =>{
-      cy.setSessionStorage('stock', data.createInventory.stock_number)
-    })
+      }`
+      graphQLClient.request(query).then((data) =>{
+        resolve(data.createInventory.stock_number)
+      })
+  })
 }
 
 addMatchImageSnapshotCommand({
@@ -295,13 +297,3 @@ Cypress.Commands.add("login", (username, password) => {
 })
 
 Cypress.Commands.add("createWholeSaleInventory", createWholeSaleInventory)
-
-Cypress.Commands.add('getSessionStorage', (key) => {
-  cy.window().then((window) => window.sessionStorage.getItem(key))
-})
-
-Cypress.Commands.add('setSessionStorage', (key, value) => {
-  cy.window().then((window) => {
-    window.sessionStorage.setItem(key, value)
-  })
-})

@@ -18,11 +18,8 @@ describe('create cash bos suite', function() {
 
     beforeEach(function(){
 
-        cy.createWholeSaleInventory()
-
-        cy.window().its('sessionStorage').then((data) =>{
-            stockNumber = parseInt(data.stock)+1
-            console.log(stockNumber)
+        cy.createWholeSaleInventory().then((stockNumber)=>{
+            console.log("Stock: ", stockNumber)
             cy.visit('./inventory/'+stockNumber, {
                 onBeforeLoad (win) {
                     win.localStorage.setItem('persist:root', adaptToReduxPersist(loginCredentials))
