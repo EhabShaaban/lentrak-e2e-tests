@@ -17,7 +17,7 @@ describe('create cash bos suite', function() {
     })
 
     for(let i = 0; i < 10; i++){
-        it('create bos take: '+(i+1), function(){
+        it('create cash bos test take: '+(i+1), function(){
 
             cy.createWholeSaleInventory().then((stockNumber)=>{
                 console.log("Stock: ", stockNumber)
