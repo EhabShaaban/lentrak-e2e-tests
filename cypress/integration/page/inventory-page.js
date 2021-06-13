@@ -69,9 +69,6 @@ class InventoryPage
     engineDisplacementId(){
         return this.jokerSpecSpan(7444)
     }
-    engineDisplacementId(){
-        return this.jokerSpecSpan(7444)
-    }
     bodyTypeSpecId(){
         return this.jokerSpecSpan(9839)
     }
