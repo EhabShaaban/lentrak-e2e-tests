@@ -82,7 +82,6 @@ let vehicleDoorArray = [
   "door_3",
   "door_4",
   "door_5",
-  "other"
 ]
 let vehicleFuelTypeArray = [
   "gasoline",
@@ -145,8 +144,8 @@ function createWholeSaleInventory() {
     let gearType = getVehicleData(inventoryGearTypeArray).toString()
     let inventoryCore = {
       bodyType:bodyType,
-      cylinders:cylinders,
-      numberOfDoors:numberOfDoors,
+      cylinders:cylinders.substr(cylinders.indexOf("_"+1),-1),
+      numberOfDoors:numberOfDoors.substr(numberOfDoors.indexOf("_"+1),-1),
       inventoryType:inventoryType,
       exteriorColor:exteriorColor,
       fuelType:fuelType,
@@ -157,12 +156,10 @@ function createWholeSaleInventory() {
     inventory.inventoryCore = inventoryCore
 
     let purchaseMileage = faker.datatype.number(150)
-    inventory.purchaseMileage = purchaseMileage
-    let purchasePirce = faker.datatype.number(15000)
-    inventory.purchasePirce = purchasePirce
+    let purchasePrice = faker.datatype.number(15000)
     let purchaseInfo = {
       purchaseMileage:purchaseMileage,
-      purchasePirce:purchasePirce
+      purchasePrice:purchasePrice
     }
     inventory.purchaseInfo = purchaseInfo
 
@@ -210,8 +207,8 @@ function createWholeSaleInventory() {
           }
           source: {
             wholesale: {
-              price: ${purchasePirce}
-              tax: ${purchasePirce*0.13}
+              price: ${purchasePrice}
+              tax: ${purchasePrice*0.13}
               date: "2017-11-25T23:45:35.116Z"
               mileage: {
                 distance: ${purchaseMileage}
