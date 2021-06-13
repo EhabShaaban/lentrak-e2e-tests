@@ -6,7 +6,6 @@ import {getInventory} from '/home/ehab/dev/lentrak/ui-framework/cypress/support/
 import assertInventory from '../helpers/create-inventorty/assert-inventory'
 
 let loginCredentials
-let stockNumber
 let inventory = getInventory()
 
 describe('create cash bos suite', function() {
@@ -17,30 +16,27 @@ describe('create cash bos suite', function() {
 
     })
 
-    beforeEach(function(){
+    for(let i = 0; i < 10; i++){
+        it('create bos take: '+(i+1), function(){
 
-        cy.createWholeSaleInventory().then((stockNumber)=>{
-            console.log("Stock: ", stockNumber)
-            console.log(inventory)
-            cy.visit('./inventory/'+stockNumber, {
-                onBeforeLoad (win) {
-                    win.localStorage.setItem('persist:root', adaptToReduxPersist(loginCredentials))
-                }
+            cy.createWholeSaleInventory().then((stockNumber)=>{
+                console.log("Stock: ", stockNumber)
+                console.log(inventory)
+                cy.visit('./inventory/'+stockNumber, {
+                    onBeforeLoad (win) {
+                        win.localStorage.setItem('persist:root', adaptToReduxPersist(loginCredentials))
+                    }
+                })
+                createCashBos({inventory:inventory})
+                cy.visit('./inventory/'+stockNumber)
             })
-            createCashBos({inventory:inventory})
-            cy.visit('./inventory/'+stockNumber)
+            
         })
-    })
-
-    it('create bos', function(){
-
-        console.log("it!")
-        
-    })
+    }
 
     afterEach(function(){
 
-        console.log("after it!")
+        assertInventory({inventory:inventory})
 
     })
 })
