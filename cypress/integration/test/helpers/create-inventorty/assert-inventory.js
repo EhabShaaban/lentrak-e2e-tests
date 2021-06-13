@@ -34,7 +34,7 @@ module.exports =({
     inventory
 }) => {
 
-    inventoryPage.inventoryStatusId().should('have.text', 'In Stock')
+    // inventoryPage.inventoryStatusId().should('have.text', 'In Stock')
     inventoryPage.vinId().should('have.text', inventory.generalInfo.vin)
     inventoryPage.mileageId().should('contain', utils.addThousandSeparator(inventory.generalInfo.listingMileage))
     inventoryPage.listingPriceId().should('contain', utils.addThousandSeparator(inventory.generalInfo.listingPrice))
