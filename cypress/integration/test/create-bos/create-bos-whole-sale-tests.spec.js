@@ -9,7 +9,7 @@ import assertInventory from '../helpers/create-inventorty/assert-inventory'
 let loginCredentials
 let inventory = getInventory()
 
-describe('create cash bos suite', function() {
+describe('source:whole-sale/create cash bos suite', function() {
 
     before(function() {
 
@@ -17,12 +17,11 @@ describe('create cash bos suite', function() {
 
     })
 
-    for(let i = 0; i < 20; i++){
+    for(let i = 0; i < 2; i++){
         it('create cash bos test #'+(i+1), function(){
 
             cy.createWholeSaleInventory().then((stockNumber)=>{
                 console.log("Stock: ", stockNumber)
-                console.log(inventory)
                 cy.visit('./inventory/'+stockNumber, {
                     onBeforeLoad (win) {
                         win.localStorage.setItem('persist:root', adaptToReduxPersist(loginCredentials))
@@ -42,7 +41,7 @@ describe('create cash bos suite', function() {
     })
 })
 
-describe('create finance bos suite', function() {
+describe('source:whole-sale/create finance bos suite', function() {
 
     before(function() {
 
@@ -50,12 +49,11 @@ describe('create finance bos suite', function() {
 
     })
 
-    for(let i = 0; i < 20; i++){
+    for(let i = 0; i < 2; i++){
         it('create finance bos test #'+(i+1), function(){
 
             cy.createWholeSaleInventory().then((stockNumber)=>{
                 console.log("Stock: ", stockNumber)
-                console.log(inventory)
                 cy.visit('./inventory/'+stockNumber, {
                     onBeforeLoad (win) {
                         win.localStorage.setItem('persist:root', adaptToReduxPersist(loginCredentials))
