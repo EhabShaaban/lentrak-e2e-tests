@@ -110,43 +110,6 @@ function getVehicleData(arr){
   return arr.sort(() => Math.random() - Math.random()).slice(0, 1)
 }
 
-let cityFuelEco = faker.datatype.number(200)
-let combinedFuelEco = faker.datatype.number(200)
-let highwayFuelEco = faker.datatype.number(200)
-let listingMileage = faker.datatype.number(10000)
-let listingPrice = faker.datatype.number({
-  'min': 16000,
-  'max': 25000
-})
-let bodyType = getVehicleData(vehicleBodyTypeArray).toString()
-let cylinders = getVehicleData(vehicleCylindersArray).toString()
-let numberOfDoors = getVehicleData(vehicleDoorArray).toString()
-let inventoryType = getVehicleData(inventoryTypeArray).toString()
-let exteriorColor = getVehicleData(vehicleExteriorColorsArray).toString()
-let fuelType = getVehicleData(vehicleFuelTypeArray).toString()
-let interiorColor = getVehicleData(vehicleInteriorColorsArray).toString()
-let features = getFeatures()
-let gearType = getVehicleData(inventoryGearTypeArray).toString()
-let inventoryCore = {
-  bodyType:bodyType,
-  cylinders:cylinders.substr(cylinders.indexOf("_"+1),-1),
-  numberOfDoors:numberOfDoors.substr(numberOfDoors.indexOf("_"+1),-1),
-  inventoryType:inventoryType,
-  exteriorColor:exteriorColor,
-  fuelType:fuelType,
-  interiorColor:interiorColor,
-  features:features,
-  gearType:gearType
-}
-inventory.inventoryCore = inventoryCore
-
-let purchaseMileage = faker.datatype.number(150)
-let purchasePrice = faker.datatype.number(15000)
-let purchaseInfo = {
-  purchaseMileage:purchaseMileage,
-  purchasePrice:purchasePrice
-}
-inventory.purchaseInfo = purchaseInfo
 let lien = faker.datatype.number({
   'min': 1000,
   'max': 2000
@@ -157,6 +120,45 @@ export function getLien() {
 
 function createWholeSaleInventory() {
   return new Cypress.Promise((resolve, reject) => {
+    
+    let cityFuelEco = faker.datatype.number(200)
+    let combinedFuelEco = faker.datatype.number(200)
+    let highwayFuelEco = faker.datatype.number(200)
+    let listingMileage = faker.datatype.number(10000)
+    let listingPrice = faker.datatype.number({
+      'min': 16000,
+      'max': 25000
+    })
+    let bodyType = getVehicleData(vehicleBodyTypeArray).toString()
+    let cylinders = getVehicleData(vehicleCylindersArray).toString()
+    let numberOfDoors = getVehicleData(vehicleDoorArray).toString()
+    let inventoryType = getVehicleData(inventoryTypeArray).toString()
+    let exteriorColor = getVehicleData(vehicleExteriorColorsArray).toString()
+    let fuelType = getVehicleData(vehicleFuelTypeArray).toString()
+    let interiorColor = getVehicleData(vehicleInteriorColorsArray).toString()
+    let features = getFeatures()
+    let gearType = getVehicleData(inventoryGearTypeArray).toString()
+    let inventoryCore = {
+      bodyType:bodyType,
+      cylinders:cylinders.substr(cylinders.indexOf("_"+1),-1),
+      numberOfDoors:numberOfDoors.substr(numberOfDoors.indexOf("_"+1),-1),
+      inventoryType:inventoryType,
+      exteriorColor:exteriorColor,
+      fuelType:fuelType,
+      interiorColor:interiorColor,
+      features:features,
+      gearType:gearType
+    }
+    inventory.inventoryCore = inventoryCore
+    
+    let purchaseMileage = faker.datatype.number(150)
+    let purchasePrice = faker.datatype.number(15000)
+    let purchaseInfo = {
+      purchaseMileage:purchaseMileage,
+      purchasePrice:purchasePrice
+    }
+    inventory.purchaseInfo = purchaseInfo    
+
     let vin = vinGenerator.generateVin()
     let generalInfo = {
       vin:vin,
@@ -167,6 +169,7 @@ function createWholeSaleInventory() {
       listingPrice:listingPrice
     }
     inventory.generalInfo = generalInfo
+
     const graphQLClient = new GraphQLClient(Cypress.config("gatewayUrl"), {
         headers: {
           authorization: 'Bearer '+accessToken,
