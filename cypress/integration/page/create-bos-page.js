@@ -86,6 +86,30 @@ class CreateBosPage
     saveBos(){
         return cy.get('button span').eq(1)
     }
+    tradeInOptionId(){
+        return cy.get("div[id='inventory-5573-regular-text step'] div").contains('Trade-In Vehicle')
+    }
+    tradeInVinId(){
+        return cy.get('#inventory-trade-input-5064')
+    }
+    tradeInDecodeSpan(){
+        return cy.get('button span').contains('Decode')
+    }
+    odometerId(){
+        return cy.get('#inventory-trade-input-9638')
+    }
+    tradeinAllowanceId(){
+        return cy.get('#inventory-trade-currency-7996')
+    }
+    taxOnTradeInAllowance(){
+        return cy.get('#inventory-trade-currency-6887')
+    }
+    netDifferenceSpan(){
+        return cy.get('div[data-testid="netdifference"] span')
+    }
+    hstOnNetDifferenceSpan(){
+        return cy.get('div[data-testid="hstonnetdifference"] span')
+    }
 }
 
 export default CreateBosPage
