@@ -34,6 +34,9 @@ class CreateBosPage
     subTotalId(){
         return cy.get("div[data-testid='subTotal_1'] #app-price")
     }
+    subTotalTwoId(){
+        return cy.get("div[data-testid='subTotal_2'] #app-price")
+    }
     subTotalWithHst(){
         return cy.get("div[data-testid='subTotal_2'] #app-price")
     }
