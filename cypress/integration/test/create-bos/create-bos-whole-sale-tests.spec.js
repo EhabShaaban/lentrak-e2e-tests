@@ -2,6 +2,7 @@
 
 import {adaptToReduxPersist} from '../../utils/redux'
 import createCashBos from '../../test/helpers/create-bos/create-cash-bos'
+import createFinanceBos from '../../test/helpers/create-bos/create-finance-bos'
 import {getInventory} from '/home/ehab/dev/lentrak/ui-framework/cypress/support/commands.js'
 import assertInventory from '../helpers/create-inventorty/assert-inventory'
 
@@ -16,8 +17,8 @@ describe('create cash bos suite', function() {
 
     })
 
-    for(let i = 0; i < 10; i++){
-        it('create cash bos test take: '+(i+1), function(){
+    for(let i = 0; i < 20; i++){
+        it('create cash bos test #'+(i+1), function(){
 
             cy.createWholeSaleInventory().then((stockNumber)=>{
                 console.log("Stock: ", stockNumber)
@@ -28,6 +29,39 @@ describe('create cash bos suite', function() {
                     }
                 })
                 createCashBos({inventory:inventory})
+                cy.visit('./inventory/'+stockNumber)
+            })
+            
+        })
+    }
+
+    afterEach(function(){
+
+        assertInventory({inventory:inventory})
+
+    })
+})
+
+describe('create finance bos suite', function() {
+
+    before(function() {
+
+        cy.login(Cypress.env("USERNAME"), Cypress.env("PASSWD")).then(function(creds) {loginCredentials = creds})
+
+    })
+
+    for(let i = 0; i < 20; i++){
+        it('create finance bos test #'+(i+1), function(){
+
+            cy.createWholeSaleInventory().then((stockNumber)=>{
+                console.log("Stock: ", stockNumber)
+                console.log(inventory)
+                cy.visit('./inventory/'+stockNumber, {
+                    onBeforeLoad (win) {
+                        win.localStorage.setItem('persist:root', adaptToReduxPersist(loginCredentials))
+                    }
+                })
+                createFinanceBos({inventory:inventory})
                 cy.visit('./inventory/'+stockNumber)
             })
             
