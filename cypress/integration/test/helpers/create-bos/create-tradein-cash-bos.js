@@ -70,6 +70,8 @@ module.exports = ({
 
   createBosPage.hstOnNetDifferenceSpan().should('contain.text', "$"+utils.addThousandSeparator((netDifference*0.13).toFixed(2)))
 
+  createBosPage.subTotalTwoId().should('contain.text', "$"+utils.addThousandSeparator(((netDifference)+(netDifference*0.13)).toFixed(2)))
+
   createBosPage.saveBos().should('have.text', 'Save').click();
 
   cy.wait(11000)
