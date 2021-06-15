@@ -112,6 +112,17 @@ module.exports = ({
 
   createBosPage.subTotalTwoId().should('contain.text', "$"+utils.addThousandSeparator(((netDifference)+(netDifference*0.13)).toFixed(2)))
 
+  createBosPage.lienInput().should('have.value', financeAmountArray[2])
+
+  createBosPage.balanceFinacnceInput().should('have.value', financeAmountArray[0])
+
+  createBosPage.netAmountInput().should('have.value', utils.addThousandSeparator(netAmount))
+
+  // createBosPage.interestInput().should('have.value', interestRate)
+
+  createBosPage.borrowingCostInput().should('have.value', financeAmountArray[1])
+
+
   createBosPage.saveBos().should('have.text', 'Save').click();
 
   cy.wait(11000)
