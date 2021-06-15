@@ -1,10 +1,8 @@
 /// <reference types="Cypress" />
 
 import {adaptToReduxPersist} from '../../utils/redux'
-import createCashBos from '../helpers/create-bos/create-cash-bos'
 import createTradeInCashBos from '../helpers/create-bos/create-tradein-cash-bos'
 import createTradeInFinanceBos from '../helpers/create-bos/create-tradein-finance-bos'
-import createFinanceBos from '../helpers/create-bos/create-finance-bos'
 import {getInventory} from '/home/ehab/dev/lentrak/ui-framework/cypress/support/commands.js'
 import assertInventory from '../helpers/create-inventorty/assert-inventory'
 
