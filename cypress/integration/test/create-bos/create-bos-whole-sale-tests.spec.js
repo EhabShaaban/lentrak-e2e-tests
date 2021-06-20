@@ -3,7 +3,7 @@
 import {adaptToReduxPersist} from '../../utils/redux'
 import createCashBos from '../../test/helpers/create-bos/create-cash-bos'
 import createFinanceBos from '../../test/helpers/create-bos/create-finance-bos'
-import {getInventory} from '/home/ehab/dev/lentrak/ui-framework/cypress/support/commands.js'
+import {getInventory} from '../../../support/commands.js'
 import assertInventory from '../helpers/create-inventorty/assert-inventory'
 
 let loginCredentials
